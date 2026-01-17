@@ -28,5 +28,21 @@ public class Constants {
     *   public static final int kRightMotor2Port = 3; 
     * }
     */ 
+
+    public static class CanIds {
+    // Can id 1-8 are for the drive train
+    public static final int TOWER_MOTOR_RIGHT1 = 11;
+    public static final int TOWER_MOTOR_LEFT1 = 12;
+    public static final int TOWER_MOTOR_RIGHT2 = 13;
+    public static final int TOWER_MOTOR_LEFT2 = 14;
+    public static final int FEEDER_MOTOR = 15;
+    public static final int INTAKE_MOTOR = 16;
+    public static final int CLIMBER_MOTOR = 17;
+    public static final int FUNNEL_MOTOR = 18;
+    public static final int EXTEND_MOTOR = 19;
+    public static final int RCLIMB_MOTOR = 20;
+    public static final int LCLIMB_MOTOR = 21;
+    public static final int TURN_MOTOR = 22;
+  }
 }
 
