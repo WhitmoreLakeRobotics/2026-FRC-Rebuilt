@@ -31,18 +31,45 @@ public class Constants {
 
     public static class CanIds {
     // Can id 1-8 are for the drive train
-    public static final int TOWER_MOTOR_RIGHT1 = 11;
-    public static final int TOWER_MOTOR_LEFT1 = 12;
-    public static final int TOWER_MOTOR_RIGHT2 = 13;
-    public static final int TOWER_MOTOR_LEFT2 = 14;
-    public static final int FEEDER_MOTOR = 15;
-    public static final int INTAKE_MOTOR = 16;
-    public static final int CLIMBER_MOTOR = 17;
-    public static final int FUNNEL_MOTOR = 18;
-    public static final int EXTEND_MOTOR = 19;
-    public static final int RCLIMB_MOTOR = 20;
-    public static final int LCLIMB_MOTOR = 21;
-    public static final int TURN_MOTOR = 22;
+    // public static final int TOWER_MOTOR_RIGHT1 = 11;
+    // public static final int TOWER_MOTOR_LEFT1 = 12;
+    // public static final int TOWER_MOTOR_RIGHT2 = 13;
+    // public static final int TOWER_MOTOR_LEFT2 = 14;
+    // public static final int FEEDER_MOTOR = 15;
+    // public static final int INTAKE_MOTOR = 16;
+    // public static final int CLIMBER_MOTOR = 17;
+    // public static final int FUNNEL_MOTOR = 18;
+    // public static final int EXTEND_MOTOR = 19;
+    // public static final int RCLIMB_MOTOR = 20;
+    // public static final int LCLIMB_MOTOR = 21;
+    // public static final int TURN_MOTOR = 22;
+
+    // create enum to store motor name, subsystem, can id, and SparkMaxConfig object data for easy reference.
+    public enum MOTORS {
+        TOWER1_MOTOR_RIGHT("Tower 1 Motor Right", "Flywheels", 9),
+        TOWER1_MOTOR_LEFT("Tower 1 Motor Left", "Flywheels", 10),
+        TOWER2_MOTOR_RIGHT("Tower 2 Motor Right", "Flywheels", 11),
+        TOWER2_MOTOR_LEFT("Tower 2 Motor Left", "Flywheels", 12),
+        FEEDER_MOTOR("Feeder Motor", "Hopper", 13),
+        INTAKE_MOTOR("Intake Motor", "Intake", 14),
+        CLIMBER_MOTOR("Climber Motor", "Climb", 15),
+        FUNNEL_MOTOR("Funnel Motor", "Hopper", 16),
+        EXTEND_MOTOR("Extend Motor", "Intake", 17),
+        RCLIMB_MOTOR("Right Climb Motor", "Climb", 18),
+        LCLIMB_MOTOR("Left Climb Motor", "Climb", 19),
+        TURN_MOTOR("Turret Turn Motor", "LTurret", 20);
+
+        public final String motorName;
+        public final String subSystem;
+        public final int canId;
+
+        MOTORS(String motorName, String subSystem, int canId) {
+            this.motorName = motorName;
+            this.subSystem = subSystem;
+            this.canId = canId;
+        }
+    }
+    
   }
 }
 
