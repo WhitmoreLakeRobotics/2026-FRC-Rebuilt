@@ -26,9 +26,9 @@ import javax.lang.model.util.ElementScanner14;
 import com.revrobotics.spark.ClosedLoopSlot;
 import com.revrobotics.spark.FeedbackSensor;
 import com.revrobotics.spark.SparkBase.ControlType;
-import com.revrobotics.spark.SparkBase.PersistMode;
+import com.revrobotics.PersistMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
-import com.revrobotics.spark.SparkBase.ResetMode;
+import com.revrobotics.ResetMode;
 
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -111,6 +111,10 @@ public class LFlywheels extends SubsystemBase {
         public double getRPM() {
             return TargetRPM;
         }
+    public FlywheelStatus getStatus() {
+            return status;
+        }
+
 
         public double getRMotorRPM() {
             return TowerRM.getEncoder().getVelocity();

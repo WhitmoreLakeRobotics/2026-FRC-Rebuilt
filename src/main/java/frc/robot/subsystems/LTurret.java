@@ -24,9 +24,9 @@ import javax.lang.model.util.ElementScanner14;
 import com.revrobotics.spark.ClosedLoopSlot;
 import com.revrobotics.spark.FeedbackSensor;
 import com.revrobotics.spark.SparkBase.ControlType;
-import com.revrobotics.spark.SparkBase.PersistMode;
+import com.revrobotics.PersistMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
-import com.revrobotics.spark.SparkBase.ResetMode;
+import com.revrobotics.ResetMode;
 
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -151,7 +151,7 @@ public class LTurret extends SubsystemBase {
         turningConfig.smartCurrentLimit(25);
         //turningConfig.smartCurrentLimit(normalStallCurrentLimit, normalFreeCurrentLimit);
 
-        //turningMotor.configure(turningConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        turningMotor.configure(turningConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
     }
     //need to create enum for status of turret STOPPED, TARGETING, ON_TARGET
