@@ -74,6 +74,32 @@ public class LFlywheels extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
+        switch (status) {
+            case RAMPING:
+                if ((Math.abs(TargetRPM - 
+                    TowerRM.getEncoder().getVelocity()) < RPM_Tolerance)
+                 || (Math.abs(TargetRPM - 
+                    TowerLM.getEncoder().getVelocity()) < RPM_Tolerance)) {
+                    if(TargetRPM > 0){
+                        status = FlywheelStatus.AT_SPEED;
+                    } else{
+                        status = FlywheelStatus.REVERSE;
+                    }
+                }
+                break;
+            case REVERSE:
+                
+                break;
+            case AT_SPEED:
+            
+                break;
+        
+            case STOPPED:
+
+                break;
+            default:
+                break;
+        }
 
     }
 
@@ -82,12 +108,31 @@ public class LFlywheels extends SubsystemBase {
         // This method will be called once per scheduler run when in simulation
 
     }
+        public double getRPM() {
+            return TargetRPM;
+        }
+
+        public double getRMotorRPM() {
+            return TowerRM.getEncoder().getVelocity();
+        }
+        public double getLMotorRPM() {
+            return TowerLM.getEncoder().getVelocity();
+        }
 
         public void setRPM(double rpm) {
-        TargetRPM = rpm;
-        TowerRM.getClosedLoopController().setSetpoint(rpm, ControlType.kVelocity);
-        TowerLM.getClosedLoopController().setSetpoint(rpm, ControlType.kVelocity);
-        status = FlywheelStatus.RAMPING;
+            if (rpm != 0) {
+            TargetRPM = rpm;
+            TowerRM.getClosedLoopController().setSetpoint(rpm, ControlType.kVelocity);
+            TowerLM.getClosedLoopController().setSetpoint(rpm, ControlType.kVelocity);
+            status = FlywheelStatus.RAMPING;
+
+            }else{
+                status = FlywheelStatus.STOPPED;
+                TowerRM.set(0);
+                TowerLM.set(0);
+            }
+        
+        
 
         }
 
@@ -133,7 +178,7 @@ public class LFlywheels extends SubsystemBase {
         TowerConfig.smartCurrentLimit(50);
         //rTowerRConfig.smartCurrentLimit(normalStallCurrentLimit, normalFreeCurrentLimit);
 
-        //rTowerRMotor.configure(rTowerRConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        motor.configure(TowerConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
     }
 

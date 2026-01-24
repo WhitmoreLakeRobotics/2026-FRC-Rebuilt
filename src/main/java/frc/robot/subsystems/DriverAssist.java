@@ -24,7 +24,7 @@ import java.util.function.Predicate;
 public class DriverAssist extends SubsystemBase {
     // GLOBAL VARIABLES GO BELOW THIS LINE
     private DAStatus currDAStatus = DAStatus.INIT;
-    private DriveTrain driveTrain;
+    private SwerveSubsystem driveTrain;
     private Pose2d currRobotPose;  //current robot pose
     private Pose2d SelectedtargetPose2d = Targets.STARTPOS.getTargetPose();  //selected target pose
     private Targets CurrSelectedTarget = Targets.STARTPOS; //selected target enum
@@ -146,30 +146,24 @@ public class DriverAssist extends SubsystemBase {
         // need to revise this to which Action state we are in with auto updating statefully
         switch(currentActionState) {
             case STOWED:
-            RobotContainer.getInstance().m_sensors.bPickup = true; //for demo purposes auto set pickup sensor to false
-            //if current pose is a Deploy target and we have an object
+            // RobotContainer.getInstance().m_sensors.bPickup = true; //for demo purposes auto set pickup sensor to false
+            // if current pose is a Deploy target and we have an object
             if(bAtPrevTarget && CurrSelectedTarget.targetType == "DEPLOY" && DriveState.STATIONARY == currDriveState){
-                if(RobotContainer.getInstance().m_sensors.bPickup){
-                    currentActionState = ActionStates.DEPLOYING;
-                }
+            
             }
             
                 break;
             case PICKINGUP:
             //if current pose is a Pickup target, and we are at target and we do not have an object
             if(bAtPrevTarget){
-                if(!RobotContainer.getInstance().m_sensors.bPickup){
-                    currentActionState = ActionStates.STOWED;
-
-                    //for demo purposes auto set pickup sensor to true
-                    RobotContainer.getInstance().m_sensors.bPickup = true;
+                
                 }
                 else {
                     currentActionState = ActionStates.STOWED;
                     //RobotContainer.getInstance().m_sensors.bPickup = false;
 
                 }
-            }
+            
                 
                 
                 break;
@@ -179,8 +173,6 @@ public class DriverAssist extends SubsystemBase {
                 if(bAtPrevTarget && CurrSelectedTarget.targetType == "DEPLOY" && DriveState.STATIONARY == currDriveState){
                     currentActionState = ActionStates.EMPTY;
 
-                    //for demo purposes auto set pickup sensor to false
-                    RobotContainer.getInstance().m_sensors.bPickup = false;
                 }
                 break;
             case EMPTY:
@@ -496,7 +488,7 @@ public class DriverAssist extends SubsystemBase {
 
 
     //get angle to target in Rotation2d in degrees
-public Rotation2d getAngleToTarget(Pose2d currentPose, Translation2d targetPosition) {
+public static Rotation2d getAngleToTarget(Pose2d currentPose, Translation2d targetPosition) {
     Translation2d toTarget = targetPosition.minus(currentPose.getTranslation());
     return new Rotation2d(Math.atan2(toTarget.getY(), toTarget.getX()));
 }
@@ -509,7 +501,7 @@ public Rotation2d getRelativeAngleToTarget(Pose2d currentPose, Translation2d tar
 
 
 //get distance to target in meters
-public double getDistanceToTarget(Pose2d currentPose, Translation2d targetPosition) {
+public static double getDistanceToTarget(Pose2d currentPose, Translation2d targetPosition) {
     return currentPose.getTranslation().getDistance(targetPosition);
 }
 
