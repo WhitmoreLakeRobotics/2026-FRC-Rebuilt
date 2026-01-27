@@ -138,15 +138,15 @@ public class LTurret extends SubsystemBase {
         // turningConfig.closedLoop.maxMotion.allowedClosedLoopError(rTowerRPosTol, rTowerR_CLOSED_LOOP_SLOT_UP);
         // turningConfig.closedLoop.pidf(0.4, 0.0, 0.0, 0.0, rTowerR_CLOSED_LOOP_SLOT_UP);
 
-        turningConfig.closedLoop.pid(0.0, 0.0, 0.0, ClosedLoopSlot.kSlot0);
+        turningConfig.closedLoop.pid(0.04, 0.0, 0.0, ClosedLoopSlot.kSlot0);
 
-        turningConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder);
+        //turningConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder);
         AbsoluteEncoderConfig absEncConfig = new AbsoluteEncoderConfig();
         absEncConfig.zeroOffset(0.0); // this needs to be set to the offset where the turret is "zeroed"
         absEncConfig.inverted(false);
         absEncConfig.positionConversionFactor(360);
 
-        turningConfig.absoluteEncoder.apply(absEncConfig);
+        //turningConfig.absoluteEncoder.apply(absEncConfig);
         turningConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder);
         turningConfig.smartCurrentLimit(25);
         //turningConfig.smartCurrentLimit(normalStallCurrentLimit, normalFreeCurrentLimit);

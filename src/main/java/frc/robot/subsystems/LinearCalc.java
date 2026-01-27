@@ -38,7 +38,7 @@ public class LinearCalc {
         this.b = this.short_shot.RPM - (this.m * this.short_shot.Distance);
     }
 
-    private double getRPM (double distance) {
+    public double getRPM (double distance) {
        
         // y = mx + b
         // RPM = (this.m * distance) + this.b;
