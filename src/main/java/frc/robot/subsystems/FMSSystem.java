@@ -109,7 +109,6 @@ public class FMSSystem extends SubsystemBase {
                 remainingTime = 60 - elapsed;
                  if (elapsed >= 60) {
             setStatus(FMSStatus.ALLIANCE_SHIFT_3);
->>>>>>> Stashed changes
                 }
                 break;
             case ALLIANCE_SHIFT_3:
@@ -131,7 +130,6 @@ public class FMSSystem extends SubsystemBase {
                 remainingTime = 140 - elapsed;
                     if (elapsed >= 140) {
                 setStatus(FMSStatus.POSTMATCH);
->>>>>>> Stashed changes
                 }
                 break;
             case POSTMATCH:
