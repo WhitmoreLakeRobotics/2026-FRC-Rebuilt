@@ -112,7 +112,7 @@ public void updateDashboard() {
     //add FMS data to smartdashboard
     SmartDashboard.putString("FMS Status", m_fmsSystem.getStatus().toString());
     SmartDashboard.putString("FMS Data", m_fmsSystem.getPrivateData());
-    SmartDashboard.putNumber("Remaining Time", m_fmsSystem.getRemainingTime());
+    SmartDashboard.putNumber("Remaining Time", (int) m_fmsSystem.getRemainingTime());
    //add current odometry position to smartdashboard
   SmartDashboard.putNumber("Robot X Position", m_driveTrain.getPose().getX());
   SmartDashboard.putNumber("Robot Y Position", m_driveTrain.getPose().getY());

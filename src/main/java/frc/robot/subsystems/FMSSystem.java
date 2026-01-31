@@ -17,6 +17,7 @@ import frc.robot.commands.*;
 
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
+import com.thethriftybot.interfaces.DriverStationInterface;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
 import java.io.ObjectInputFilter.Status;
@@ -58,6 +59,7 @@ public class FMSSystem extends SubsystemBase {
     private double remainingTime = 0.0;
 
     private String gameData = DriverStation.getGameSpecificMessage();
+       //need way to access the Field management system and read the alliance shift data
 
     /**
     *
@@ -166,6 +168,10 @@ public class FMSSystem extends SubsystemBase {
         time.start();
     }
 
+    public void pause() {
+        time.stop();
+    }
+
     public void resetTeleop() {
         time.start();
         time.reset();
@@ -186,21 +192,9 @@ public class FMSSystem extends SubsystemBase {
         return gameData;
     }
 
-    // if(gameData.length()>0) {
-    //     switch (gameData.charAt(0)) {
-    //         case 'B':
-    //             // Blue case code
-    //             break;
-    //         case 'R':
-    //             // Red case code
-    //             break;
-    //         default:
-    //             // This is corrupt data
-    //             break;
-    //     }
-    // } else {
-    //   // Code for no data received yet
-    // }
+   
+
+
 
     // enum that has status of prematch, Auton, transition, alliance shift 1,
     // alliance shift 2, alliance shift 3, alliance shift 4, endgame

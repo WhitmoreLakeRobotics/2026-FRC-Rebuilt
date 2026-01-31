@@ -15,6 +15,9 @@ package frc.robot;
 import edu.wpi.first.hal.FRCNetComm.tInstances;
 import edu.wpi.first.hal.FRCNetComm.tResourceType;
 import edu.wpi.first.hal.HAL;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -27,6 +30,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 public class Robot extends TimedRobot {
 
     private Command m_autonomousCommand;
+    private NetworkTableEntry firstInactiveAlliance;
 
     private RobotContainer m_robotContainer;
 
@@ -65,6 +69,7 @@ public class Robot extends TimedRobot {
     */
     @Override
     public void disabledInit() {
+        RobotContainer.getInstance().m_fmsSystem.pause();
     }
 
     @Override
@@ -82,6 +87,7 @@ public class Robot extends TimedRobot {
         if (m_autonomousCommand != null) {
             m_autonomousCommand.schedule();
         }
+        RobotContainer.getInstance().m_fmsSystem.resetAuton();
     }
 
     /**
@@ -100,6 +106,10 @@ public class Robot extends TimedRobot {
         if (m_autonomousCommand != null) {
             m_autonomousCommand.cancel();
         }
+        RobotContainer.getInstance().m_fmsSystem.resetTeleop();
+
+        NetworkTable table = NetworkTableInstance.getDefault().getTable("shifts");
+        firstInactiveAlliance = table.getEntry("firstInactiveAlliance");
     }
 
     /**
@@ -107,6 +117,8 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopPeriodic() {
+        String alliance = firstInactiveAlliance.getString("Unknown");
+        System.out.println("First inactive alliance: " + alliance);
     }
 
     @Override
