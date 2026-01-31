@@ -80,47 +80,26 @@ public class FMSSystem extends SubsystemBase {
                 // do nothing
                 break;
             case AUTONOMOUS:
-<<<<<<< Updated upstream
-                // do nothing
-                remainingTime = 15 - elapsed;
-                if (elapsed >= 25) {
-                    setStatus(FMSStatus.PRETELEOP);
-                }
-                // do nothing
-                break;
-            case PRETELEOP:
-                // do nothing
-                remainingTime = 5 - elapsed;
-=======
-                resetAuton();
-                remainingTime = 25 - elapsed;
             if (elapsed >= 25) {
              setStatus(FMSStatus.PRETELEOP);
             }
+                // do nothing
                 break;
             case PRETELEOP:
-                remainingTime = 28 - elapsed;
->>>>>>> Stashed changes
+                // do nothing
                 if (elapsed >= 28) {
                     resetTeleop();
                 }
                 break;
             case TRANSITION:
-<<<<<<< Updated upstream
                 // do nothing
-=======
->>>>>>> Stashed changes
-                remainingTime = 10 - elapsed;
                 if (elapsed >= 10) {
                     setStatus(FMSStatus.ALLIANCE_SHIFT_1);
                 }
                 break;
             case ALLIANCE_SHIFT_1:
-<<<<<<< Updated upstream
                 // do nothing
-                // timeremaining = 35 - time
-=======
->>>>>>> Stashed changes
+                // timeremaining = 35 - time 
                 remainingTime = 35 - elapsed;
                 if (elapsed >= 35) {
                     setStatus(FMSStatus.ALLIANCE_SHIFT_2);
@@ -128,11 +107,6 @@ public class FMSSystem extends SubsystemBase {
                 break;
             case ALLIANCE_SHIFT_2:
                 // do nothing
-                remainingTime = 60 - elapsed;
-<<<<<<< Updated upstream
-                if (elapsed >= 60) {
-                    setStatus(FMSStatus.ALLIANCE_SHIFT_3);
-=======
                  if (elapsed >= 60) {
             setStatus(FMSStatus.ALLIANCE_SHIFT_3);
 >>>>>>> Stashed changes
@@ -154,11 +128,6 @@ public class FMSSystem extends SubsystemBase {
                 break;
             case ENDGAME:
                 // do nothing
-                remainingTime = 140 - elapsed;
-<<<<<<< Updated upstream
-                if (elapsed >= 140) {
-                    setStatus(FMSStatus.POSTMATCH);
-=======
                     if (elapsed >= 140) {
                 setStatus(FMSStatus.POSTMATCH);
 >>>>>>> Stashed changes
