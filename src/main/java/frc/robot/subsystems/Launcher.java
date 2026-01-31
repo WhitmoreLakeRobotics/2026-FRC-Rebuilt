@@ -51,7 +51,7 @@ public class Launcher extends SubsystemBase {
     private Pose2d targetPose;
     private LauncherStatus status = LauncherStatus.STOPPED;
     private String combinedStatus = "Initializing";
-    private Pose2d currentPose;
+    private Pose2d currentPose = new Pose2d(1, 4, new Rotation2d(0));
     private double distanceToTarget;
     private double targetAngle;
     private double currentAngle;
@@ -151,7 +151,7 @@ public class Launcher extends SubsystemBase {
         distanceToTarget = DriverAssist.getDistanceToTarget(currentPose, targetPose.getTranslation());
     }
 
-    private double getAngleToTarget(){
+    public double getAngleToTarget(){
         return DriverAssist.getAngleToTarget(currentPose, targetPose.getTranslation()).getDegrees();
     }
 

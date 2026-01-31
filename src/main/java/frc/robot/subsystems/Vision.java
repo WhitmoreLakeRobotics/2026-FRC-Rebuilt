@@ -13,11 +13,14 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform2d;
 import edu.wpi.first.math.geometry.Transform3d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.networktables.NetworkTablesJNI;
+import edu.wpi.first.networktables.StructPublisher;
 import edu.wpi.first.wpilibj.Alert;
 import edu.wpi.first.wpilibj.Alert.AlertType;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
@@ -47,6 +50,13 @@ import swervelib.telemetry.SwerveDriveTelemetry;
  */
 public class Vision
 {
+  /***Begin Custom Varibles */
+public Optional<Pose2d> lastCalculatedDist;
+public Pose2d LastCalcVisionLocation = new Pose2d(new Translation2d(16.0, 4.000), Rotation2d.fromDegrees(180));;
+//public final PhotonPoseEstimator poseEstimator;
+StructPublisher<Pose2d> estimatedCaemraPose = NetworkTableInstance.getDefault().getStructTopic("SmartDashboard/Subsystem/Vision/estimatedCameraPose", Pose2d.struct).publish();
+public int latestID;
+private double VisionTimeStamp;
 
   /**
    * April Tag Field Layout of the year.
@@ -139,17 +149,39 @@ public class Vision
        */
       visionSim.update(swerveDrive.getSimulationDriveTrainPose().get());
     }
-    for (Cameras camera : Cameras.values())
-    {
+    for (Cameras camera : Cameras.values()) {
       Optional<EstimatedRobotPose> poseEst = getEstimatedGlobalPose(camera);
-      if (poseEst.isPresent())
-      {
+      try{
+      if (!poseEst.isEmpty()) {
         var pose = poseEst.get();
-        swerveDrive.addVisionMeasurement(pose.estimatedPose.toPose2d(),
-                                         pose.timestampSeconds,
-                                         camera.curStdDevs);
+        //System.out.println("timestamp " + pose.timestampSeconds);
+
+        /*added custom code 3668 here */
+        latestID = pose.targetsUsed.get(0).getFiducialId(); //get used id from last scan 
+        VisionTimeStamp = pose.timestampSeconds;
+        Optional<Pose3d> tagPoseOptional = fieldLayout.getTagPose(latestID);   //get april tag location from last viewed tag id
+        Pose3d tagPose = tagPoseOptional.get();   //convert to actual Pose3d of tag id 
+        // Compute the robot's pose relative to the tag
+        Pose2d robotPose = pose.estimatedPose.toPose2d();   //grab 2d pose of robot relative to field
+        LastCalcVisionLocation = robotPose;
+        Pose2d tagPose2d = tagPose.toPose2d();  // get 2d pose from 3d of april tag location
+        Pose2d robotInTagSpace = robotPose.relativeTo(tagPose2d);  //calc robot postion relative to tag 
+        lastCalculatedDist = Optional.of(robotInTagSpace);  // store robot location 
+
+
+       // lastCalculatedDist.of(poseEst.get().estimatedPose.toPose2d());
+        /* end of custom code 3668 */
+       
+       swerveDrive.addVisionMeasurement(pose.estimatedPose.toPose2d(),
+            pose.timestampSeconds,
+            camera.curStdDevs);
+      }
+    
+      } catch (Exception e) {
+       //ignore 
       }
     }
+
 
   }
 
@@ -626,4 +658,23 @@ public class Vision
       }
     }
   }
+  /*****Inserted Custom Code */
+public int getLatestID() { 
+  return latestID;
+}
+public double getVisionTimestamp(){
+  return VisionTimeStamp;
+}
+
+
+public void UpdateTargetList(){
+  //var result = Cameras.RIGHT_CAM.getLatestResult();
+  PhotonPipelineResult result = Cameras.CENTER_CAM.getLatestResult().get();
+  if(result!=null && result.hasTargets()) {
+    latestID = result.getBestTarget().getFiducialId();
+  }
+  else {
+    latestID = -1;
+  }
+}
 }
