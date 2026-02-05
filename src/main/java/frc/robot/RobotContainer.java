@@ -52,7 +52,7 @@ public class RobotContainer {
     public final LTurret m_turret = new LTurret();
     public final Launcher m_launcher = new Launcher();
     public final Intake m_intake = new Intake();
-    public final FMSSystem m_climb = new FMSSystem();
+    public final Climb m_climb = new Climb();
     public final DriverAssist m_driverAssist = new DriverAssist();
     public final FMSSystem m_fmsSystem = new FMSSystem();
 
