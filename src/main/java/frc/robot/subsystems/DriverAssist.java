@@ -530,8 +530,17 @@ public static double getDistanceToTarget(Pose2d currentPose, Translation2d targe
         ID8LEFT(new Pose2d(1.85, 5.6, new Rotation2d(Math.toRadians(0.0))), "DEPLOY"),
         ID8RIGHT(new Pose2d(1.0, 4.0, new Rotation2d(Math.toRadians(0.0))), "DEPLOY"),
         STARTPOS(new Pose2d(1.0, 4.0, new Rotation2d(Math.toRadians(0.0))), "START"),
-        CLIMBLEFT(new Pose2d(18.0, 1.5, new Rotation2d(Math.toRadians(0.0))),"END");
+        CLIMBLEFT(new Pose2d(18.0, 1.5, new Rotation2d(Math.toRadians(0.0))),"END"),
+        
+        BRIGHTSTART(new Pose2d(3.752, 0.489, new Rotation2d(Math.toRadians(90.0))),"DRIVE"),
+        BLEFTSTART(new Pose2d(1.568, 3.329, new Rotation2d(Math.toRadians(0.0))),"DRIVE"),
+        BLEFTCLIMB(new Pose2d(18.0, 1.5, new Rotation2d(Math.toRadians(0.0))),"DRIVE"),
+        BRIGHTCLIMB(new Pose2d(18.0, 6.0, new Rotation2d(Math.toRadians(0.0))),"DRIVE"),
 
+        RRIGHTSTART(new Pose2d(12.724, 7.623, new Rotation2d(Math.toRadians(-90.0))),"DRIVE"),
+        RLEFTSTART(new Pose2d(1.568, 4.671, new Rotation2d(Math.toRadians(180.0))),"DRIVE"),
+        RLEFTCLIMB(new Pose2d(18.0, 6.0, new Rotation2d(Math.toRadians(0.0))),"DRIVE"),
+        RRIGHTCLIMB(new Pose2d(14.994, 4.772, new Rotation2d(Math.toRadians(180.0))),"DRIVE");
         private final Pose2d targetPose;
         private final String targetType;
         Targets(Pose2d targetPose, String targetType) {
