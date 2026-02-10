@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.752121212121212,
-        "y": 0.48879734848484757
+        "x": 7.713570075757577,
+        "y": 1.1947159090909087
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.384083814462514,
-        "y": 1.9328939541742407
+        "x": 7.704076940134675,
+        "y": 2.7430801170737515
       },
       "isLocked": false,
-      "linkedName": "right start"
+      "linkedName": "right center mid"
     },
     {
       "anchor": {
-        "x": 1.5679261363636363,
-        "y": 3.329081439393939
+        "x": 7.713570075757577,
+        "y": 4.059914772727272
       },
       "prevControl": {
-        "x": 2.2028172017196304,
-        "y": 2.4147637338031367
+        "x": 7.696443284700625,
+        "y": 2.9150872552478257
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Climb"
+      "linkedName": "middle"
     }
   ],
   "rotationTargets": [],
@@ -33,19 +33,7 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "All Drive",
-      "waypointRelativePos": 0,
-      "endWaypointRelativePos": null,
-      "command": null
-    },
-    {
-      "name": "climbpm",
-      "waypointRelativePos": 0,
-      "endWaypointRelativePos": null,
-      "command": null
-    },
-    {
-      "name": "Climb",
+      "name": "Driving while intaking",
       "waypointRelativePos": 0,
       "endWaypointRelativePos": null,
       "command": null
@@ -60,13 +48,13 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 0,
-    "rotation": 0.0
+    "velocity": 1.5,
+    "rotation": 90.0
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
-    "velocity": 0,
+    "velocity": 1.5,
     "rotation": 90.0
   },
   "useDefaultConstraints": true

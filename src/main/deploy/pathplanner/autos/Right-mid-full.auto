@@ -13,19 +13,25 @@
         {
           "type": "path",
           "data": {
-            "pathName": "start-mid"
+            "pathName": "right start-mid"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "bottom mid-middle"
+            "pathName": "right mid-middle"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "middle-bottom start"
+            "pathName": "middle-left mid"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "upper mid-upper start"
           }
         },
         {

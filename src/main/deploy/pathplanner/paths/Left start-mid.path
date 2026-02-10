@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.752121212121212,
-        "y": 0.48879734848484757
+        "x": 3.685681818181818,
+        "y": 7.556287878787879
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.384083814462514,
-        "y": 1.9328939541742407
+        "x": 4.685681818181818,
+        "y": 7.556287878787879
       },
       "isLocked": false,
-      "linkedName": "right start"
+      "linkedName": "left start"
     },
     {
       "anchor": {
-        "x": 1.5679261363636363,
-        "y": 3.329081439393939
+        "x": 7.738484848484848,
+        "y": 6.93341856060606
       },
       "prevControl": {
-        "x": 2.2028172017196304,
-        "y": 2.4147637338031367
+        "x": 7.323238636363636,
+        "y": 7.7057765151515145
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Climb"
+      "linkedName": "left mid intake"
     }
   ],
   "rotationTargets": [],
@@ -39,14 +39,8 @@
       "command": null
     },
     {
-      "name": "climbpm",
-      "waypointRelativePos": 0,
-      "endWaypointRelativePos": null,
-      "command": null
-    },
-    {
-      "name": "Climb",
-      "waypointRelativePos": 0,
+      "name": "intake",
+      "waypointRelativePos": 0.4338624338624342,
       "endWaypointRelativePos": null,
       "command": null
     }
@@ -60,14 +54,14 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 0,
-    "rotation": 0.0
+    "velocity": 1.5,
+    "rotation": -90.0
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 90.0
+    "rotation": -90.0
   },
   "useDefaultConstraints": true
 }

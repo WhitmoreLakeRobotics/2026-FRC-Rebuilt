@@ -12,7 +12,7 @@
         "y": 0.48879734848484757
       },
       "isLocked": false,
-      "linkedName": "bottom start"
+      "linkedName": "right start"
     },
     {
       "anchor": {
@@ -25,13 +25,19 @@
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "bottom center mid"
+      "linkedName": "right center mid"
     }
   ],
   "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [
+    {
+      "name": "All Drive",
+      "waypointRelativePos": 0.0,
+      "endWaypointRelativePos": null,
+      "command": null
+    },
     {
       "name": "intake",
       "waypointRelativePos": 0.2,
