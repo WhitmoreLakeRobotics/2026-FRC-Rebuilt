@@ -49,9 +49,21 @@ public class DriverAssist extends SubsystemBase {
     private TACTIC_APPROACH currentTactic = TACTIC_APPROACH.T1;
     private ActionStates currentActionState = ActionStates.EMPTY;
 
+    private AUTON_TACTIC autonTactic = currentTactic.autonTactic;
+    private TRANSITION_TACTIC transitionTactic = currentTactic.transitionTactic;
+    private SHIFT1_TACTIC shift1Tactic = currentTactic.shift1Tactic;
+    private SHIFT2_TACTIC shift2Tactic = currentTactic.shift2Tactic;
+    private SHIFT3_TACTIC shift3Tactic = currentTactic.shift3Tactic;
+    private SHIFT4_TACTIC shift4Tactic = currentTactic.shift4Tactic;
+    private ENDGAME_TACTIC endgameTactic = currentTactic.endgameTactic;
+
+
     private PICKUP_TACTIC pickTactic = currentTactic.pickTactic;
     private DEPLOY_TACTIC deployTactic = currentTactic.deployTactic;
     private END_TACTIC endTactic = currentTactic.endTactic;
+    
+
+
 
     private int numofTargets = 0;
     
@@ -127,7 +139,6 @@ public class DriverAssist extends SubsystemBase {
 
     private void getSubsystemState() {
         
-        currRobotPose = driveTrain.getPose();
         updateDrivetrainStatus();
         //currCoralPhase = coral.getCoralPhase();
         
@@ -140,9 +151,16 @@ public class DriverAssist extends SubsystemBase {
         bAtPrevTarget = isPose2dCloseEnough(currRobotPose, prevTargetPose2d);
         
         // update Tactics based upon current tactic approach.
-        pickTactic = currentTactic.pickTactic;
-        deployTactic = currentTactic.deployTactic;
-        endTactic = currentTactic.endTactic;
+        autonTactic = currentTactic.autonTactic;
+        transitionTactic = currentTactic.transitionTactic;
+        shift1Tactic = currentTactic.shift1Tactic;
+        shift2Tactic = currentTactic.shift2Tactic;
+        shift3Tactic = currentTactic.shift3Tactic;
+        shift4Tactic = currentTactic.shift4Tactic;
+        endgameTactic = currentTactic.endgameTactic;
+        //pickTactic = currentTactic.pickTactic;
+        //deployTactic = currentTactic.deployTactic;
+       // endTactic = currentTactic.endTactic;
         // need to revise this to which Action state we are in with auto updating statefully
         switch(currentActionState) {
             case STOWED:
@@ -443,6 +461,7 @@ public class DriverAssist extends SubsystemBase {
     private void updateDrivetrainStatus() {
         // Get the current status of the drivetrain.
         if(driveTrain.getCurrentCommand() != null){
+            currRobotPose = driveTrain.getPose();
         currCmdName = driveTrain.getCurrentCommand().getName();
            
             if(driveTrain.getSwerveDrive().getRobotVelocity().vxMetersPerSecond <= Math.abs(0.01) && 
@@ -594,6 +613,39 @@ public static double getDistanceToTarget(Pose2d currentPose, Translation2d targe
         MOVING;
     }
 
+    public enum AUTON_TACTIC {
+       
+    }
+
+    public enum TRANSITION_TACTIC {
+        
+    }
+
+    public enum SHIFT1_TACTIC {
+        
+    }
+
+
+    public enum SHIFT2_TACTIC {
+        
+    }
+
+
+    public enum SHIFT3_TACTIC {
+        
+    }
+
+
+    public enum SHIFT4_TACTIC {
+        
+    }
+
+
+    public enum ENDGAME_TACTIC {
+        
+    }
+
+
     //Tactic Approaches pickup
     public enum PICKUP_TACTIC {
         NEARESTPICKUP,
@@ -617,9 +669,19 @@ public static double getDistanceToTarget(Pose2d currentPose, Translation2d targe
         T2(PICKUP_TACTIC.NEARESTPICKUP, DEPLOY_TACTIC.ID8RIGHTDEPLOY, END_TACTIC.LEFTCLIMB),
         T3(PICKUP_TACTIC.RIGHTPICKUP, DEPLOY_TACTIC.ID8LEFTDEPLOY , END_TACTIC.LEFTCLIMB);
 
+
+        private AUTON_TACTIC autonTactic;
+        private TRANSITION_TACTIC transitionTactic;
+        private SHIFT1_TACTIC shift1Tactic;
+        private SHIFT2_TACTIC shift2Tactic;
+        private SHIFT3_TACTIC shift3Tactic;
+        private SHIFT4_TACTIC shift4Tactic;
+        private ENDGAME_TACTIC endgameTactic;
+
         private PICKUP_TACTIC pickTactic;
         private DEPLOY_TACTIC deployTactic;
         private END_TACTIC endTactic;
+        
 
         TACTIC_APPROACH(PICKUP_TACTIC pickup, DEPLOY_TACTIC deploy, END_TACTIC end) {
             this.pickTactic = pickup;
@@ -634,7 +696,8 @@ public static double getDistanceToTarget(Pose2d currentPose, Translation2d targe
         }
         public END_TACTIC getEndTactic() {
             return endTactic;
-        }   
+        }
+        
     }
 
     public enum ActionStates {
