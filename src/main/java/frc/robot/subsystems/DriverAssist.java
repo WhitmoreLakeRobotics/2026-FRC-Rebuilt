@@ -38,7 +38,7 @@ public class DriverAssist extends SubsystemBase {
     private FMSSystem fmsSystem;
     private FMSSystem.FMSStatus fmsStatus;
     private boolean onShift = true;
-    
+
     private double remainingTime;
     private PMGT pmgt;
     private PMGT.Profiles pmgtProfile;
@@ -164,6 +164,7 @@ public class DriverAssist extends SubsystemBase {
         hopperStatus = hopper.getStatus();
         pmgtProfile = pmgt.getCurrentProfile();
         fmsStatus = fmsSystem.getStatus();
+        onShift = fmsSystem.getOnShift();
         climbStatus = climb.getStatus();
         currFieldZone = getFieldZone(currRobotPose.getX());
         //currCoralPhase = coral.getCoralPhase();
@@ -264,20 +265,33 @@ public class DriverAssist extends SubsystemBase {
                 break;
             case ALLIANCE_SHIFT_1:
                 if (onShift) {
-                
+                    determineTargetBasedOnTactic();
+                } else {
+                determineTargetBasedOffTactic();
             }
                 break;
             case ALLIANCE_SHIFT_2:
-                determineTargetBasedOnTactic();
+             if (onShift) {
+                    determineTargetBasedOnTactic();
+                } else {
+                determineTargetBasedOffTactic();
+            }
                 break;
             case ALLIANCE_SHIFT_3:
-                determineTargetBasedOnTactic();
+                if (onShift) {
+                    determineTargetBasedOnTactic();
+                } else {
+                determineTargetBasedOffTactic();
+            }
                 break;
             case ALLIANCE_SHIFT_4:
-                determineTargetBasedOnTactic();
-                break;
+                if (onShift) {
+                    determineTargetBasedOnTactic();
+                } else {
+                determineTargetBasedOffTactic();
+            }                break;
             case ENDGAME:
-                determineEndTargetBasedOnTactic();
+                determineTargetBasedClimbTactic();
                  break;
             default:
                 break;
@@ -367,7 +381,7 @@ public class DriverAssist extends SubsystemBase {
 
     }
 
-    private void determineDeployTargetBasedOnTactic() {
+    private void determineTargetBasedOffTactic() {
         // Determine the target based on the current tactic approach.
 
         switch (deployTactic){
