@@ -182,7 +182,7 @@ Trigger X_Drive = new Trigger(driver_Controller.x());
     // dump hopper
     Trigger rightTrigger = new Trigger(driver_Controller.rightTrigger());
     // toggle intake
-        rightTrigger.onTrue(new SetStatusIntake(Intake.STATUS.RETRACTED));
+        rightTrigger.onTrue(new SetStatusIntake(Intake.STATUS.HALF_EXTENDED, true));
     Trigger dpad_up = new Trigger(driver_Controller.povUp());
     // climb up
     Trigger dpad_down = new Trigger(driver_Controller.povDown());

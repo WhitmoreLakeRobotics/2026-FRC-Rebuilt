@@ -31,6 +31,7 @@ import com.revrobotics.PersistMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.ResetMode;
 
+import edu.wpi.first.hal.HAL;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -160,6 +161,13 @@ public class Intake extends SubsystemBase {
             setExtendMotorPosition(status.getPosition());
              intakeMotor.setVoltage(0);
              bIntakeMotorRunning = false;
+                break;
+                case HALF_EXTENDED:
+                targetStatus = STATUS.HALF_EXTENDED;
+                status = STATUS.RETRACTING;
+                setExtendMotorPosition(status.getPosition());
+                 intakeMotor.setVoltage(0);
+                bIntakeMotorRunning = false;
                 break;
             case EXTENDING: //transition state
             targetStatus = STATUS.EXTENDED_STOPPED;
@@ -300,6 +308,7 @@ public class Intake extends SubsystemBase {
         // Enumeration of status which should store position and speed values
     public enum STATUS {
         RETRACTED(90.0, 0.0),
+        HALF_EXTENDED(45.0, 0.0),
         RETRACTING(0.0, 0.0),
         EXTENDED_STOPPED(0.0, 0.0),
         EXTENDING(0.0, 0.0),
