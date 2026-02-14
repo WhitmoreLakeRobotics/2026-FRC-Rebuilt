@@ -161,7 +161,7 @@ public void updateDashboard() {
    SmartDashboard.putString("Curr Tactic", m_driverAssist.getCurrTacticApproach().toString());
    SmartDashboard.putBoolean("At Prev Targ", m_driverAssist.getbAtPrevTarg());
    SmartDashboard.putNumber("Num Of Targets", m_driverAssist.getNumOfTargets());
-   //SmartDashboard.putString("Curr Action State", m_driverAssist.getCurrActionState().toString());
+
   }
   /**
    * Use this method to define your button->command mappings.  Buttons can be created by

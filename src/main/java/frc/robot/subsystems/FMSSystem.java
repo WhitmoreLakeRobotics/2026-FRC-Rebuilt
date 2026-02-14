@@ -210,6 +210,22 @@ public class FMSSystem extends SubsystemBase {
     public String getPrivateData() {
         return gameData;
     }
+    
+    public boolean getOnShift() {
+        return onShift;
+    }
+
+    public boolean getIs2_4() {
+        return is2_4;
+    }
+
+    public void setIs2_4(boolean is2_4) {
+        this.is2_4 = is2_4;
+    }
+
+    public void setOnShift(boolean onShift) {
+        this.onShift = onShift;
+    }
 
     // enum that has status of prematch, Auton, transition, alliance shift 1,
     // alliance shift 2, alliance shift 3, alliance shift 4, endgame
