@@ -57,10 +57,12 @@ public class FMSSystem extends SubsystemBase {
     private Timer time = new Timer();
     private FMSStatus status = FMSStatus.PREMATCH;
     private double remainingTime = 0.0;
-
+    private boolean is2_4 = true;
+    private boolean onShift = true;
 
     private String gameData = DriverStation.getGameSpecificMessage();
-       //need way to access the Field management system and read the alliance shift data
+    // need way to access the Field management system and read the alliance shift
+    // data
 
     /**
     *
@@ -83,9 +85,9 @@ public class FMSSystem extends SubsystemBase {
             case AUTONOMOUS:
                 resetAuton();
                 remainingTime = 25 - elapsed;
-            if (elapsed >= 25) {
-             setStatus(FMSStatus.PRETELEOP);
-            }
+                if (elapsed >= 25) {
+                    setStatus(FMSStatus.PRETELEOP);
+                }
                 break;
             case PRETELEOP:
                 remainingTime = 28 - elapsed;
@@ -97,19 +99,35 @@ public class FMSSystem extends SubsystemBase {
                 remainingTime = 10 - elapsed;
                 if (elapsed >= 10) {
                     setStatus(FMSStatus.ALLIANCE_SHIFT_1);
+                    if (is2_4) {
+                        onShift = false;
+                    } else {
+                        onShift = true;
+                    }
                 }
                 break;
             case ALLIANCE_SHIFT_1:
                 remainingTime = 35 - elapsed;
+
                 if (elapsed >= 35) {
                     setStatus(FMSStatus.ALLIANCE_SHIFT_2);
+                    if (is2_4) {
+                        onShift = true;
+                    } else {
+                        onShift = false;
+                    }
                 }
                 break;
             case ALLIANCE_SHIFT_2:
                 // do nothing
                 remainingTime = 60 - elapsed;
-                 if (elapsed >= 60) {
-            setStatus(FMSStatus.ALLIANCE_SHIFT_3);
+                if (elapsed >= 60) {
+                    setStatus(FMSStatus.ALLIANCE_SHIFT_3);
+                    if (is2_4) {
+                        onShift = false;
+                    } else {
+                        onShift = true;
+                    }
                 }
                 break;
             case ALLIANCE_SHIFT_3:
@@ -117,6 +135,11 @@ public class FMSSystem extends SubsystemBase {
                 remainingTime = 85 - elapsed;
                 if (elapsed >= 85) {
                     setStatus(FMSStatus.ALLIANCE_SHIFT_4);
+                    if (is2_4) {
+                        onShift = true;
+                    } else {
+                        onShift = false;
+                    }
                 }
                 break;
             case ALLIANCE_SHIFT_4:
@@ -129,8 +152,8 @@ public class FMSSystem extends SubsystemBase {
             case ENDGAME:
                 // do nothing
                 remainingTime = 140 - elapsed;
-                    if (elapsed >= 140) {
-                setStatus(FMSStatus.POSTMATCH);
+                if (elapsed >= 140) {
+                    setStatus(FMSStatus.POSTMATCH);
                 }
                 break;
             case POSTMATCH:
@@ -187,10 +210,6 @@ public class FMSSystem extends SubsystemBase {
     public String getPrivateData() {
         return gameData;
     }
-
-   
-
-
 
     // enum that has status of prematch, Auton, transition, alliance shift 1,
     // alliance shift 2, alliance shift 3, alliance shift 4, endgame

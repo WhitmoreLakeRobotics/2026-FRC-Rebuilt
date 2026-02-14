@@ -37,10 +37,13 @@ public class DriverAssist extends SubsystemBase {
     private Climb.Status climbStatus;
     private FMSSystem fmsSystem;
     private FMSSystem.FMSStatus fmsStatus;
+    private boolean onShift = true;
+    
     private double remainingTime;
     private PMGT pmgt;
     private PMGT.Profiles pmgtProfile;
     private Pose2d currRobotPose;  //current robot pose
+    private FIELDZONE currFieldZone; //current field zone
     private Pose2d SelectedtargetPose2d = Targets.STARTPOS.getTargetPose();  //selected target pose
     private Targets CurrSelectedTarget = Targets.STARTPOS; //selected target enum
     private Pose2d prevTargetPose2d;   //previous loop's selected target pose
@@ -162,6 +165,7 @@ public class DriverAssist extends SubsystemBase {
         pmgtProfile = pmgt.getCurrentProfile();
         fmsStatus = fmsSystem.getStatus();
         climbStatus = climb.getStatus();
+        currFieldZone = getFieldZone(currRobotPose.getX());
         //currCoralPhase = coral.getCoralPhase();
         
     }
@@ -179,14 +183,46 @@ public class DriverAssist extends SubsystemBase {
        // endTactic = currentTactic.endTactic;
         // need to revise this to which Action state we are in with auto updating statefully
     
+        // check and confirm what zone we are in.
     }
     private void determineCurrentAction() {
-        // Determine what action we need to take based on the current state of the
+        // Determine what action we are currently taking based on the current state of the
         // subsystems
         
         // Should pass in the current states of all subsystems to determine the full state.
         // Update search methhod with new subsystems as they are added.
-        currFullState = getCurFullState(new String[] {currDriveState.name()});
+        // currFullState = getCurFullState(new String[] {currDriveState.name()});
+        switch (fmsStatus){
+            case PREMATCH:
+                // Determine on shift action state based on subsystem states.
+                break;
+            case AUTONOMOUS:
+                // Determine off shift action state based on subsystem states.
+                break;
+            case PRETELEOP:
+                // Determine climb action state based on subsystem states.
+                break;
+            case TRANSITION:
+                // Determine transition action state based on subsystem states.
+                break;
+            case ALLIANCE_SHIFT_1:
+                // Determine alliance shift 1 action state based on subsystem states.
+                break;
+            case ALLIANCE_SHIFT_2:
+                // Determine alliance shift 2 action state based on subsystem states.
+                break;
+            case ALLIANCE_SHIFT_3:
+                // Determine alliance shift 3 action state based on subsystem states.
+                break;
+            case ALLIANCE_SHIFT_4:
+                // Determine alliance shift 4 action state based on subsystem states.
+                break;
+            case ENDGAME:
+                // Determine endgame action state based on subsystem states.
+                 break;
+            default:
+                break;
+        }
 
         //This should be Articulation state check. 
     }
@@ -215,11 +251,42 @@ public class DriverAssist extends SubsystemBase {
 
         numofTargets = distances.size();  // number of targets
         
+        // Based on pos of robot, tactics, and shift we need to  determine which drive target is best. 
+        switch (fmsStatus){
+            case PREMATCH:
+                break;
+            case AUTONOMOUS:
+                break;
+            case PRETELEOP:
+                break;
+            case TRANSITION:
+                determineTargetBasedOnTactic();
+                break;
+            case ALLIANCE_SHIFT_1:
+                if (onShift) {
+                
+            }
+                break;
+            case ALLIANCE_SHIFT_2:
+                determineTargetBasedOnTactic();
+                break;
+            case ALLIANCE_SHIFT_3:
+                determineTargetBasedOnTactic();
+                break;
+            case ALLIANCE_SHIFT_4:
+                determineTargetBasedOnTactic();
+                break;
+            case ENDGAME:
+                determineEndTargetBasedOnTactic();
+                 break;
+            default:
+                break;
+
+        }
         
 
-        /* game tatics notes: identify if we are at previous target location,  if we arriaved at pick up point mark pick up complete
-         * then move to deploy point. if we are at deploy point mark deploy complete then move to pick up point.
-         */
+        // based on current pos of robot and shift we need to determine which launch target is best.
+        
 
 
     }
@@ -534,9 +601,32 @@ public static double getDistanceToTarget(Pose2d currentPose, Translation2d targe
         MOVING;
     }
 
-    public enum AUTON_TACTIC {
-       
+    public enum FIELDZONE {
+        REDZONE(0.0, 8.2296),
+        BLUEZONE(8.2296, 16.4592),
+        DMZ(7.62, 8.2296);
+
+        double start;
+        double end;
+
+        FIELDZONE(double start, double end) {
+            this.start = start;
+            this.end = end;
+        }
+
+        public boolean isInZone(double x) {
+            return x >= start && x <= end;
+        }
+
     }
+    public FIELDZONE getFieldZone(double x) {
+        for (FIELDZONE zone : FIELDZONE.values()) {
+            if (zone.isInZone(x)) {
+                return zone;
+            }
+        }
+        return null; // or throw an exception if x is out of bounds
+    } 
 
     public enum TRANSITION_TACTIC {
         
@@ -591,32 +681,25 @@ public static double getDistanceToTarget(Pose2d currentPose, Translation2d targe
         T3(ONSHIFT_TACTIC.CLOSE, OFFSHIFT_TACTIC.CENTER, CLIMB_TACTIC.CENTERCLIMB);
 
 
-        private AUTON_TACTIC autonTactic;
-        private TRANSITION_TACTIC transitionTactic;
-        private SHIFT1_TACTIC shift1Tactic;
-        private SHIFT2_TACTIC shift2Tactic;
-        private SHIFT3_TACTIC shift3Tactic;
-        private SHIFT4_TACTIC shift4Tactic;
-        private ENDGAME_TACTIC endgameTactic;
 
-        private ONSHIFT_TACTIC pickTactic;
-        private OFFSHIFT_TACTIC deployTactic;
-        private CLIMB_TACTIC endTactic;
+        private ONSHIFT_TACTIC onshiftTactic;
+        private OFFSHIFT_TACTIC offshiftTactic;
+        private CLIMB_TACTIC climbTactic;
         
 
-        TACTIC_APPROACH(ONSHIFT_TACTIC pickup, OFFSHIFT_TACTIC deploy, CLIMB_TACTIC end) {
-            this.pickTactic = pickup;
-            this.deployTactic = deploy;
-            this.endTactic = end;
+        TACTIC_APPROACH(ONSHIFT_TACTIC onshift, OFFSHIFT_TACTIC offshift, CLIMB_TACTIC climb) {
+            this.onshiftTactic = onshift;
+            this.offshiftTactic = offshift;
+            this.climbTactic = climb;
         }
-        public ONSHIFT_TACTIC getPickTactic() {
-            return pickTactic;
+        public ONSHIFT_TACTIC getOnshiftTactic() {
+            return onshiftTactic;
         }
-        public OFFSHIFT_TACTIC getDeployTactic() {
-            return deployTactic;
+        public OFFSHIFT_TACTIC getOffshiftTactic() {
+            return offshiftTactic;
         }
-        public CLIMB_TACTIC getEndTactic() {
-            return endTactic;
+        public CLIMB_TACTIC getClimbTactic() {
+            return climbTactic;
         }
         
     }
