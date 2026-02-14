@@ -32,6 +32,7 @@ import com.revrobotics.spark.SparkBase.ResetMode;
 
 import edu.wpi.first.units.measure.Time;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -59,6 +60,7 @@ public class FMSSystem extends SubsystemBase {
     private double remainingTime = 0.0;
     private boolean is2_4 = true;
     private boolean onShift = true;
+    private Alliance currAlliance = DriverStation.getAlliance().orElse(Alliance.Red);
 
     private String gameData = DriverStation.getGameSpecificMessage();
     // need way to access the Field management system and read the alliance shift
@@ -147,6 +149,7 @@ public class FMSSystem extends SubsystemBase {
                 remainingTime = 110 - elapsed;
                 if (elapsed >= 110) {
                     setStatus(FMSStatus.ENDGAME);
+                    onShift = true;
                 }
                 break;
             case ENDGAME:
@@ -225,6 +228,9 @@ public class FMSSystem extends SubsystemBase {
 
     public void setOnShift(boolean onShift) {
         this.onShift = onShift;
+    }
+    public Alliance getAlliance() {
+        return currAlliance;
     }
 
     // enum that has status of prematch, Auton, transition, alliance shift 1,
