@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.RobotContainer;
+import frc.robot.subsystems.Launcher.LauncherStatus;
 //import frc.robot.Constants.CanIds;
 //import frc.robot.commands.drivebase.DriveToPickup.TARGETPOS;
 //import frc.robot.subsystems.Coral.CoralPhase;
@@ -25,6 +26,20 @@ public class DriverAssist extends SubsystemBase {
     // GLOBAL VARIABLES GO BELOW THIS LINE
     private DAStatus currDAStatus = DAStatus.INIT;
     private SwerveSubsystem driveTrain;
+    private Intake intake;
+    private Intake.STATUS intakeStatus;
+    private Launcher launcher;
+    private String combinedStatus;
+    private Launcher.LauncherStatus launcherStatus;
+    private Hopper hopper;
+    private Hopper.HopperStatus hopperStatus;
+    private Climb climb;
+    private Climb.Status climbStatus;
+    private FMSSystem fmsSystem;
+    private FMSSystem.FMSStatus fmsStatus;
+    private double remainingTime;
+    private PMGT pmgt;
+    private PMGT.Profiles pmgtProfile;
     private Pose2d currRobotPose;  //current robot pose
     private Pose2d SelectedtargetPose2d = Targets.STARTPOS.getTargetPose();  //selected target pose
     private Targets CurrSelectedTarget = Targets.STARTPOS; //selected target enum
@@ -47,20 +62,14 @@ public class DriverAssist extends SubsystemBase {
 
     //tactic variables
     private TACTIC_APPROACH currentTactic = TACTIC_APPROACH.T1;
-    private ActionStates currentActionState = ActionStates.EMPTY;
+    //private ActionStates currentActionState = ActionStates.EMPTY;
 
-    private AUTON_TACTIC autonTactic = currentTactic.autonTactic;
-    private TRANSITION_TACTIC transitionTactic = currentTactic.transitionTactic;
-    private SHIFT1_TACTIC shift1Tactic = currentTactic.shift1Tactic;
-    private SHIFT2_TACTIC shift2Tactic = currentTactic.shift2Tactic;
-    private SHIFT3_TACTIC shift3Tactic = currentTactic.shift3Tactic;
-    private SHIFT4_TACTIC shift4Tactic = currentTactic.shift4Tactic;
-    private ENDGAME_TACTIC endgameTactic = currentTactic.endgameTactic;
+    
 
 
-    private PICKUP_TACTIC pickTactic = currentTactic.pickTactic;
-    private DEPLOY_TACTIC deployTactic = currentTactic.deployTactic;
-    private END_TACTIC endTactic = currentTactic.endTactic;
+    private ONSHIFT_TACTIC onshifTactic = currentTactic.onshiftTactic;
+    private OFFSHIFT_TACTIC offshifTactic = currentTactic.offshiftTactic;
+    private CLIMB_TACTIC climbTactic = currentTactic.climbTactic;
     
 
 
@@ -71,7 +80,13 @@ public class DriverAssist extends SubsystemBase {
     // GLOBAL VARIABLES GO ABOVE THIS LINE
     // SYSTEM METHODS GO BELOW THIS LINE
     public DriverAssist() {
-        
+        driveTrain = RobotContainer.getInstance().m_driveTrain;
+        intake = RobotContainer.getInstance().m_intake;
+        launcher = RobotContainer.getInstance().m_launcher;
+        hopper = RobotContainer.getInstance().m_feeder;
+        fmsSystem = RobotContainer.getInstance().m_fmsSystem;
+        pmgt = RobotContainer.getInstance().m_pmgt;
+        climb = RobotContainer.getInstance().m_climb;
 
     }
 
@@ -140,6 +155,13 @@ public class DriverAssist extends SubsystemBase {
     private void getSubsystemState() {
         
         updateDrivetrainStatus();
+        intakeStatus = intake.getStatus();
+        launcherStatus = launcher.getStatus();
+        combinedStatus = launcher.getCombinedStatus();
+        hopperStatus = hopper.getStatus();
+        pmgtProfile = pmgt.getCurrentProfile();
+        fmsStatus = fmsSystem.getStatus();
+        climbStatus = climb.getStatus();
         //currCoralPhase = coral.getCoralPhase();
         
     }
@@ -151,62 +173,13 @@ public class DriverAssist extends SubsystemBase {
         bAtPrevTarget = isPose2dCloseEnough(currRobotPose, prevTargetPose2d);
         
         // update Tactics based upon current tactic approach.
-        autonTactic = currentTactic.autonTactic;
-        transitionTactic = currentTactic.transitionTactic;
-        shift1Tactic = currentTactic.shift1Tactic;
-        shift2Tactic = currentTactic.shift2Tactic;
-        shift3Tactic = currentTactic.shift3Tactic;
-        shift4Tactic = currentTactic.shift4Tactic;
-        endgameTactic = currentTactic.endgameTactic;
-        //pickTactic = currentTactic.pickTactic;
-        //deployTactic = currentTactic.deployTactic;
+        offshifTactic = currentTactic.offshiftTactic;
+        onshifTactic = currentTactic.onshiftTactic;
+        climbTactic = currentTactic.climbTactic;
        // endTactic = currentTactic.endTactic;
         // need to revise this to which Action state we are in with auto updating statefully
-        switch(currentActionState) {
-            case STOWED:
-            // RobotContainer.getInstance().m_sensors.bPickup = true; //for demo purposes auto set pickup sensor to false
-            // if current pose is a Deploy target and we have an object
-            if(bAtPrevTarget && CurrSelectedTarget.targetType == "DEPLOY" && DriveState.STATIONARY == currDriveState){
-            
-            }
-            
-                break;
-            case PICKINGUP:
-            //if current pose is a Pickup target, and we are at target and we do not have an object
-            if(bAtPrevTarget){
-                
-                }
-                else {
-                    currentActionState = ActionStates.STOWED;
-                    //RobotContainer.getInstance().m_sensors.bPickup = false;
-
-                }
-            
-                
-                
-                break;
-                //has object heading to deply
-            case DEPLOYING:
-            //if current pose is a Deploy target, we are at previous target 
-                if(bAtPrevTarget && CurrSelectedTarget.targetType == "DEPLOY" && DriveState.STATIONARY == currDriveState){
-                    currentActionState = ActionStates.EMPTY;
-
-                }
-                break;
-            case EMPTY:
-            //if current pose is a Pickup target and we do not have an object
-                if(CurrSelectedTarget.targetType == "PICKUP" 
-                    && DriveState.STATIONARY == currDriveState){
-                    currentActionState = ActionStates.PICKINGUP;
-                }
-                break;
-            default:
-                break;
-        }
-        
-
+    
     }
-
     private void determineCurrentAction() {
         // Determine what action we need to take based on the current state of the
         // subsystems
@@ -225,38 +198,6 @@ public class DriverAssist extends SubsystemBase {
         distances.clear();
         TargetSets = new Targets[0];
 
-        switch (currentActionState) {
-            case EMPTY:
-            TargetSets = getTargets("PICKUP");
-            pickTactic = currentTactic.getPickTactic();
-
-                break;
-            case PICKINGUP:
-            TargetSets = getTargets("PICKUP");  //this may need to be changed to deploy
-            pickTactic = currentTactic.getPickTactic();
-
-                break;
-            case STOWED:
-            TargetSets = getTargets("DEPLOY");
-            deployTactic = currentTactic.getDeployTactic();
-                break;
-            case DEPLOYING:
-            TargetSets = getTargets("DEPLOY");     //this may need to be changed to pickup
-            deployTactic = currentTactic.getDeployTactic();
-                break;
-            case CLIMB_PREP:
-            TargetSets = getTargets("END");
-            endTactic = currentTactic.getEndTactic();
-                break;
-            case CLIMB:
-            TargetSets = getTargets("END");
-            endTactic = currentTactic.getEndTactic();
-
-                break;
-            default:
-                break;
-
-        }
 
         for (Targets target : Targets.values()) {
             Pose2d targetPose = target.getTargetPose();
@@ -274,38 +215,7 @@ public class DriverAssist extends SubsystemBase {
 
         numofTargets = distances.size();  // number of targets
         
-        switch (currentActionState) {
-            case EMPTY:
-                //based on current pickup tactic
-                //filter distances based on pick tactic
-                determineTargetBasedOnTactic();
-                
-                break;
-            case PICKINGUP:
-                //get current pickup tactic
-                determineTargetBasedOnTactic();
-                break;
-            case STOWED:
-                //based on current deploy tactic
-                determineDeployTargetBasedOnTactic();
-                break;
-            case DEPLOYING:
-                //get current deploy tactic
-                determineDeployTargetBasedOnTactic();
-            
-                break;
-            case CLIMB_PREP:
-                //based on current climb tactic
-                determineEndTargetBasedOnTactic();
-                break;
-            case CLIMB:
-                //get current climb tactic
-                determineEndTargetBasedOnTactic();
-
-                break;
-            default:
-                break;
-        }
+        
 
         /* game tatics notes: identify if we are at previous target location,  if we arriaved at pick up point mark pick up complete
          * then move to deploy point. if we are at deploy point mark deploy complete then move to pick up point.
@@ -433,7 +343,7 @@ public class DriverAssist extends SubsystemBase {
                     .orElse(null);
                 
                 break;
-            case LEFTCLIMB:
+           case LEFTCLIMB:
                 //select left climb
                 CurrSelectedTarget = Targets.CLIMBLEFT;
                 
@@ -493,9 +403,9 @@ public class DriverAssist extends SubsystemBase {
         return numofTargets;
     }
 
-    public ActionStates getCurrActionState() {
-        return currentActionState;
-    }
+  //  public ActionStates getCurrActionState() {
+    //    return currentActionState;
+    //}
 
     public FullState getCurFullState(String[] args) {
         
@@ -544,6 +454,17 @@ public static double getDistanceToTarget(Pose2d currentPose, Translation2d targe
     }
 
     public enum Targets {
+        BLAUNCHLEFT(new Pose2d(3.835, 7.340, new Rotation2d(Math.toRadians(0.0))), "LAUNCH"),
+        BLAUNCHRIGHT(new Pose2d(3.835, 0.696, new Rotation2d(Math.toRadians(0.0))), "LAUNCH"),
+        RLAUNCHLEFT(new Pose2d(12.705, 0.580, new Rotation2d(Math.toRadians(0.0))), "LAUNCH"),
+        RLAUNCHRIGHT(new Pose2d(12.705, 7.340, new Rotation2d(Math.toRadians(0.0))), "LAUNCH"),
+
+        BFEEDLEFT(new Pose2d(2.116, 6.518, new Rotation2d(Math.toRadians(0.0))), "FEED"),
+        BFEEDRIGHT (new Pose2d(2.008, 1.444, new Rotation2d(Math.toRadians(0.0))), "FEED"),
+        RFEEDLEFT(new Pose2d(14.524, 1.676, new Rotation2d(Math.toRadians(0.0))), "FEED"),
+        RFEEDRIGHT(new Pose2d(14.598, 6.518, new Rotation2d(Math.toRadians(0.0))), "FEED"),
+        
+
         PICKUPLEFT(new Pose2d(-1.5, 6.75, new Rotation2d(Math.toRadians(0.0))), "PICKUP"),
         PICKUPRIGHT(new Pose2d(-1.18, 3.18, new Rotation2d(Math.toRadians(0.0))), "PICKUP"),
         ID8LEFT(new Pose2d(1.85, 5.6, new Rotation2d(Math.toRadians(0.0))), "DEPLOY"),
@@ -647,27 +568,27 @@ public static double getDistanceToTarget(Pose2d currentPose, Translation2d targe
 
 
     //Tactic Approaches pickup
-    public enum PICKUP_TACTIC {
-        NEARESTPICKUP,
-        RIGHTPICKUP,
-        LEFTPICKUP;
-        
+    public enum ONSHIFT_TACTIC {
+        LEFTSIDE,
+        RIGHTSIDE,
+        CLOSE;
     }
 
-    public enum DEPLOY_TACTIC {
-        NEARESTDEPLOY,
-        ID8RIGHTDEPLOY,
-        ID8LEFTDEPLOY;
+    public enum OFFSHIFT_TACTIC {
+        LEFTFAR,
+        RIGHTFAR,
+        CENTER;
     }
-    public enum END_TACTIC {
-        NEARESTCLIMB,
-        LEFTCLIMB;
+    public enum CLIMB_TACTIC {
+        LEFTCLIMB,
+        RIGHTCLIMB,
+        CENTERCLIMB;
     }
 
     public enum TACTIC_APPROACH{
-        T1(PICKUP_TACTIC.NEARESTPICKUP, DEPLOY_TACTIC.NEARESTDEPLOY, END_TACTIC.LEFTCLIMB),
-        T2(PICKUP_TACTIC.NEARESTPICKUP, DEPLOY_TACTIC.ID8RIGHTDEPLOY, END_TACTIC.LEFTCLIMB),
-        T3(PICKUP_TACTIC.RIGHTPICKUP, DEPLOY_TACTIC.ID8LEFTDEPLOY , END_TACTIC.LEFTCLIMB);
+        T1(ONSHIFT_TACTIC.RIGHTSIDE, OFFSHIFT_TACTIC.RIGHTFAR, CLIMB_TACTIC.RIGHTCLIMB),
+        T2(ONSHIFT_TACTIC.LEFTSIDE, OFFSHIFT_TACTIC.LEFTFAR, CLIMB_TACTIC.LEFTCLIMB),
+        T3(ONSHIFT_TACTIC.CLOSE, OFFSHIFT_TACTIC.CENTER, CLIMB_TACTIC.CENTERCLIMB);
 
 
         private AUTON_TACTIC autonTactic;
@@ -678,29 +599,29 @@ public static double getDistanceToTarget(Pose2d currentPose, Translation2d targe
         private SHIFT4_TACTIC shift4Tactic;
         private ENDGAME_TACTIC endgameTactic;
 
-        private PICKUP_TACTIC pickTactic;
-        private DEPLOY_TACTIC deployTactic;
-        private END_TACTIC endTactic;
+        private ONSHIFT_TACTIC pickTactic;
+        private OFFSHIFT_TACTIC deployTactic;
+        private CLIMB_TACTIC endTactic;
         
 
-        TACTIC_APPROACH(PICKUP_TACTIC pickup, DEPLOY_TACTIC deploy, END_TACTIC end) {
+        TACTIC_APPROACH(ONSHIFT_TACTIC pickup, OFFSHIFT_TACTIC deploy, CLIMB_TACTIC end) {
             this.pickTactic = pickup;
             this.deployTactic = deploy;
             this.endTactic = end;
         }
-        public PICKUP_TACTIC getPickTactic() {
+        public ONSHIFT_TACTIC getPickTactic() {
             return pickTactic;
         }
-        public DEPLOY_TACTIC getDeployTactic() {
+        public OFFSHIFT_TACTIC getDeployTactic() {
             return deployTactic;
         }
-        public END_TACTIC getEndTactic() {
+        public CLIMB_TACTIC getEndTactic() {
             return endTactic;
         }
         
     }
 
-    public enum ActionStates {
+    /*  public enum ActionStates {
         STOWED,
         PICKINGUP,
         DEPLOYING,
@@ -709,6 +630,8 @@ public static double getDistanceToTarget(Pose2d currentPose, Translation2d targe
         CLIMB,
         UNKNOWN;
     }
+    */
+    
 
     // ENUMERATIONS GO ABOVE THIS LINE
     // REFERENCE METHODS GO BELOW THIS LINE

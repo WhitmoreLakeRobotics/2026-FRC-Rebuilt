@@ -59,6 +59,7 @@ public class RobotContainer {
     public final Climb m_climb = new Climb();
     public final DriverAssist m_driverAssist = new DriverAssist();
     public final FMSSystem m_fmsSystem = new FMSSystem();
+    public final PMGT m_pmgt = new PMGT();
 
 // Joysticks
   private final CommandXboxController articulator_Controller = new CommandXboxController(1);

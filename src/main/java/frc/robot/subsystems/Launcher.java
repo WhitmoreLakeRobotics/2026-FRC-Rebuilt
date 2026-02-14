@@ -138,6 +138,11 @@ public class Launcher extends SubsystemBase {
         return combinedStatus;
     }
 
+    public LauncherStatus getStatus() {
+        return status;
+    }
+
+
     private void calcDistanceToTarget() {
         distanceToTarget = DriverAssist.getDistanceToTarget(currentPose, targetPose.getTranslation());
     }
