@@ -155,9 +155,9 @@ public void updateDashboard() {
    SmartDashboard.putNumber("Curr Tag ID", m_driveTrain.vision.getLatestID());
    //add driver assist varibles.
    SmartDashboard.putString("Drive State", m_driverAssist.getCurrDriveState().toString());
-   SmartDashboard.putString("Curr Selected Targets", m_driverAssist.getCurrSelectedTargets().toString());
-   SmartDashboard.putString("Curr Selected Target pos", m_driverAssist.getCurrSelectedTargets().getTargetPose().toString());
-   SmartDashboard.putString("Curr Selected Target Type", m_driverAssist.getCurrSelectedTargets().getTargetType().toString());
+   SmartDashboard.putString("Curr Selected Targets", m_driverAssist.getCurrDriveSelectedTarget().toString());
+   SmartDashboard.putString("Curr Selected Target pos", m_driverAssist.getCurrDriveSelectedTarget().getTargetPose().toString());
+   SmartDashboard.putString("Curr Selected Target Type", m_driverAssist.getCurrDriveSelectedTarget().getTargetType().toString());
    SmartDashboard.putString("Curr Tactic", m_driverAssist.getCurrTacticApproach().toString());
    SmartDashboard.putBoolean("At Prev Targ", m_driverAssist.getbAtPrevTarg());
    SmartDashboard.putNumber("Num Of Targets", m_driverAssist.getNumOfTargets());

@@ -15,6 +15,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CanIds;
 import frc.robot.RobotContainer;
@@ -229,32 +230,40 @@ public class Launcher extends SubsystemBase {
     public enum KnownTargets {
         RED_HUB("Red Hub",
                 new edu.wpi.first.math.geometry.Pose2d(11.907, 4.040, new edu.wpi.first.math.geometry.Rotation2d(0)),
-                "Hub"),
+                "Hub", Alliance.Red),
         BLUE_HUB("Blue Hub",
                 new edu.wpi.first.math.geometry.Pose2d(4.623, 4.040, new edu.wpi.first.math.geometry.Rotation2d(0)),
-                "Hub"),
+                "Hub", Alliance.Blue),
         RED_DEPOT("Red Depot",
                 new edu.wpi.first.math.geometry.Pose2d(15.877, 1.135, new edu.wpi.first.math.geometry.Rotation2d(0)),
-                "Depot"),
+                "Depot", Alliance.Red),
         BLUE_DEPOT("Blue Depot",
                 new edu.wpi.first.math.geometry.Pose2d(0.792, 6.967, new edu.wpi.first.math.geometry.Rotation2d(0)),
-                "Depot"),
+                "Depot", Alliance.Blue),
         RED_OUTPOST("Red Outpost",
                 new edu.wpi.first.math.geometry.Pose2d(15.963, 6.902, new edu.wpi.first.math.geometry.Rotation2d(0)),
-                "Outpost"),
+                "Outpost", Alliance.Red),
         BLUE_OUTPOST("Blue Outpost",
                 new edu.wpi.first.math.geometry.Pose2d(0.534, 1.135, new edu.wpi.first.math.geometry.Rotation2d(0)),
-                "Outpost");
+                "Outpost", Alliance.Blue),
+        BLUE_CENTERTARGET("Blue Center Target",
+                new edu.wpi.first.math.geometry.Pose2d(2.706, 1.618, new edu.wpi.first.math.geometry.Rotation2d(0)),
+                "Center Target", Alliance.Blue),
+        RED_CENTERTARGET("Red Center Target",
+                new edu.wpi.first.math.geometry.Pose2d(13.934, 6.219, new edu.wpi.first.math.geometry.Rotation2d(0)),
+                "Center Target", Alliance.Red);
 
         // Store name, pose2d, and "type" for each target
         private final String name;
         private final edu.wpi.first.math.geometry.Pose2d pose2d;
         private final String type;
+        private final Alliance alliance;
 
-        KnownTargets(String name, edu.wpi.first.math.geometry.Pose2d pose2d, String type) {
+        KnownTargets(String name, edu.wpi.first.math.geometry.Pose2d pose2d, String type, Alliance alliance) {
             this.name = name;
             this.pose2d = pose2d;
             this.type = type;
+            this.alliance = alliance;
         }
 
         public String getName() {
