@@ -76,6 +76,7 @@ public class DriverAssist extends SubsystemBase {
     // GLOBAL VARIABLES GO ABOVE THIS LINE
     // SYSTEM METHODS GO BELOW THIS LINE
     public DriverAssist() {
+        try{
         driveTrain = RobotContainer.getInstance().m_driveTrain;
         intake = RobotContainer.getInstance().m_intake;
         launcher = RobotContainer.getInstance().m_launcher;
@@ -83,6 +84,14 @@ public class DriverAssist extends SubsystemBase {
         fmsSystem = RobotContainer.getInstance().m_fmsSystem;
         pmgt = RobotContainer.getInstance().m_pmgt;
         climb = RobotContainer.getInstance().m_climb;
+} catch (Exception e) {
+    System.out.println("Error initializing DriverAssist subsystem: " + e.getMessage());
+}
+
+    if(driveTrain !=null){
+        currDAStatus = DAStatus.RUNNING;
+
+    }
 
     }
 
@@ -100,8 +109,7 @@ public class DriverAssist extends SubsystemBase {
                 break;
             case INIT:
                 getSubsystems();
-                getSubsystemState();
-                currDAStatus = DAStatus.RUNNING;
+                
 
                 break;
 
