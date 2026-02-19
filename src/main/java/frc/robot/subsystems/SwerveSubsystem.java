@@ -33,6 +33,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Config;
 import frc.robot.Constants;
 import frc.robot.subsystems.Vision.Cameras;
+import frc.robot.utils.PID;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
@@ -62,8 +64,12 @@ public class SwerveSubsystem extends SubsystemBase
   /**
    * Enable vision odometry updates while driving.
    */
-  private final boolean     visionDriveTest = false;
- 
+  private final boolean visionDriveTest = false;
+  private boolean bAdrive = false;
+  private PID turnPID = new PID(0.02,0.0,0.0);
+  public double THeading = 0;
+  private double maxTurnRate = 0.55;
+
   /**
    * PhotonVision class to keep an accurate odometry.
    */
@@ -132,6 +138,10 @@ public class SwerveSubsystem extends SubsystemBase
   public void setupPhotonVision()
   {
     vision = new Vision(swerveDrive::getPose, swerveDrive.field);
+  }
+
+   public boolean getbAutoDrive(){
+    return bAdrive;
   }
 
   @Override
@@ -717,6 +727,10 @@ public class SwerveSubsystem extends SubsystemBase
   {
     swerveDrive.addVisionMeasurement(new Pose2d(3, 3, Rotation2d.fromDegrees(65)), Timer.getFPGATimestamp());
   }
+  public double AutoTurn(){
+    double turn =  DriverAssist.CapMotorPower(turnPID.calcPIDF(THeading, getHeading().getDegrees()), -maxTurnRate, maxTurnRate)  ;
+    return turn;
+  }  
 
   /**
    * Gets the swerve drive object.

@@ -31,7 +31,14 @@ public class Constants {
     */ 
 
       public static final double MAX_SPEED  = Units.feetToMeters(14.5);
+  public static class OperatorConstants {
 
+    // Joystick Deadband
+    public static final double DEADBAND = 0.01;
+    public static final double LEFT_Y_DEADBAND = 0.1;
+    public static final double RIGHT_X_DEADBAND = 0.1;
+    public static final double TURN_CONSTANT = 6;
+  }
     public static class CanIds {
     // Can id 1-8 are for the drive train
     // public static final int TOWER_MOTOR_RIGHT1 = 11;
