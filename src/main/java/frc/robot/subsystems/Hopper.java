@@ -187,8 +187,8 @@ public HopperStatus getStatus() {
     //for each entry create belt motor voltage and funnel motor voltage
     public enum HopperStatus {
         STOP(0.0, 0.0),
-        INDEXING(0.0,4.0),
-        FUELING(5.0,5.0),
+        INDEXING(0.0,0.0),
+        FUELING(10.0,6.0),
         REVERSAL(-5.0,-5.0);
 
         public final double beltMotorVoltage;

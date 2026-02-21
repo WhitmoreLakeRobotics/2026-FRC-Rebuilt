@@ -294,16 +294,16 @@ public class Intake extends SubsystemBase {
         extendConfig.closedLoopRampRate(0.15);
         extendConfig.voltageCompensation(9.0);
         //// Down / outVelocity Values
-         extendConfig.closedLoop.maxMotion.maxAcceleration(80000, IntakeClosedLoopSlotDown);
-         extendConfig.closedLoop.maxMotion.cruiseVelocity(50000, IntakeClosedLoopSlotDown);
+         extendConfig.closedLoop.maxMotion.maxAcceleration(2000000, IntakeClosedLoopSlotDown);
+         extendConfig.closedLoop.maxMotion.cruiseVelocity(1800000, IntakeClosedLoopSlotDown);
          extendConfig.closedLoop.maxMotion.allowedProfileError(1.0, IntakeClosedLoopSlotDown);
-         extendConfig.closedLoop.pid(0.06, 0.0, 0.0, IntakeClosedLoopSlotDown);
+         extendConfig.closedLoop.pid(0.08, 0.0, 0.0, IntakeClosedLoopSlotDown);
 
         // //// Up / in Velocity Values
-         extendConfig.closedLoop.maxMotion.maxAcceleration(80000, IntakeClosedLoopSlotUp);
-         extendConfig.closedLoop.maxMotion.cruiseVelocity(50000, IntakeClosedLoopSlotUp);
+         extendConfig.closedLoop.maxMotion.maxAcceleration(2000000, IntakeClosedLoopSlotUp);
+         extendConfig.closedLoop.maxMotion.cruiseVelocity(1800000, IntakeClosedLoopSlotUp);
          extendConfig.closedLoop.maxMotion.allowedProfileError(1.0, IntakeClosedLoopSlotUp);
-         extendConfig.closedLoop.pid(0.06, 0.0, 0.0, IntakeClosedLoopSlotUp);
+         extendConfig.closedLoop.pid(0.15, 0.0, 0.0, IntakeClosedLoopSlotUp);
 
         extendConfig.closedLoop.feedbackSensor(FeedbackSensor.kAbsoluteEncoder);
         AbsoluteEncoderConfig absEncConfig = new AbsoluteEncoderConfig();
@@ -327,7 +327,7 @@ public class Intake extends SubsystemBase {
         RETRACTING(103.0, 0.0),
         EXTENDED_STOPPED(10.0, 0.0),
         EXTENDING(10.0, 0.0),
-        EXTENDED_INTAKING(10.0, 0.0), 
+        EXTENDED_INTAKING(10.0, 7.0), 
         EXTENDED_OUTPUT(10.0, 0.0);
 
         private final double position;
