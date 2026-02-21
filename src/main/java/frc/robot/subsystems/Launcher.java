@@ -173,6 +173,22 @@ public class Launcher extends SubsystemBase {
         return DriverAssist.getAngleToTarget(currentPose, targetPose.getTranslation()).getDegrees();
     }
 
+    public boolean getbLHF_Enabled(){
+        return bLHF_Enabled;
+    }
+
+    public boolean getbRHF_Enabled() {
+        return bRHF_Enabled;
+    }
+
+    public void setbLHF_Enabled(boolean bLHF_E) {
+        this.bLHF_Enabled = bLHF_E;
+    }
+
+    public void setbRHF_Enabled(boolean bRHF_E) {
+        this.bRHF_Enabled = bRHF_E;
+    }
+
     public void setStatus(LauncherStatus newStatus) {
 
         switch (newStatus) {

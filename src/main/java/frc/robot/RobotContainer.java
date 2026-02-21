@@ -18,6 +18,7 @@ import frc.robot.commands.Climb.SetStatusClimb;
 import frc.robot.commands.DriveTrain.DriveToPos;
 import frc.robot.commands.Hopper.SetStatusHopper;
 import frc.robot.commands.Intake.SetStatusIntake;
+import frc.robot.commands.Launcher.ToggleLaunchTower;
 import frc.robot.subsystems.*;
 import frc.robot.subsystems.Hopper.HopperStatus;
 import swervelib.SwerveInputStream;
@@ -213,6 +214,11 @@ SwerveInputStream driveAngularVelocity = SwerveInputStream.of(m_driveTrain.getSw
     SmartDashboard.putString("Curr Tactic", m_driverAssist.getCurrTacticApproach().toString());
     SmartDashboard.putBoolean("At Prev Targ", m_driverAssist.getbAtPrevTarg());
     SmartDashboard.putNumber("Num Of Targets", m_driverAssist.getNumOfTargets());
+
+    SmartDashboard.putData("Left Turret Toggle", new ToggleLaunchTower(true));
+    SmartDashboard.putData("Right Turret Toggle", new ToggleLaunchTower(false));
+    SmartDashboard.putBoolean("Left Turret", m_launcher.getbLHF_Enabled());
+    SmartDashboard.putBoolean("Right Turret", m_launcher.getbRHF_Enabled());
 
   }
 
