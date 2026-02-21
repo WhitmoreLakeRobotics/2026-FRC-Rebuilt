@@ -40,10 +40,10 @@ public class Launcher extends SubsystemBase {
     private double distanceToTarget;
     private double targetAngle;
     private double currentAngle;
-    private boolean bActive = false;
+    private boolean bActive = true;
     private boolean bRHF_Enabled = true;
     private boolean bLHF_Enabled = true;
-    private boolean bturret_Enabled = true;
+    private boolean bturret_Enabled = false;
 
     private LinearCalcRef short_shot = new LinearCalcRef(2503, 196, edu.wpi.first.units.Units.Centimeter);
     private LinearCalcRef long_shot = new LinearCalcRef(4407, 379, edu.wpi.first.units.Units.Centimeter);
@@ -89,13 +89,13 @@ public class Launcher extends SubsystemBase {
 
             // calculate distance and angle to target
 
-            calcDistanceToTarget();
+            //calcDistanceToTarget();
             targetAngle = getAngleToTarget();
 
             // set rpm based on distance to target
-            targetRPM = shotCalc.getRPM(distanceToTarget);
+            //targetRPM = shotCalc.getRPM(distanceToTarget);
             // insert calcuation for shoot on the fly
-            shootOnTheFly();
+            //shootOnTheFly();
 
             // once we define turret zones we may have to adujust RPM based on angle to
             // target
@@ -175,6 +175,17 @@ public class Launcher extends SubsystemBase {
 
     public boolean getbLHF_Enabled(){
         return bLHF_Enabled;
+    }
+
+
+    public void setTargetRPM (double newRPM){
+        targetRPM = newRPM;
+
+
+    }
+
+    public double getTargetRPM (){
+        return targetRPM;
     }
 
     public boolean getbRHF_Enabled() {

@@ -194,11 +194,11 @@ public class Climb extends SubsystemBase {
         // config.encoder.positionConversionFactor(Math.PI * elevator_gearDiameter /
         // elevator_gearRatio);
         lClimbConfig.encoder.positionConversionFactor(1);
-        lClimbConfig.inverted(true);
+        lClimbConfig.inverted(false);
         lClimbConfig.softLimit.forwardSoftLimitEnabled(false);
         lClimbConfig.softLimit.reverseSoftLimit(0);
         lClimbConfig.softLimit.reverseSoftLimitEnabled(false);
-        lClimbConfig.idleMode(IdleMode.kCoast);
+        lClimbConfig.idleMode(IdleMode.kBrake);
         lClimbConfig.openLoopRampRate(0.15);
         //lClimbConfig.limitSwitch.forwardLimitSwitchEnabled(false);
         //lClimbConfig.limitSwitch.reverseLimitSwitchEnabled(false);
@@ -292,7 +292,7 @@ public class Climb extends SubsystemBase {
         HOLDING (0.0, 0.0),
         STORED (0.0, 0.0),
         MOVING (0.0, 0.0),
-        DEPLOYEDL1 (0.0, 0.0),
+        DEPLOYEDL1 (48.0, 48.0),
         CLIMBING (0.0, 0.0),
         L1 (0.0, 0.0);
 
