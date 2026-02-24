@@ -33,6 +33,24 @@
           "data": {
             "name": "launch"
           }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "left start-back mid"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "middle-right start"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "launch"
+          }
         }
       ]
     }

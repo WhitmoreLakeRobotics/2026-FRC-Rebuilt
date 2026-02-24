@@ -24,6 +24,7 @@ import frc.robot.commands.Turret.SetTarget;
 import frc.robot.commands.Launcher.SpeedChange;
 import frc.robot.subsystems.*;
 import frc.robot.subsystems.Hopper.HopperStatus;
+import frc.robot.subsystems.LTurret.TurretStatus;
 import swervelib.SwerveInputStream;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -38,6 +39,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import java.io.File;
 
 import edu.wpi.first.epilogue.Logged.Importance;
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
@@ -86,6 +88,7 @@ public class RobotContainer {
   // A chooser for autonomous commands
   SendableChooser<Command> autoChooser = new SendableChooser<>();
   SendableChooser<Double> cruiseControl = new SendableChooser();
+  SendableChooser<Pose2d> launchPos = new SendableChooser<>();
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -142,6 +145,18 @@ public class RobotContainer {
     cruiseControl.addOption("40%", 0.4);
     cruiseControl.addOption("80%", 0.8);
     cruiseControl.addOption("70%", 0.7);
+
+    launchPos.setDefaultOption("Red Hub", Launcher.KnownTargets.RED_HUB.getPose2d());
+    launchPos.addOption("Blue Hub", Launcher.KnownTargets.BLUE_HUB.getPose2d());
+    launchPos.addOption("Red OutPost", Launcher.KnownTargets.RED_OUTPOST.getPose2d());
+    launchPos.addOption("Blue OutPost", Launcher.KnownTargets.BLUE_OUTPOST.getPose2d());
+    launchPos.addOption("Red Depot", Launcher.KnownTargets.RED_DEPOT.getPose2d());
+    launchPos.addOption("Blue Depot", Launcher.KnownTargets.BLUE_DEPOT.getPose2d());
+    launchPos.addOption("Red Center", Launcher.KnownTargets.RED_CENTERTARGET.getPose2d());
+    launchPos.addOption("Blue Center", Launcher.KnownTargets.BLUE_CENTERTARGET.getPose2d());
+
+
+
     boolean isCompetition = false; // CHANGE AT COMP
 
     // Build an auto chooser. This will use Commands.none() as the default option.
@@ -182,6 +197,11 @@ public class RobotContainer {
     speed_multi = cruiseControl.getSelected();
     SmartDashboard.putNumber("Current Speed Setting", speed_multi);
     SmartDashboard.putData("Drive Speed Selector", cruiseControl);
+
+    
+    String launchTarg = launchPos.getSelected().toString();
+    SmartDashboard.putString("Curr Selected Launch Targ", launchTarg);
+    SmartDashboard.putData("Launcher Targets", launchPos);
 
     if (m_launcher.turret != null) {
       // add turret data to smartdashboard
