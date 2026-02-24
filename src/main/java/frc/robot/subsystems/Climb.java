@@ -294,7 +294,7 @@ public class Climb extends SubsystemBase {
         MOVING (0.0, 0.0),
         DEPLOYEDL1 (48.0, 48.0),
         CLIMBING (0.0, 0.0),
-        L1 (0.0, 0.0);
+        L1 (16.0, 16.0);
 
         private final double rightPos;
         private final double leftPos;

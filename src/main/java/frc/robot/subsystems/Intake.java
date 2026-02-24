@@ -98,7 +98,7 @@ public class Intake extends SubsystemBase {
             case EXTENDING:
             if (DriverAssist.isInRange(extendMotor.getAbsoluteEncoder().getPosition(),status.position ,posTol)) {
                 if (!bIntakeMotorRunning) {
-                    intakeMotor.setVoltage(status.getSpeed());
+                    intakeMotor.set(status.getSpeed());
                     bIntakeMotorRunning = true;
                     status = targetStatus;
                 }  
@@ -114,7 +114,7 @@ public class Intake extends SubsystemBase {
             case EXTENDED_INTAKING:
             if (DriverAssist.isInRange(extendMotor.getAbsoluteEncoder().getPosition(),status.position ,posTol)) {
                 //start intake motor
-                intakeMotor.setVoltage(status.getSpeed());
+                intakeMotor.set(status.getSpeed());
                 bIntakeMotorRunning = true;
                 bCommandComplete = true;
                 extendMotor.set(0);
@@ -123,7 +123,7 @@ public class Intake extends SubsystemBase {
             case EXTENDED_OUTPUT:
             if (DriverAssist.isInRange(extendMotor.getAbsoluteEncoder().getPosition(),status.position ,posTol)) {
                 //start intake motor
-                intakeMotor.setVoltage(status.getSpeed());
+                intakeMotor.set(status.getSpeed());
                 bIntakeMotorRunning = true;
                 bCommandComplete = true;
             }
@@ -131,7 +131,7 @@ public class Intake extends SubsystemBase {
                 case RETRACTED:
                 if (DriverAssist.isInRange(extendMotor.getAbsoluteEncoder().getPosition(),status.position ,posTol)) {
                 //stop intake motor
-               // intakeMotor.setVoltage(status.getSpeed());
+               // intakeMotor.set(status.getSpeed());
                 bCommandComplete = true;
                
             }
@@ -161,7 +161,12 @@ public class Intake extends SubsystemBase {
     }
 
     public double getCurrPos(){
-         return extendMotor.getAbsoluteEncoder().getPosition();
+         return extendMotor.getEncoder().getPosition();
+        
+    }
+
+    public void setMotorPos(double setPosition){
+         extendMotor.getEncoder().setPosition(setPosition);   
     }
 
     public double getTargetPos(){
@@ -176,26 +181,26 @@ public class Intake extends SubsystemBase {
             status = STATUS.RETRACTING;
             //set extend motor to retract
             setExtendMotorPosition(status.getPosition(), IntakeClosedLoopSlotUp);
-             intakeMotor.setVoltage(status.getSpeed());
+             intakeMotor.set(status.getSpeed());
              bIntakeMotorRunning = false;
                 break;
                 case HALF_EXTENDED:
                 targetStatus = STATUS.HALF_EXTENDED;
                 status = STATUS.RETRACTING;
                 setExtendMotorPosition(targetStatus.getPosition(), IntakeClosedLoopSlotUp);
-                 intakeMotor.setVoltage(targetStatus.getSpeed());
+                 intakeMotor.set(targetStatus.getSpeed());
                 bIntakeMotorRunning = false;
                 break;
             case EXTENDING: //transition state
             targetStatus = STATUS.EXTENDED_STOPPED;
             setExtendMotorPosition(status.getPosition(), IntakeClosedLoopSlotDown);
-             intakeMotor.setVoltage(status.getSpeed());
+             intakeMotor.set(status.getSpeed());
              bIntakeMotorRunning = false;
                 break;
             case RETRACTING://transition state
             targetStatus = STATUS.RETRACTED;    
             setExtendMotorPosition(targetStatus.getPosition(), IntakeClosedLoopSlotUp);
-            intakeMotor.setVoltage(status.getSpeed());
+            intakeMotor.set(status.getSpeed());
                 bIntakeMotorRunning = false;
         
                 break;
@@ -203,14 +208,14 @@ public class Intake extends SubsystemBase {
             targetStatus = STATUS.EXTENDED_STOPPED;
             status = STATUS.EXTENDING;
             setExtendMotorPosition(targetStatus.getPosition(), IntakeClosedLoopSlotDown);
-             intakeMotor.setVoltage(status.getSpeed());
+             intakeMotor.set(status.getSpeed());
              bIntakeMotorRunning = false;
                 break;
             case EXTENDED_INTAKING:
             targetStatus = STATUS.EXTENDED_INTAKING;
             status = STATUS.EXTENDING;
             setExtendMotorPosition(status.getPosition(), IntakeClosedLoopSlotDown);
-             intakeMotor.setVoltage(status.getSpeed());
+             intakeMotor.set(status.getSpeed());
              bIntakeMotorRunning = false;
 
                 break;
@@ -218,14 +223,14 @@ public class Intake extends SubsystemBase {
             targetStatus = STATUS.EXTENDED_OUTPUT;
             status = STATUS.EXTENDING;
             setExtendMotorPosition(status.getPosition(), IntakeClosedLoopSlotDown);
-             intakeMotor.setVoltage(status.getSpeed());
+             intakeMotor.set(status.getSpeed());
                 bIntakeMotorRunning = false;
                 break;  
         
             default:
             targetStatus = STATUS.RETRACTED;
             status = STATUS.RETRACTING;
-             intakeMotor.setVoltage(status.getSpeed());
+             intakeMotor.set(status.getSpeed());
                 bIntakeMotorRunning = false;
                  setExtendMotorPosition(STATUS.RETRACTING.getPosition(), IntakeClosedLoopSlotUp);
                 break;
@@ -249,7 +254,7 @@ public class Intake extends SubsystemBase {
         //intakeConfig.limitSwitch.forwardLimitSwitchEnabled(false);
         //intakeConfig.limitSwitch.reverseLimitSwitchEnabled(false);
 
-    //    intakeConfig.closedLoop.maxOutput(1.0);
+      //intakeConfig.closedLoop.maxOutput(1.0);
       //  intakeConfig.closedLoop.minOutput(-1.0);
 
         //intakeConfig.closedLoopRampRate(0.15);
@@ -258,7 +263,7 @@ public class Intake extends SubsystemBase {
         // intakeConfig.closedLoop.maxMotion.maxAcceleration(5000, rTowerR_CLOSED_LOOP_SLOT_DOWN);
         // intakeConfig.closedLoop.maxMotion.maxVelocity(5000, rTowerR_CLOSED_LOOP_SLOT_DOWN);
         // intakeConfig.closedLoop.maxMotion.allowedClosedLoopError(rTowerRPosTol, rTowerR_CLOSED_LOOP_SLOT_DOWN);
-        // intakeConfig.closedLoop.pidf(0.4, 0.0, 0.0, 0.0, rTowerR_CLOSED_LOOP_SLOT_DOWN);
+        // intakeConfig.closedLoop.pid(0.4, 0.0, 0.0, ClosedLoopSlot.kSlot0);
 
         // //// Up / in Velocity Values
         // intakeConfig.closedLoop.maxMotion.maxAcceleration(5000, rTowerR_CLOSED_LOOP_SLOT_UP);
@@ -268,7 +273,7 @@ public class Intake extends SubsystemBase {
 
         intakeConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder);
 
-         intakeConfig.smartCurrentLimit(50);
+         intakeConfig.smartCurrentLimit(40);
         //intakeConfig.smartCurrentLimit(normalStallCurrentLimit, normalFreeCurrentLimit);
 
         intakeMotor.configure(intakeConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
@@ -293,7 +298,7 @@ public class Intake extends SubsystemBase {
         //extendConfig.closedLoop.maxOutput(1.0);
         //extendConfig.closedLoop.minOutput(-1.0);
         //extendConfig.closedLoopRampRate(0.15);
-        extendConfig.voltageCompensation(12.0);
+        extendConfig.voltageCompensation(9.0);
         //// Down / outVelocity Values
          extendConfig.closedLoop.maxMotion.maxAcceleration(2000000, IntakeClosedLoopSlotDown);
          extendConfig.closedLoop.maxMotion.cruiseVelocity(1800000, IntakeClosedLoopSlotDown);
@@ -306,15 +311,15 @@ public class Intake extends SubsystemBase {
          extendConfig.closedLoop.maxMotion.allowedProfileError(1.0, IntakeClosedLoopSlotUp);
          extendConfig.closedLoop.pid(0.1, 0.0, 0.0, IntakeClosedLoopSlotUp);
 
-        extendConfig.closedLoop.feedbackSensor(FeedbackSensor.kAbsoluteEncoder);
-        AbsoluteEncoderConfig absEncConfig = new AbsoluteEncoderConfig();
+        extendConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder);
+        // AbsoluteEncoderConfig absEncConfig = new AbsoluteEncoderConfig();
         //absEncConfig.zeroOffset(0.649);
-        absEncConfig.inverted(false);
-        absEncConfig.positionConversionFactor(360);
+        // absEncConfig.inverted(false);
+        // absEncConfig.positionConversionFactor(360);
 
-        extendConfig.absoluteEncoder.apply(absEncConfig);
+        // extendConfig.absoluteEncoder.apply(absEncConfig);
 
-        extendConfig.smartCurrentLimit(30);
+        extendConfig.smartCurrentLimit(40);
         //extendConfig.smartCurrentLimit(normalStallCurrentLimit, normalFreeCurrentLimit);
 
         extendMotor.configure(extendConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
@@ -328,8 +333,8 @@ public class Intake extends SubsystemBase {
         RETRACTING(103.0, 0.0),
         EXTENDED_STOPPED(10.0, 0.0),
         EXTENDING(10.0, 0.0),
-        EXTENDED_INTAKING(10.0, 7.0), 
-        EXTENDED_OUTPUT(10.0, -7.0);
+        EXTENDED_INTAKING(10.0, 0.8), 
+        EXTENDED_OUTPUT(10.0, -0.8);
 
         private final double position;
         private final double speed; //in volts
