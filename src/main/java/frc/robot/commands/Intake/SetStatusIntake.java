@@ -68,9 +68,11 @@ public class SetStatusIntake extends Command {
             }
         } else {
         RobotContainer.getInstance().m_intake.setStatus(iStatus);
-        bDone = true;        }
+               }
+               bDone = true; 
        
     }
+
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
@@ -85,7 +87,7 @@ public class SetStatusIntake extends Command {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return false;
+        return bDone;
     }
 
     @Override

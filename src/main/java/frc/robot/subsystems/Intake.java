@@ -87,7 +87,7 @@ public class Intake extends SubsystemBase {
         
         switch (status) {
             case RETRACTING:
-            if (DriverAssist.isInRange(extendMotor.getAbsoluteEncoder().getPosition(),status.position ,posTol)) {
+            if (DriverAssist.isInRange(extendMotor.getEncoder().getPosition(),status.position ,posTol)) {
 
                 status = targetStatus;     
 
@@ -96,7 +96,7 @@ public class Intake extends SubsystemBase {
                 
                 break;
             case EXTENDING:
-            if (DriverAssist.isInRange(extendMotor.getAbsoluteEncoder().getPosition(),status.position ,posTol)) {
+            if (DriverAssist.isInRange(extendMotor.getEncoder().getPosition(),status.position ,posTol)) {
                 if (!bIntakeMotorRunning) {
                     intakeMotor.set(status.getSpeed());
                     bIntakeMotorRunning = true;
@@ -106,13 +106,13 @@ public class Intake extends SubsystemBase {
             }
             break;
             case EXTENDED_STOPPED:
-            if (DriverAssist.isInRange(extendMotor.getAbsoluteEncoder().getPosition(),status.position ,posTol)) {
+            if (DriverAssist.isInRange(extendMotor.getEncoder().getPosition(),status.position ,posTol)) {
                 //do nothing
                 bCommandComplete = true;
             }
                 break;
             case EXTENDED_INTAKING:
-            if (DriverAssist.isInRange(extendMotor.getAbsoluteEncoder().getPosition(),status.position ,posTol)) {
+            if (DriverAssist.isInRange(extendMotor.getEncoder().getPosition(),status.position ,posTol)) {
                 //start intake motor
                 intakeMotor.set(status.getSpeed());
                 bIntakeMotorRunning = true;
@@ -121,7 +121,7 @@ public class Intake extends SubsystemBase {
             }
                 break;
             case EXTENDED_OUTPUT:
-            if (DriverAssist.isInRange(extendMotor.getAbsoluteEncoder().getPosition(),status.position ,posTol)) {
+            if (DriverAssist.isInRange(extendMotor.getEncoder().getPosition(),status.position ,posTol)) {
                 //start intake motor
                 intakeMotor.set(status.getSpeed());
                 bIntakeMotorRunning = true;
@@ -129,7 +129,7 @@ public class Intake extends SubsystemBase {
             }
                 break;
                 case RETRACTED:
-                if (DriverAssist.isInRange(extendMotor.getAbsoluteEncoder().getPosition(),status.position ,posTol)) {
+                if (DriverAssist.isInRange(extendMotor.getEncoder().getPosition(),status.position ,posTol)) {
                 //stop intake motor
                // intakeMotor.set(status.getSpeed());
                 bCommandComplete = true;
@@ -286,7 +286,7 @@ public class Intake extends SubsystemBase {
         // config.encoder.positionConversionFactor(Math.PI * elevator_gearDiameter /
         // elevator_gearRatio);
         extendConfig.encoder.positionConversionFactor(1);
-        extendConfig.inverted(false);
+        extendConfig.inverted(true);
         extendConfig.softLimit.forwardSoftLimitEnabled(false);
         extendConfig.softLimit.reverseSoftLimit(0);
         extendConfig.softLimit.reverseSoftLimitEnabled(false);
@@ -300,16 +300,16 @@ public class Intake extends SubsystemBase {
         //extendConfig.closedLoopRampRate(0.15);
         extendConfig.voltageCompensation(9.0);
         //// Down / outVelocity Values
-         extendConfig.closedLoop.maxMotion.maxAcceleration(2000000, IntakeClosedLoopSlotDown);
-         extendConfig.closedLoop.maxMotion.cruiseVelocity(1800000, IntakeClosedLoopSlotDown);
-         extendConfig.closedLoop.maxMotion.allowedProfileError(1.0, IntakeClosedLoopSlotDown);
+         extendConfig.closedLoop.maxMotion.maxAcceleration(5000000, IntakeClosedLoopSlotDown);
+         extendConfig.closedLoop.maxMotion.cruiseVelocity(4000000, IntakeClosedLoopSlotDown);
+         extendConfig.closedLoop.maxMotion.allowedProfileError(0.1, IntakeClosedLoopSlotDown);
          extendConfig.closedLoop.pid(0.08, 0.0, 0.0, IntakeClosedLoopSlotDown);
 
         // //// Up / in Velocity Values
-         extendConfig.closedLoop.maxMotion.maxAcceleration(2000000, IntakeClosedLoopSlotUp);
-         extendConfig.closedLoop.maxMotion.cruiseVelocity(1800000, IntakeClosedLoopSlotUp);
-         extendConfig.closedLoop.maxMotion.allowedProfileError(1.0, IntakeClosedLoopSlotUp);
-         extendConfig.closedLoop.pid(0.1, 0.0, 0.0, IntakeClosedLoopSlotUp);
+         extendConfig.closedLoop.maxMotion.maxAcceleration(5000000, IntakeClosedLoopSlotUp);
+         extendConfig.closedLoop.maxMotion.cruiseVelocity(4000000, IntakeClosedLoopSlotUp);
+         extendConfig.closedLoop.maxMotion.allowedProfileError(0.1, IntakeClosedLoopSlotUp);
+         extendConfig.closedLoop.pid(0.11, 0.0, 0.0, IntakeClosedLoopSlotUp);
 
         extendConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder);
         // AbsoluteEncoderConfig absEncConfig = new AbsoluteEncoderConfig();
@@ -319,7 +319,7 @@ public class Intake extends SubsystemBase {
 
         // extendConfig.absoluteEncoder.apply(absEncConfig);
 
-        extendConfig.smartCurrentLimit(40);
+        extendConfig.smartCurrentLimit(80);
         //extendConfig.smartCurrentLimit(normalStallCurrentLimit, normalFreeCurrentLimit);
 
         extendMotor.configure(extendConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
@@ -328,16 +328,16 @@ public class Intake extends SubsystemBase {
 
         // Enumeration of status which should store position and speed values
     public enum STATUS {
-        RETRACTED(103.0, 0.0),
-        HALF_EXTENDED(78.0, 0.0),
-        RETRACTING(103.0, 0.0),
-        EXTENDED_STOPPED(10.0, 0.0),
-        EXTENDING(10.0, 0.0),
-        EXTENDED_INTAKING(10.0, 0.8), 
-        EXTENDED_OUTPUT(10.0, -0.8);
+        RETRACTED(0.0, 0.0),
+        HALF_EXTENDED(2.33, 0.0),
+        RETRACTING(0.0, 0.0),
+        EXTENDED_STOPPED(8.0, 0.0),
+        EXTENDING(8.0, 0.0),
+        EXTENDED_INTAKING(8.0, 0.8), 
+        EXTENDED_OUTPUT(8.0, -0.8);
 
         private final double position;
-        private final double speed; //in volts
+        private final double speed; //setpower
 
         STATUS(double position, double speed) { 
             this.position = position;
