@@ -133,7 +133,8 @@ public class RobotContainer {
 
     NamedCommands.registerCommand("Intake", new SetStatusIntake(Intake.STATUS.EXTENDED_INTAKING));
     NamedCommands.registerCommand("Climb", new SetStatusClimb(Climb.Status.EXTENDED));
-    NamedCommands.registerCommand("Launch", new SetStatusHopper(Hopper.HopperStatus.FUELING, false));
+    NamedCommands.registerCommand("Hopper Start", new SetStatusHopper(Hopper.HopperStatus.FUELING, false));
+    NamedCommands.registerCommand("Start Flywheels", new SetTarget(m_launcher.getTargetRPM()));
     NamedCommands.registerCommand("All Drive", new SetPowerProfile(PMGT.Profiles.ALLDRIVE));
     NamedCommands.registerCommand("All Launch", new SetPowerProfile(PMGT.Profiles.ALLLAUNCH));
     NamedCommands.registerCommand("Drive While Shooting", new SetPowerProfile(PMGT.Profiles.DRIVE_WHILE_SHOOTING));
