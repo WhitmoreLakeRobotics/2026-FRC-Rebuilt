@@ -16,6 +16,7 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.*;
 import frc.robot.commands.Climb.SetStatusClimb;
 import frc.robot.commands.DriveTrain.DriveToPos;
+import frc.robot.commands.DriveTrain.SetAutoTurn;
 import frc.robot.commands.Hopper.SetStatusHopper;
 import frc.robot.commands.Intake.SetStatusIntake;
 import frc.robot.commands.Launcher.ToggleLaunchTower;
@@ -79,6 +80,8 @@ public class RobotContainer {
   public final PMGT m_pmgt = new PMGT();
   public double speed_multi = 0.6;
 
+  private boolean bAdrive = false;
+
   // Joysticks
   private final CommandXboxController articulator_Controller = new CommandXboxController(1);
   private final CommandXboxController driver_Controller = new CommandXboxController(0);
@@ -95,11 +98,19 @@ public class RobotContainer {
    */
 
   private double getRightXInverted() {
-    if (m_driveTrain.getbAutoDrive()) {
+    if (getbAutoDrive()) {
       return m_driveTrain.AutoTurn();
     } else {
       return this.driver_Controller.getRightX() * -1 * speed_multi;
     }
+  }
+
+  public void setAutoDrive(boolean bAdrive){
+     this.bAdrive = bAdrive; 
+  }
+
+  public boolean getbAutoDrive(){
+    return bAdrive;
   }
 
   SwerveInputStream driveAngularVelocity = SwerveInputStream.of(m_driveTrain.getSwerveDrive(),
@@ -293,6 +304,10 @@ public class RobotContainer {
 
     Trigger B_Drive = new Trigger(driver_Controller.b());
     B_Drive.onTrue(new SetTarget(0.0));
+
+
+    Trigger Y_Trigger = new Trigger(driver_Controller.y());
+    Y_Trigger.onTrue( new SetAutoTurn(true));
 
     // dump hopper
     Trigger leftTrigger = new Trigger(driver_Controller.leftTrigger());

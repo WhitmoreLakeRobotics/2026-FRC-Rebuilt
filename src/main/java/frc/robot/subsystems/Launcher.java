@@ -92,8 +92,9 @@ public class Launcher extends SubsystemBase {
             // calculate distance and angle to target
 
             //calcDistanceToTarget();
-            targetAngle = getAngleToTarget();
+            targetAngle = getRelativeAngleToTarget();
 
+            RobotContainer.getInstance().m_driveTrain.THeading = getAngleToTarget();
             // set rpm based on distance to target
             //targetRPM = shotCalc.getRPM(distanceToTarget);
             // insert calcuation for shoot on the fly
@@ -173,6 +174,11 @@ public class Launcher extends SubsystemBase {
 
     public double getAngleToTarget() {
         return DriverAssist.getAngleToTarget(currentPose, targetPose.getTranslation()).getDegrees();
+    }
+
+    public double getRelativeAngleToTarget(){
+       return DriverAssist.getRelativeAngleToTarget(currentPose, targetPose.getTranslation()).getDegrees();
+
     }
 
     public boolean getbLHF_Enabled(){

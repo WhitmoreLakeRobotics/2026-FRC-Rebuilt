@@ -140,9 +140,7 @@ public class SwerveSubsystem extends SubsystemBase
     vision = new Vision(swerveDrive::getPose, swerveDrive.field);
   }
 
-   public boolean getbAutoDrive(){
-    return bAdrive;
-  }
+   
 
   @Override
   public void periodic()
