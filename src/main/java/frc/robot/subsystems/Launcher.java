@@ -194,6 +194,7 @@ public class Launcher extends SubsystemBase {
 
     public void setTargetRPM (double newRPM, boolean auto) {
         targetRPM = newRPM;
+        bShotCalc = auto;
     }
 
     public void addRPM(){
