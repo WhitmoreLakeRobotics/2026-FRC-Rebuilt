@@ -44,9 +44,10 @@ public class Launcher extends SubsystemBase {
     private boolean bRHF_Enabled = true;
     private boolean bLHF_Enabled = true;
     private boolean bturret_Enabled = false;
+    private boolean bShotCalc = false;
 
-    private LinearCalcRef short_shot = new LinearCalcRef(2503, 196, edu.wpi.first.units.Units.Centimeter);
-    private LinearCalcRef long_shot = new LinearCalcRef(4407, 379, edu.wpi.first.units.Units.Centimeter);
+    private LinearCalcRef short_shot = new LinearCalcRef(3250, 9.25, edu.wpi.first.units.Units.Feet);
+    private LinearCalcRef long_shot = new LinearCalcRef(3700, 12.36, edu.wpi.first.units.Units.Feet);
     private LinearCalc shotCalc = new LinearCalc(short_shot, long_shot);
     private double targetRPM;
 
@@ -96,7 +97,12 @@ public class Launcher extends SubsystemBase {
 
             RobotContainer.getInstance().m_driveTrain.THeading = getAngleToTarget();
             // set rpm based on distance to target
-            //targetRPM = shotCalc.getRPM(distanceToTarget);
+
+            if (bShotCalc)  {
+                calcDistanceToTarget();
+            targetRPM = shotCalc.getRPM(distanceToTarget);
+            }
+
             // insert calcuation for shoot on the fly
             //shootOnTheFly();
 
@@ -186,7 +192,7 @@ public class Launcher extends SubsystemBase {
     }
 
 
-    public void setTargetRPM (double newRPM){
+    public void setTargetRPM (double newRPM, boolean auto) {
         targetRPM = newRPM;
     }
 

@@ -87,6 +87,10 @@ public class Robot extends TimedRobot {
         if (m_autonomousCommand != null) {
             m_autonomousCommand.schedule();
         }
+        else {
+                System.out.println("It's null");
+            }
+        
         RobotContainer.getInstance().m_fmsSystem.resetAuton();
     }
 

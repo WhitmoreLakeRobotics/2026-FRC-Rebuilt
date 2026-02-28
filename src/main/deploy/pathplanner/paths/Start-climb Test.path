@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.752121212121212,
-        "y": 0.48879734848484757
+        "x": 3.998600237247925,
+        "y": 0.4683274021352315
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.5891459074733105,
-        "y": 0.6081969157769856
+        "x": 2.8356249326000236,
+        "y": 0.5877269694273696
       },
       "isLocked": false,
       "linkedName": null
@@ -33,7 +33,7 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "intake",
+      "name": "Intake",
       "waypointRelativePos": 0.36464088397790134,
       "endWaypointRelativePos": null,
       "command": null
@@ -66,7 +66,7 @@
   "reversed": false,
   "folder": null,
   "idealStartingState": {
-    "velocity": 0,
+    "velocity": 0.0,
     "rotation": 90.0
   },
   "useDefaultConstraints": true
