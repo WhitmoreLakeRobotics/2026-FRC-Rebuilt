@@ -311,7 +311,7 @@ public class RobotContainer {
             .until(this::driverIsMoving));
 
     Trigger A_Drive = new Trigger(driver_Controller.a());
-    A_Drive.onTrue(new SetTarget(3700.0, false));
+    A_Drive.onTrue(new SetTarget(3750.0, false));
 
     Trigger B_Drive = new Trigger(driver_Controller.b());
     B_Drive.onTrue(new SetTarget(0.0, false));
@@ -339,6 +339,12 @@ public class RobotContainer {
     // climb down
     Trigger dpad_down = new Trigger(driver_Controller.povDown());
     dpad_down.onTrue(new SetStatusClimb(Climb.Status.L1));
+
+    Trigger dPad_left = new Trigger(driver_Controller.povLeft());
+    dPad_left.onTrue(new SetTarget(3250, false));
+
+    Trigger dPad_right = new Trigger(driver_Controller.povRight());
+    dPad_right.onTrue(new SetTarget(4100, false));
 
     // toggle launch
     Trigger rightJoyStick = new Trigger(driver_Controller.rightStick());
