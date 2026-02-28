@@ -12,6 +12,8 @@
 
 package frc.robot.commands.Intake;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Subsystem;
+
 import java.util.function.DoubleSupplier;
 import frc.robot.subsystems.Intake;
 import frc.robot.RobotContainer;
@@ -53,6 +55,12 @@ public class SetStatusIntake extends Command {
     public SetStatusIntake(Intake.STATUS nStatus, boolean bToggle) {
         iStatus = nStatus;
         this.bToggle = bToggle;
+    }
+
+    public SetStatusIntake(Intake.STATUS nStatus, Subsystem m_subsystem){
+        iStatus = nStatus;
+        //m_subsystem = subsystem;
+        addRequirements(m_subsystem);  
     }
 
     // Called when the command is initially scheduled.
