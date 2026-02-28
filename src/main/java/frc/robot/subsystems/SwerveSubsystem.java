@@ -64,7 +64,7 @@ public class SwerveSubsystem extends SubsystemBase
   /**
    * Enable vision odometry updates while driving.
    */
-  private final boolean visionDriveTest = false;
+  private final boolean visionDriveTest = true;
   private boolean bAdrive = false;
   private PID turnPID = new PID(0.02,0.0,0.0);
   public double THeading = 0;

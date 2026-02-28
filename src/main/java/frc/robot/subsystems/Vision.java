@@ -52,10 +52,10 @@ public class Vision
 {
   /***Begin Custom Varibles */
 public Optional<Pose2d> lastCalculatedDist;
-public Pose2d LastCalcVisionLocation = new Pose2d(new Translation2d(16.0, 4.000), Rotation2d.fromDegrees(180));;
+public Pose2d LastCalcVisionLocation = new Pose2d(new Translation2d(13.0, 7.50), Rotation2d.fromDegrees(180));
 //public final PhotonPoseEstimator poseEstimator;
 StructPublisher<Pose2d> estimatedCaemraPose = NetworkTableInstance.getDefault().getStructTopic("SmartDashboard/Subsystem/Vision/estimatedCameraPose", Pose2d.struct).publish();
-public int latestID;
+public int latestID = -1;
 private double VisionTimeStamp;
 
   /**
@@ -152,7 +152,7 @@ private double VisionTimeStamp;
     for (Cameras camera : Cameras.values()) {
       Optional<EstimatedRobotPose> poseEst = getEstimatedGlobalPose(camera);
       try{
-      if (!poseEst.isEmpty()) {
+      if (poseEst.isPresent()) {
         var pose = poseEst.get();
         //System.out.println("timestamp " + pose.timestampSeconds);
 
@@ -369,31 +369,34 @@ private double VisionTimeStamp;
     /**
      * Left Camera
      */
-    LEFT_CAM("left",
-             new Rotation3d(15, Math.toRadians(0.0), Math.toRadians(90)),
+  /*   LEFT_CAM("left",
+             new Rotation3d(0, Math.toRadians(15), Math.toRadians(-90)),
              new Translation3d(Units.inchesToMeters(-9.5),
                                Units.inchesToMeters(14.0),
                                Units.inchesToMeters(17.75)),
              VecBuilder.fill(4, 4, 8), VecBuilder.fill(0.5, 0.5, 1)),
+
+             */
     /**
      * Right Camera
      */
     RIGHT_CAM("right",
-              new Rotation3d(-15, Math.toRadians(0.0), Math.toRadians(-90)),
+              new Rotation3d(0, Math.toRadians(-15), Math.toRadians(90)),
               new Translation3d(Units.inchesToMeters(-9.5),
                                 Units.inchesToMeters(-14.0),
                                 Units.inchesToMeters(17.75)),
-              VecBuilder.fill(4, 4, 8), VecBuilder.fill(0.5, 0.5, 1)),
+              VecBuilder.fill(4, 4, 8), VecBuilder.fill(0.5, 0.5, 1));
     /**
      * Center Camera
      */
+    /* 
     CENTER_CAM("center",
                new Rotation3d(0, Units.degreesToRadians(18), 0),
                new Translation3d(Units.inchesToMeters(-4.628),
                                  Units.inchesToMeters(-10.687),
                                  Units.inchesToMeters(16.129)),
                VecBuilder.fill(4, 4, 8), VecBuilder.fill(0.5, 0.5, 1));
-
+*/
     /**
      * Latency alert to use when high latency is detected.
      */
@@ -669,7 +672,7 @@ public double getVisionTimestamp(){
 
 public void UpdateTargetList(){
   //var result = Cameras.RIGHT_CAM.getLatestResult();
-  PhotonPipelineResult result = Cameras.CENTER_CAM.getLatestResult().get();
+  PhotonPipelineResult result = Cameras.RIGHT_CAM.getLatestResult().get();
   if(result!=null && result.hasTargets()) {
     latestID = result.getBestTarget().getFiducialId();
   }

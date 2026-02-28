@@ -216,6 +216,7 @@ public class RobotContainer {
 
     
     String launchTarg = launchPos.getSelected().toString();
+    m_launcher.setNewTarget(launchPos.getSelected());
     SmartDashboard.putString("Curr Selected Launch Targ", launchTarg);
     SmartDashboard.putData("Launcher Targets", launchPos);
 
@@ -225,12 +226,14 @@ public class RobotContainer {
       SmartDashboard.putNumber("Target Angle", m_launcher.turret.getTargetAngle());
     }
     SmartDashboard.putNumber("Angle To Target", m_launcher.getAngleToTarget());
+    SmartDashboard.putNumber("Relative Angle to Target", m_launcher.getRelativeAngleToTarget());
     SmartDashboard.putString("Launcher Status", m_launcher.getCombinedStatus());
     SmartDashboard.putNumber("Tower2LM RPM", m_launcher.flywheels_LH.getLMotorRPM());
     SmartDashboard.putNumber("Tower2RM RPM", m_launcher.flywheels_LH.getRMotorRPM());
     SmartDashboard.putNumber("Tower1LM RPM", m_launcher.flywheels_RH.getLMotorRPM());
     SmartDashboard.putNumber("Tower1RM RPM", m_launcher.flywheels_RH.getRMotorRPM());
     SmartDashboard.putNumber("Target RPM", m_launcher.getTargetRPM());
+    SmartDashboard.putNumber("Distance to Target",DriverAssist.getDistanceToTarget(m_driveTrain.getPose(), m_launcher.getTargetPose().getTranslation()));
 
     // add Hopper data to SmartDashboard
     SmartDashboard.putString("Hopper Status", m_feeder.getStatus().toString());
@@ -256,8 +259,8 @@ public class RobotContainer {
     SmartDashboard.putNumber("Drivetrain Velocity Y", m_driveTrain.getFieldVelocity().vyMetersPerSecond);
 
     if (m_driveTrain.vision != null) {
-      // add vision data to smartdashboard SmartDashboard.putNumber("Curr Pose x",
-      // m_driveTrain.vision.LastCalcVisionLocation.getX());
+      // add vision data to smartdashboard 
+      SmartDashboard.putNumber("Curr Pose x", m_driveTrain.vision.LastCalcVisionLocation.getX());
       SmartDashboard.putNumber("Curr Pose y", m_driveTrain.vision.LastCalcVisionLocation.getY());
       SmartDashboard.putNumber("Curr Pose theta",
           m_driveTrain.vision.LastCalcVisionLocation.getRotation().getDegrees());
