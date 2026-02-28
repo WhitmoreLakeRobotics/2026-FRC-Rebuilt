@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 3.752121212121212,
-        "y": 0.48879734848484757
+        "x": 4.325160984848484,
+        "y": 0.4472727272727275
       },
       "prevControl": {
-        "x": 6.002121212121212,
-        "y": 0.48879734848484735
+        "x": 6.575160984848484,
+        "y": 0.44727272727272727
       },
       "nextControl": null,
       "isLocked": false,
@@ -35,6 +35,12 @@
     {
       "name": "All Drive",
       "waypointRelativePos": 0.05,
+      "endWaypointRelativePos": null,
+      "command": null
+    },
+    {
+      "name": "Start Flywheels",
+      "waypointRelativePos": 0.600170502983797,
       "endWaypointRelativePos": null,
       "command": null
     }

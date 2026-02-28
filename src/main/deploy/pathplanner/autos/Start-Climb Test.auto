@@ -9,6 +9,18 @@
           "data": {
             "pathName": "Start-climb Test"
           }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "HStop"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "FStop"
+          }
         }
       ]
     }

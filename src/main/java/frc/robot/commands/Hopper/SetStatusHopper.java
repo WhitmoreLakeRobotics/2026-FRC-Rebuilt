@@ -73,8 +73,8 @@ public class SetStatusHopper extends Command {
             }
         } else {
         RobotContainer.getInstance().m_feeder.setStatus(hStatus);
-        bDone = true;
         }
+            bDone = true;
         
     }
 
@@ -91,7 +91,7 @@ public class SetStatusHopper extends Command {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return false;
+        return bDone;
     }
 
     @Override

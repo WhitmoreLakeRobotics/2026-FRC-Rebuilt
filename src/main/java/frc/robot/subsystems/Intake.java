@@ -152,7 +152,7 @@ public class Intake extends SubsystemBase {
     }
     private void setExtendMotorPosition(double position, ClosedLoopSlot DoTHing) {
           targetPos = position;
-        extendMotor.getClosedLoopController().setSetpoint(position, ControlType.kMAXMotionPositionControl, DoTHing);
+        extendMotor.getClosedLoopController().setSetpoint(position, ControlType.kPosition, DoTHing);
        // extendMotor.getClosedLoopController().setSetpoint(position,ControlType.kMAXMotionPositionControl);
     }
 
@@ -295,20 +295,20 @@ public class Intake extends SubsystemBase {
         //extendConfig.limitSwitch.forwardLimitSwitchEnabled(false);
         //extendConfig.limitSwitch.reverseLimitSwitchEnabled(false);
 
-        //extendConfig.closedLoop.maxOutput(1.0);
-        //extendConfig.closedLoop.minOutput(-1.0);
-        //extendConfig.closedLoopRampRate(0.15);
+        extendConfig.closedLoop.maxOutput(0.6);
+        extendConfig.closedLoop.minOutput(-0.6);
+        extendConfig.closedLoopRampRate(0.15);
         extendConfig.voltageCompensation(9.0);
         //// Down / outVelocity Values
-         extendConfig.closedLoop.maxMotion.maxAcceleration(5000000, IntakeClosedLoopSlotDown);
-         extendConfig.closedLoop.maxMotion.cruiseVelocity(4000000, IntakeClosedLoopSlotDown);
-         extendConfig.closedLoop.maxMotion.allowedProfileError(0.1, IntakeClosedLoopSlotDown);
+        //  extendConfig.closedLoop.maxMotion.maxAcceleration(5000000, IntakeClosedLoopSlotDown);
+        //  extendConfig.closedLoop.maxMotion.cruiseVelocity(4000000, IntakeClosedLoopSlotDown);
+        //  extendConfig.closedLoop.maxMotion.allowedProfileError(0.1, IntakeClosedLoopSlotDown);
          extendConfig.closedLoop.pid(0.08, 0.0, 0.0, IntakeClosedLoopSlotDown);
 
         // //// Up / in Velocity Values
-         extendConfig.closedLoop.maxMotion.maxAcceleration(5000000, IntakeClosedLoopSlotUp);
-         extendConfig.closedLoop.maxMotion.cruiseVelocity(4000000, IntakeClosedLoopSlotUp);
-         extendConfig.closedLoop.maxMotion.allowedProfileError(0.1, IntakeClosedLoopSlotUp);
+        //  extendConfig.closedLoop.maxMotion.maxAcceleration(5000000, IntakeClosedLoopSlotUp);
+        //  extendConfig.closedLoop.maxMotion.cruiseVelocity(4000000, IntakeClosedLoopSlotUp);
+        //  extendConfig.closedLoop.maxMotion.allowedProfileError(0.1, IntakeClosedLoopSlotUp);
          extendConfig.closedLoop.pid(0.11, 0.0, 0.0, IntakeClosedLoopSlotUp);
 
         extendConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder);
@@ -329,12 +329,12 @@ public class Intake extends SubsystemBase {
         // Enumeration of status which should store position and speed values
     public enum STATUS {
         RETRACTED(0.0, 0.0),
-        HALF_EXTENDED(2.33, 0.0),
+        HALF_EXTENDED(7.1, 0.0),
         RETRACTING(0.0, 0.0),
-        EXTENDED_STOPPED(8.0, 0.0),
-        EXTENDING(8.0, 0.0),
-        EXTENDED_INTAKING(8.0, 0.8), 
-        EXTENDED_OUTPUT(8.0, -0.8);
+        EXTENDED_STOPPED(15.4, 0.0),
+        EXTENDING(15.4, 0.0),
+        EXTENDED_INTAKING(15.4, 0.5), 
+        EXTENDED_OUTPUT(15.4, -0.8);
 
         private final double position;
         private final double speed; //setpower

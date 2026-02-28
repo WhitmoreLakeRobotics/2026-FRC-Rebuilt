@@ -203,8 +203,8 @@ public class Climb extends SubsystemBase {
         //lClimbConfig.limitSwitch.forwardLimitSwitchEnabled(false);
         //lClimbConfig.limitSwitch.reverseLimitSwitchEnabled(false);
 
-        lClimbConfig.closedLoop.maxOutput(1.0);
-        lClimbConfig.closedLoop.minOutput(-1.0);
+        lClimbConfig.closedLoop.maxOutput(0.6);
+        lClimbConfig.closedLoop.minOutput(-0.6);
         lClimbConfig.closedLoopRampRate(0.15);
         lClimbConfig.voltageCompensation(9.0);
         //// Down / outVelocity Values
@@ -239,7 +239,7 @@ public class Climb extends SubsystemBase {
                 // Code to move motors to stored position
                 targetStatus = Status.STORED;
                 status = Status.MOVING;
-                lClimbMotor.getClosedLoopController().setSetpoint(targetStatus.getLeftPos(),ControlType.kMAXMotionPositionControl);
+                lClimbMotor.getClosedLoopController().setSetpoint(targetStatus.getLeftPos(),ControlType.kPosition);
                // rClimbMotor.getClosedLoopController().setSetpoint(targetStatus.getRightPos(),ControlType.kMAXMotionPositionControl);
                 
             }
@@ -250,7 +250,7 @@ public class Climb extends SubsystemBase {
                 // Code to move motors to deployed L1 position
                 targetStatus = Status.DEPLOYEDL1;
                 status = Status.MOVING;
-                lClimbMotor.getClosedLoopController().setSetpoint(targetStatus.getLeftPos(),ControlType.kMAXMotionPositionControl);
+                lClimbMotor.getClosedLoopController().setSetpoint(targetStatus.getLeftPos(),ControlType.kPosition);
             //    rClimbMotor.getClosedLoopController().setSetpoint(targetStatus.getRightPos(),ControlType.kMAXMotionPositionControl);
             }
                 break;
@@ -262,7 +262,7 @@ public class Climb extends SubsystemBase {
                 // Code to move motors to L1 position
                 targetStatus = Status.L1;
                 status = Status.CLIMBING;
-                lClimbMotor.getClosedLoopController().setSetpoint(targetStatus.getLeftPos(),ControlType.kMAXMotionPositionControl);
+                lClimbMotor.getClosedLoopController().setSetpoint(targetStatus.getLeftPos(),ControlType.kPosition);
                // rClimbMotor.getClosedLoopController().setSetpoint(targetStatus.getRightPos(),ControlType.kMAXMotionPositionControl);
             }
                 break;
@@ -272,7 +272,7 @@ public class Climb extends SubsystemBase {
                 // Code to move motors to extended position
                 targetStatus = Status.EXTENDED;
                 status = Status.MOVING;
-                lClimbMotor.getClosedLoopController().setSetpoint(targetStatus.getLeftPos(),ControlType.kMAXMotionPositionControl);
+                lClimbMotor.getClosedLoopController().setSetpoint(targetStatus.getLeftPos(),ControlType.kPosition);
               //  rClimbMotor.getClosedLoopController().setSetpoint(targetStatus.getRightPos(),ControlType.kMAXMotionPositionControl);
             }
                 break;
@@ -281,7 +281,7 @@ public class Climb extends SubsystemBase {
                 break;
         }
         this.status = newStatus;
-        lClimbMotor.getClosedLoopController().setSetpoint(newStatus.getLeftPos(),ControlType.kMAXMotionPositionControl);
+        lClimbMotor.getClosedLoopController().setSetpoint(newStatus.getLeftPos(),ControlType.kPosition);
       //  rClimbMotor.getClosedLoopController().setSetpoint(newStatus.getRightPos(),ControlType.kMAXMotionPositionControl);
 ;
     }

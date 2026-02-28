@@ -136,7 +136,7 @@ public HopperStatus getStatus() {
 
         beltMotorConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder);
 
-        beltMotorConfig.smartCurrentLimit(30);
+        beltMotorConfig.smartCurrentLimit(50);
         //beltMotorConfig.smartCurrentLimit(normalStallCurrentLimit, normalFreeCurrentLimit);
 
         beltMotor.configure(beltMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
