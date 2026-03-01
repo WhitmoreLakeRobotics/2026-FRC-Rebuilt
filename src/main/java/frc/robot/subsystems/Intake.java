@@ -98,7 +98,7 @@ public class Intake extends SubsystemBase {
             case EXTENDING:
             if (DriverAssist.isInRange(extendMotor.getEncoder().getPosition(),status.position ,posTol)) {
                 if (!bIntakeMotorRunning) {
-                    intakeMotor.set(status.getSpeed());
+             intakeMotor.getClosedLoopController().setSetpoint(status.getSpeed(), ControlType.kVelocity);
                     bIntakeMotorRunning = true;
                     status = targetStatus;
                 }  
@@ -114,16 +114,16 @@ public class Intake extends SubsystemBase {
             case EXTENDED_INTAKING:
             if (DriverAssist.isInRange(extendMotor.getEncoder().getPosition(),status.position ,posTol)) {
                 //start intake motor
-                intakeMotor.set(status.getSpeed());
+             intakeMotor.getClosedLoopController().setSetpoint(status.getSpeed(), ControlType.kVelocity);
                 bIntakeMotorRunning = true;
                 bCommandComplete = true;
-                extendMotor.set(0);
+                //extendMotor.set(0);
             }
                 break;
             case EXTENDED_OUTPUT:
             if (DriverAssist.isInRange(extendMotor.getEncoder().getPosition(),status.position ,posTol)) {
                 //start intake motor
-                intakeMotor.set(status.getSpeed());
+             intakeMotor.getClosedLoopController().setSetpoint(status.getSpeed(), ControlType.kVelocity);
                 bIntakeMotorRunning = true;
                 bCommandComplete = true;
             }
@@ -165,6 +165,11 @@ public class Intake extends SubsystemBase {
         
     }
 
+    public double getRollerRPM(){
+
+    return intakeMotor.getEncoder().getVelocity();
+    }
+
     public void setMotorPos(double setPosition){
          extendMotor.getEncoder().setPosition(setPosition);   
     }
@@ -181,26 +186,26 @@ public class Intake extends SubsystemBase {
             status = STATUS.RETRACTING;
             //set extend motor to retract
             setExtendMotorPosition(status.getPosition(), IntakeClosedLoopSlotUp);
-             intakeMotor.set(status.getSpeed());
+             intakeMotor.getClosedLoopController().setSetpoint(status.getSpeed(), ControlType.kVelocity);
              bIntakeMotorRunning = false;
                 break;
                 case HALF_EXTENDED:
                 targetStatus = STATUS.HALF_EXTENDED;
                 status = STATUS.RETRACTING;
                 setExtendMotorPosition(targetStatus.getPosition(), IntakeClosedLoopSlotUp);
-                 intakeMotor.set(targetStatus.getSpeed());
+             intakeMotor.getClosedLoopController().setSetpoint(status.getSpeed(), ControlType.kVelocity);
                 bIntakeMotorRunning = false;
                 break;
             case EXTENDING: //transition state
             targetStatus = STATUS.EXTENDED_STOPPED;
             setExtendMotorPosition(status.getPosition(), IntakeClosedLoopSlotDown);
-             intakeMotor.set(status.getSpeed());
+             intakeMotor.getClosedLoopController().setSetpoint(status.getSpeed(), ControlType.kVelocity);
              bIntakeMotorRunning = false;
                 break;
             case RETRACTING://transition state
             targetStatus = STATUS.RETRACTED;    
             setExtendMotorPosition(targetStatus.getPosition(), IntakeClosedLoopSlotUp);
-            intakeMotor.set(status.getSpeed());
+             intakeMotor.getClosedLoopController().setSetpoint(status.getSpeed(), ControlType.kVelocity);
                 bIntakeMotorRunning = false;
         
                 break;
@@ -208,14 +213,14 @@ public class Intake extends SubsystemBase {
             targetStatus = STATUS.EXTENDED_STOPPED;
             status = STATUS.EXTENDING;
             setExtendMotorPosition(targetStatus.getPosition(), IntakeClosedLoopSlotDown);
-             intakeMotor.set(status.getSpeed());
+             intakeMotor.getClosedLoopController().setSetpoint(status.getSpeed(), ControlType.kVelocity);
              bIntakeMotorRunning = false;
                 break;
             case EXTENDED_INTAKING:
             targetStatus = STATUS.EXTENDED_INTAKING;
             status = STATUS.EXTENDING;
             setExtendMotorPosition(status.getPosition(), IntakeClosedLoopSlotDown);
-             intakeMotor.set(status.getSpeed());
+             intakeMotor.getClosedLoopController().setSetpoint(status.getSpeed(), ControlType.kVelocity);
              bIntakeMotorRunning = false;
 
                 break;
@@ -223,7 +228,7 @@ public class Intake extends SubsystemBase {
             targetStatus = STATUS.EXTENDED_OUTPUT;
             status = STATUS.EXTENDING;
             setExtendMotorPosition(status.getPosition(), IntakeClosedLoopSlotDown);
-             intakeMotor.set(status.getSpeed());
+             intakeMotor.getClosedLoopController().setSetpoint(status.getSpeed(), ControlType.kVelocity);
                 bIntakeMotorRunning = false;
                 break;  
         
@@ -263,7 +268,7 @@ public class Intake extends SubsystemBase {
         // intakeConfig.closedLoop.maxMotion.maxAcceleration(5000, rTowerR_CLOSED_LOOP_SLOT_DOWN);
         // intakeConfig.closedLoop.maxMotion.maxVelocity(5000, rTowerR_CLOSED_LOOP_SLOT_DOWN);
         // intakeConfig.closedLoop.maxMotion.allowedClosedLoopError(rTowerRPosTol, rTowerR_CLOSED_LOOP_SLOT_DOWN);
-        // intakeConfig.closedLoop.pid(0.4, 0.0, 0.0, ClosedLoopSlot.kSlot0);
+         intakeConfig.closedLoop.pid(0.0005, 0.0, 0.0, ClosedLoopSlot.kSlot0);
 
         // //// Up / in Velocity Values
         // intakeConfig.closedLoop.maxMotion.maxAcceleration(5000, rTowerR_CLOSED_LOOP_SLOT_UP);
@@ -273,8 +278,8 @@ public class Intake extends SubsystemBase {
 
         intakeConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder);
 
-         intakeConfig.smartCurrentLimit(40);
-        //intakeConfig.smartCurrentLimit(normalStallCurrentLimit, normalFreeCurrentLimit);
+         //intakeConfig.smartCurrentLimit(40);
+        intakeConfig.smartCurrentLimit(10, 40);
 
         intakeMotor.configure(intakeConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
@@ -295,8 +300,8 @@ public class Intake extends SubsystemBase {
         //extendConfig.limitSwitch.forwardLimitSwitchEnabled(false);
         //extendConfig.limitSwitch.reverseLimitSwitchEnabled(false);
 
-        extendConfig.closedLoop.maxOutput(0.6);
-        extendConfig.closedLoop.minOutput(-0.6);
+        extendConfig.closedLoop.maxOutput(0.5);
+        extendConfig.closedLoop.minOutput(-0.5);
         extendConfig.closedLoopRampRate(0.15);
         extendConfig.voltageCompensation(9.0);
         //// Down / outVelocity Values
@@ -329,15 +334,15 @@ public class Intake extends SubsystemBase {
         // Enumeration of status which should store position and speed values
     public enum STATUS {
         RETRACTED(0.0, 0.0),
-        HALF_EXTENDED(6.1, 0.0),
+        HALF_EXTENDED(5.5, 1500),
         RETRACTING(0.0, 0.0),
-        EXTENDED_STOPPED(15.4, 0.0),
-        EXTENDING(15.4, 0.0),
-        EXTENDED_INTAKING(15.4, 0.55), 
-        EXTENDED_OUTPUT(15.4, -0.8);
+        EXTENDED_STOPPED(15.1, 0.0),
+        EXTENDING(15.1, 0.0),
+        EXTENDED_INTAKING(15.5, 3500), 
+        EXTENDED_OUTPUT(15.1, -3000);
 
         private final double position;
-        private final double speed; //setpower
+        private final double speed; //setpower  , //set velocity 
 
         STATUS(double position, double speed) { 
             this.position = position;

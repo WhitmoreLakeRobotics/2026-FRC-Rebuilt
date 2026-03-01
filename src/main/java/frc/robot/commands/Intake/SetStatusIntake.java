@@ -57,7 +57,7 @@ public class SetStatusIntake extends Command {
         this.bToggle = bToggle;
     }
 
-    public SetStatusIntake(Intake.STATUS nStatus, Subsystem m_subsystem){
+    public SetStatusIntake(Intake.STATUS nStatus, Intake m_subsystem){
         iStatus = nStatus;
         //m_subsystem = subsystem;
         addRequirements(m_subsystem);  

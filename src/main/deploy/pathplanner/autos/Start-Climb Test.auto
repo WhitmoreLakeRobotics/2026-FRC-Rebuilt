@@ -5,6 +5,12 @@
     "data": {
       "commands": [
         {
+          "type": "named",
+          "data": {
+            "name": "Start Flywheels"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "Start-climb Test"
@@ -13,13 +19,37 @@
         {
           "type": "named",
           "data": {
-            "name": "HStop"
+            "name": "Intake"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Hopper Start"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 3.0
           }
         },
         {
           "type": "named",
           "data": {
             "name": "FStop"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "HStop"
           }
         }
       ]

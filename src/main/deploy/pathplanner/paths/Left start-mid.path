@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.685681818181818,
-        "y": 7.556287878787879
+        "x": 4.009359430604984,
+        "y": 7.6447093712930005
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.685681818181818,
-        "y": 7.556287878787879
+        "x": 5.009359430604984,
+        "y": 7.6447093712930005
       },
       "isLocked": false,
       "linkedName": "left start"
@@ -33,13 +33,13 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "All Drive",
+      "name": "",
       "waypointRelativePos": 0,
       "endWaypointRelativePos": null,
       "command": null
     },
     {
-      "name": "Intake",
+      "name": "",
       "waypointRelativePos": 0.4338624338624342,
       "endWaypointRelativePos": null,
       "command": null

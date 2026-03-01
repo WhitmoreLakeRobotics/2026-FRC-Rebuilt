@@ -7,31 +7,31 @@
         {
           "type": "named",
           "data": {
-            "name": null
+            "name": "Start Flywheels"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "right start-mid"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "right mid-middle"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "middle-right start"
+            "pathName": "LStart-Climb"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": null
+            "name": "Intake"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Hopper Start"
           }
         },
         {
@@ -41,27 +41,15 @@
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "left start-back mid"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "middle-right start"
+            "name": "HStop"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": null
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 3.0
+            "name": "FStop"
           }
         }
       ]

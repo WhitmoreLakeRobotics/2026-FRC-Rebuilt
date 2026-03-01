@@ -86,7 +86,7 @@ public class LTurret extends SubsystemBase {
     }
 
     public double getCurrAngle() {
-        return turningMotor.getEncoder().getPosition();
+        return turningMotor.getAbsoluteEncoder().getPosition();
     }
 
     public void setAngle(double angle) {
@@ -110,7 +110,7 @@ public class LTurret extends SubsystemBase {
 
         // config.encoder.positionConversionFactor(Math.PI * elevator_gearDiameter /
         // elevator_gearRatio);
-        turningConfig.encoder.positionConversionFactor(360);
+        //turningConfig.encoder.positionConversionFactor(360);
         turningConfig.inverted(true);
         turningConfig.softLimit.forwardSoftLimitEnabled(false);
         turningConfig.softLimit.reverseSoftLimit(0);
@@ -129,7 +129,7 @@ public class LTurret extends SubsystemBase {
         // turningConfig.closedLoop.maxMotion.maxAcceleration(5000, rTowerR_CLOSED_LOOP_SLOT_DOWN);
         // turningConfig.closedLoop.maxMotion.maxVelocity(5000, rTowerR_CLOSED_LOOP_SLOT_DOWN);
         // turningConfig.closedLoop.maxMotion.allowedClosedLoopError(rTowerRPosTol, rTowerR_CLOSED_LOOP_SLOT_DOWN);
-        // turningConfig.closedLoop.pidf(0.4, 0.0, 0.0, 0.0, rTowerR_CLOSED_LOOP_SLOT_DOWN);
+         //turningConfig.closedLoop.pid(0.0004, 0.0, 0.0, ClosedLoopSlot.kSlot0);
 
         // //// Up / in Velocity Values
         // turningConfig.closedLoop.maxMotion.maxAcceleration(5000, rTowerR_CLOSED_LOOP_SLOT_UP);
@@ -139,14 +139,14 @@ public class LTurret extends SubsystemBase {
 
         turningConfig.closedLoop.pid(0.04, 0.0, 0.0, ClosedLoopSlot.kSlot0);
 
-        //turningConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder);
+        turningConfig.closedLoop.feedbackSensor(FeedbackSensor.kAbsoluteEncoder);
         AbsoluteEncoderConfig absEncConfig = new AbsoluteEncoderConfig();
         absEncConfig.zeroOffset(0.0); // this needs to be set to the offset where the turret is "zeroed"
         absEncConfig.inverted(false);
         absEncConfig.positionConversionFactor(360);
 
-        //turningConfig.absoluteEncoder.apply(absEncConfig);
-        turningConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder);
+        turningConfig.absoluteEncoder.apply(absEncConfig);
+        turningConfig.closedLoop.feedbackSensor(FeedbackSensor.kAbsoluteEncoder);
         turningConfig.smartCurrentLimit(25);
         //turningConfig.smartCurrentLimit(normalStallCurrentLimit, normalFreeCurrentLimit);
 

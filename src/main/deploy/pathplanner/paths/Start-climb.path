@@ -33,19 +33,19 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "All Drive",
+      "name": "",
       "waypointRelativePos": 0,
       "endWaypointRelativePos": null,
       "command": null
     },
     {
-      "name": "climbpm",
+      "name": "",
       "waypointRelativePos": 1.0,
       "endWaypointRelativePos": null,
       "command": null
     },
     {
-      "name": "Climb",
+      "name": "",
       "waypointRelativePos": 1.0,
       "endWaypointRelativePos": null,
       "command": null

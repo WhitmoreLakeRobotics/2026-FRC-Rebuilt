@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 3.685681818181818,
-        "y": 7.556287878787879
+        "x": 4.009359430604984,
+        "y": 7.6447093712930005
       },
       "prevControl": {
-        "x": 4.95633535888864,
-        "y": 7.531379819376929
+        "x": 5.280012971311805,
+        "y": 7.619801311882051
       },
       "nextControl": null,
       "isLocked": false,
@@ -33,7 +33,7 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "All Drive",
+      "name": "",
       "waypointRelativePos": 0.04837490551776118,
       "endWaypointRelativePos": null,
       "command": null
