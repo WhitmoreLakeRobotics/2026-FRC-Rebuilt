@@ -5,86 +5,34 @@
     "data": {
       "commands": [
         {
-          "type": "named",
+          "type": "sequential",
           "data": {
-            "name": "Intake"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Left start-mid"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Intake"
+                }
+              }
+            ]
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "right start-mid"
+            "pathName": "left mid-middle"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "right mid-middle"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "middle-right start"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 3.0
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "HStop"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Rstart-back mid"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "middle-right start"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "FStop"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 3.0
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "RStart-climb"
-          }
-        }
-      ]
-    }
-  },
-  "resetOdom": true,
-  "folder": null,
-  "choreoAuto": false
-}    "type": "path",
-          "data": {
-            "pathName": "Rstart-back mid"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "middle-right start"
+            "pathName": "LMid-start"
           }
         },
         {
@@ -124,15 +72,40 @@
           }
         },
         {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Left start-mid"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Intake"
+                }
+              }
+            ]
+          }
+        },
+        {
           "type": "path",
           "data": {
-            "pathName": "RStart-climb"
+            "pathName": "left mid-middle"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "LMid-start"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "Climb"
+            "name": "Start Flywheels"
           }
         },
         {
@@ -142,15 +115,27 @@
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "RClimb Forward"
+            "name": "Hopper Start"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 3.0
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "Down Climb"
+            "name": "HStop"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "FStop"
           }
         }
       ]
