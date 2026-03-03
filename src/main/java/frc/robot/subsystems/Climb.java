@@ -203,17 +203,17 @@ public class Climb extends SubsystemBase {
         //lClimbConfig.limitSwitch.forwardLimitSwitchEnabled(false);
         //lClimbConfig.limitSwitch.reverseLimitSwitchEnabled(false);
 
-        lClimbConfig.closedLoop.maxOutput(0.8);
+        lClimbConfig.closedLoop.maxOutput(1.0);
         lClimbConfig.closedLoop.minOutput(-1.0);
         lClimbConfig.closedLoopRampRate(0.15);
-        lClimbConfig.voltageCompensation(9.0);
+        lClimbConfig.voltageCompensation(12.0);
         //// Down / outVelocity Values
         // lClimbConfig.closedLoop.maxMotion.maxAcceleration(5000, lClimb_CLOSED_LOOP_SLOT_DOWN);
         // lClimbConfig.closedLoop.maxMotion.maxVelocity(5000, lClimb_CLOSED_LOOP_SLOT_DOWN);
         // lClimbConfig.closedLoop.maxMotion.allowedClosedLoopError(lClimbPosTol, lClimb_CLOSED_LOOP_SLOT_DOWN);
          // lClimbConfig.closedLoop.maxMotion.allowedClosedLoopError(lClimbPosTol, lClimb_CLOSED_LOOP_SLOT_DOWN);
           lClimbConfig.closedLoop.pid(0.4, 0.0, 0.0, lClimbClosedLoopSlotDown); //when we are going down, we may need to add a feedforward
-          //lClimbConfig.closedLoop.feedForward.kA(0.02);  //need more tuning
+          lClimbConfig.closedLoop.feedForward.kG(0.02);  //need more tuning
         // //// Up / in Velocity Values
         // lClimbConfig.closedLoop.maxMotion.maxAcceleration(5000, lClimb_CLOSED_LOOP_SLOT_UP);
         // lClimbConfig.closedLoop.maxMotion.maxVelocity(2000, lClimb_CLOSED_LOOP_SLOT_UP);

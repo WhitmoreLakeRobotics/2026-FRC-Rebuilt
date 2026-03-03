@@ -95,6 +95,7 @@ public class RobotContainer {
   SendableChooser<Command> autoChooser = new SendableChooser<>();
   SendableChooser<Double> cruiseControl = new SendableChooser();
   SendableChooser<Pose2d> launchPos = new SendableChooser<>();
+  SendableChooser<Double> 
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
