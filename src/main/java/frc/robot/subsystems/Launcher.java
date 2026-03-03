@@ -50,7 +50,7 @@ public class Launcher extends SubsystemBase {
     private double[] pidFlyWheelRH1 = {0.00033, 0.0, 0.0,0.0018};
     private double[] pidFlyWheelRH2 = {0.00033, 0.0, 0.0,0.0018};
 
-
+    private boolean bAutoAngle = false;
 
 
     private LinearCalcRef short_shot = new LinearCalcRef(3250, 9.25, edu.wpi.first.units.Units.Feet);
@@ -100,7 +100,17 @@ public class Launcher extends SubsystemBase {
             // calculate distance and angle to target
 
             //calcDistanceToTarget();
-            targetAngle = getRelativeAngleToTarget();
+           if( bAutoAngle ){
+            if (bturret_Enabled){
+           targetAngle = getRelativeAngleToTarget();
+            }else {
+                targetAngle = getAngleToTarget();
+            }
+           }else{
+            //set static angle
+
+           } 
+
 
             RobotContainer.getInstance().m_driveTrain.THeading = getAngleToTarget();
             // set rpm based on distance to target
@@ -203,6 +213,20 @@ public class Launcher extends SubsystemBase {
         targetRPM = newRPM;
         bShotCalc = auto;
     }
+
+    public void setAngle (double newAngle, boolean Auto) {
+        targetAngle = newAngle;
+        bAutoAngle = Auto;
+    }
+
+    public void enableTurret (boolean enable){
+        bturret_Enabled = enable;
+    }
+
+    public boolean getTurretStatus(){
+        return bturret_Enabled;
+    }
+
 
     public void addRPM(){
         targetRPM = targetRPM + 50;
