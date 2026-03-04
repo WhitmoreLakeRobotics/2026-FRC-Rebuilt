@@ -68,7 +68,8 @@ public class SetTarget extends Command {
         }
             }
             else {
-        RobotContainer.getInstance().m_launcher.setNewTarget(targetPose);
+       // RobotContainer.getInstance().m_launcher.setNewTarget(targetPose);
+       RobotContainer.getInstance().m_launcher.setTargetRPM(targetRPM, false);
 
 
             }

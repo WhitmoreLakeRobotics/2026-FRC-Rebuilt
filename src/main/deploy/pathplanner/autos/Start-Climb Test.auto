@@ -5,15 +5,15 @@
     "data": {
       "commands": [
         {
-          "type": "named",
-          "data": {
-            "name": "Start Flywheels"
-          }
-        },
-        {
           "type": "path",
           "data": {
             "pathName": "Start-climb Test"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Start Flywheels"
           }
         },
         {
@@ -25,7 +25,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 1.0
+            "waitTime": 2.0
           }
         },
         {

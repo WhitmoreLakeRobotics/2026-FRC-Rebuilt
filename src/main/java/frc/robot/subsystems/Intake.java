@@ -322,7 +322,7 @@ public class Intake extends SubsystemBase {
         // IntakeClosedLoopSlotUp);
         // extendConfig.closedLoop.maxMotion.allowedProfileError(0.1,
         // IntakeClosedLoopSlotUp);
-        extendConfig.closedLoop.pid(0.11, 0.0, 0.0, IntakeClosedLoopSlotUp);
+        extendConfig.closedLoop.pid(0.055, 0.0, 0.0, IntakeClosedLoopSlotUp);
 
         extendConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder);
         // AbsoluteEncoderConfig absEncConfig = new AbsoluteEncoderConfig();

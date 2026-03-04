@@ -7,13 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "RStart-climb"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": null
+            "pathName": "Start-climb Test"
           }
         }
       ]
