@@ -43,18 +43,18 @@ public class Launcher extends SubsystemBase {
     private boolean bActive = true;
     private boolean bRHF_Enabled = true;
     private boolean bLHF_Enabled = true;
-    private boolean bturret_Enabled = false;
+    private boolean bturret_Enabled = true;
     private boolean bShotCalc = false;
-    private double[] pidFlyWheelLH1 = {0.00033, 0.0, 0.0,0.0018};
-    private double[] pidFlyWheelLH2 = {0.00033, 0.0, 0.0,0.0018};
-    private double[] pidFlyWheelRH1 = {0.00033, 0.0, 0.0,0.0018};
-    private double[] pidFlyWheelRH2 = {0.00033, 0.0, 0.0,0.0018};
+    private double[] pidFlyWheelLH1 = {0.00037, 0.0, 0.0,0.0018};  // 9 tower 2 right
+    private double[] pidFlyWheelLH2 = {0.00037, 0.0, 0.0,0.0018};   //10  tower 2 left
+    private double[] pidFlyWheelRH1 = {0.00037, 0.0, 0.0,0.0018};   //11   tower 1 right 
+    private double[] pidFlyWheelRH2 = {0.00037, 0.0, 0.0,0.0018};   //12   tower 1 left
 
     private boolean bAutoAngle = false;
 
 
     private LinearCalcRef short_shot = new LinearCalcRef(3250, 9.25, edu.wpi.first.units.Units.Feet);
-    private LinearCalcRef long_shot = new LinearCalcRef(3700, 12.36, edu.wpi.first.units.Units.Feet);
+    private LinearCalcRef long_shot = new LinearCalcRef(3700, 10.5, edu.wpi.first.units.Units.Feet);
     private LinearCalc shotCalc = new LinearCalc(short_shot, long_shot);
     private double targetRPM;
 

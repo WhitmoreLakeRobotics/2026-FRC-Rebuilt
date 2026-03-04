@@ -157,10 +157,10 @@ public class LFlywheels extends SubsystemBase {
         //rTowerRConfig.limitSwitch.forwardLimitSwitchEnabled(false);
         //rTowerRConfig.limitSwitch.reverseLimitSwitchEnabled(false);
 
-        TowerConfig.closedLoop.maxOutput(1.0);
-        TowerConfig.closedLoop.minOutput(-1.0);
+        //TowerConfig.closedLoop.maxOutput(1.0);
+        //TowerConfig.closedLoop.minOutput(-1.0);
 
-        TowerConfig.closedLoopRampRate(0.075);
+       // TowerConfig.closedLoopRampRate(0.075);
        TowerConfig.voltageCompensation(9.0);
        // TowerConfig.closedLoop.maxMotion.cruiseVelocity(0);
         //TowerConfig.closedLoop.maxMotion.maxAcceleration(0);
@@ -181,7 +181,7 @@ public class LFlywheels extends SubsystemBase {
         TowerConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder);
 
        // TowerConfig.smartCurrentLimit(50);
-        TowerConfig.smartCurrentLimit(10, 50);
+        TowerConfig.smartCurrentLimit(30, 50);
 
         TowerLM.configure(TowerConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
@@ -202,10 +202,10 @@ public class LFlywheels extends SubsystemBase {
         //rTowerRConfig.limitSwitch.forwardLimitSwitchEnabled(false);
         //rTowerRConfig.limitSwitch.reverseLimitSwitchEnabled(false);
 
-        TowerConfig.closedLoop.maxOutput(1.0);
-        TowerConfig.closedLoop.minOutput(-1.0);
+        //TowerConfig.closedLoop.maxOutput(1.0);
+        //TowerConfig.closedLoop.minOutput(-1.0);
 
-        TowerConfig.closedLoopRampRate(0.075);
+        //TowerConfig.closedLoopRampRate(0.075);
         TowerConfig.voltageCompensation(9.0);
     //    TowerConfig.closedLoop.maxMotion.cruiseVelocity(0);
         //TowerConfig.closedLoop.maxMotion.maxAcceleration(0);
@@ -226,7 +226,7 @@ public class LFlywheels extends SubsystemBase {
         TowerConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder);
 
       //  TowerConfig.smartCurrentLimit(50);
-        TowerConfig.smartCurrentLimit(10, 50);
+        TowerConfig.smartCurrentLimit(30, 50);
 
         TowerRM.configure(TowerConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 

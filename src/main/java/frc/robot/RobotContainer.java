@@ -144,10 +144,11 @@ public class RobotContainer {
     cruiseControl.addOption("40%", 0.4);
     cruiseControl.addOption("30%", 0.3);
     
-    towerAngle.addOption("Front", 0.0);
+    towerAngle.setDefaultOption("Front", 0.0);
     towerAngle.addOption("Right", 270.0);
     towerAngle.addOption("Back", 180.0);
     towerAngle.addOption("Left", 90.0);
+    towerAngle.addOption("auto", -1.0);
 
     launchPos.setDefaultOption("Red Hub", Launcher.KnownTargets.RED_HUB.getPose2d());
     launchPos.addOption("Blue Hub", Launcher.KnownTargets.BLUE_HUB.getPose2d());
@@ -185,7 +186,7 @@ public class RobotContainer {
     SmartDashboard.putData("Start Flywheels", new SetTarget(4000.0, false ));
     SmartDashboard.putData("Stop Flywheels", new SetTarget(0.0, false));
     SmartDashboard.putData("Stop hopper", new SetStatusHopper(HopperStatus.STOP));
-    SmartDashboard.putData("Auto Aim", new SetTurret(-1,true) );
+   // SmartDashboard.putData("Auto Aim", new SetTurret(0,true) );
     SmartDashboard.putData("Enable Turret", new EnableTurret());
 
 
@@ -220,7 +221,7 @@ public class RobotContainer {
 
     TAngle = towerAngle.getSelected();
     SmartDashboard.putData("Tower Angle", towerAngle);
-    m_launcher.setAngle(TAngle, false);
+    m_launcher.setAngle(TAngle, true);
     SmartDashboard.putNumber("Target Turret Angle", TAngle);
 
     if (m_launcher.turret != null) {

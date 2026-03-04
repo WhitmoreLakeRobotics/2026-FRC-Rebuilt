@@ -112,7 +112,7 @@ public class LTurret extends SubsystemBase {
         // config.encoder.positionConversionFactor(Math.PI * elevator_gearDiameter /
         // elevator_gearRatio);
         //turningConfig.encoder.positionConversionFactor(360);
-        turningConfig.inverted(true);
+        turningConfig.inverted(false);
         turningConfig.softLimit.forwardSoftLimitEnabled(false);
         turningConfig.softLimit.reverseSoftLimit(0);
         turningConfig.softLimit.reverseSoftLimitEnabled(false);
@@ -130,7 +130,8 @@ public class LTurret extends SubsystemBase {
         // turningConfig.closedLoop.maxMotion.maxAcceleration(5000, rTowerR_CLOSED_LOOP_SLOT_DOWN);
         // turningConfig.closedLoop.maxMotion.maxVelocity(5000, rTowerR_CLOSED_LOOP_SLOT_DOWN);
         // turningConfig.closedLoop.maxMotion.allowedClosedLoopError(rTowerRPosTol, rTowerR_CLOSED_LOOP_SLOT_DOWN);
-         turningConfig.closedLoop.pid(0.0004, 0.0, 0.0, ClosedLoopSlot.kSlot0);
+         turningConfig.closedLoop.pid(0.03, 0.0, 0.0, ClosedLoopSlot.kSlot0);
+         turningConfig.closedLoop.feedForward.kG(0.00018);
          turningConfig.closedLoop.positionWrappingEnabled(true);
          turningConfig.closedLoop.positionWrappingMinInput(0);
          turningConfig.closedLoop.positionWrappingMaxInput(360);
@@ -142,11 +143,11 @@ public class LTurret extends SubsystemBase {
         // turningConfig.closedLoop.maxMotion.allowedClosedLoopError(rTowerRPosTol, rTowerR_CLOSED_LOOP_SLOT_UP);
         // turningConfig.closedLoop.pidf(0.4, 0.0, 0.0, 0.0, rTowerR_CLOSED_LOOP_SLOT_UP);
 
-        turningConfig.closedLoop.pid(0.04, 0.0, 0.0, ClosedLoopSlot.kSlot0);
+        //turningConfig.closedLoop.pid(0.04, 0.0, 0.0, ClosedLoopSlot.kSlot0);
 
         turningConfig.closedLoop.feedbackSensor(FeedbackSensor.kAbsoluteEncoder);
         AbsoluteEncoderConfig absEncConfig = new AbsoluteEncoderConfig();
-        absEncConfig.zeroOffset(0.0); // this needs to be set to the offset where the turret is "zeroed"
+        absEncConfig.zeroOffset(0.43408346); // this needs to be set to the offset where the turret is "zeroed"
         absEncConfig.inverted(false);
         absEncConfig.positionConversionFactor(360);
 
