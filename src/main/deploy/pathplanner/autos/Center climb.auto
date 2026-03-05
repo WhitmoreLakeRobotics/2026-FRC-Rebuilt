@@ -23,12 +23,6 @@
           }
         },
         {
-          "type": "wait",
-          "data": {
-            "waitTime": 1.0
-          }
-        },
-        {
           "type": "named",
           "data": {
             "name": "Hopper Start"
@@ -41,15 +35,27 @@
           }
         },
         {
-          "type": "named",
+          "type": "path",
           "data": {
-            "name": "HStop"
+            "pathName": "Center-climb"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "FStop"
+            "name": "Climb"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "RClimb Forward"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Down Climb"
           }
         }
       ]

@@ -35,21 +35,21 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "HStop"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "FStop"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "RStart-mid"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.5
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "middle-right start"
           }
         },
         {
@@ -59,9 +59,9 @@
           }
         },
         {
-          "type": "wait",
+          "type": "path",
           "data": {
-            "waitTime": 0.5
+            "pathName": "middle-right start"
           }
         },
         {
@@ -85,7 +85,31 @@
         {
           "type": "named",
           "data": {
+            "name": "HStop"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "FStop"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
             "name": "Climb"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "RClimb Forward"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Down Climb"
           }
         }
       ]

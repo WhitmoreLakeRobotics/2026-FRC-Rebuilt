@@ -3,33 +3,47 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.738484848484848,
-        "y": 4.5000757575757575
+        "x": 0.46958481612677805,
+        "y": 0.5006049821985494
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.738484848484848,
-        "y": 7.000740714213028
+        "x": 0.7708422301304869,
+        "y": 1.8670225385527872
       },
       "isLocked": false,
-      "linkedName": "r mid"
+      "linkedName": "outpost"
     },
     {
       "anchor": {
-        "x": 4.009359430610362,
-        "y": 7.472562277574691
+        "x": 0.8353973902728358,
+        "y": 2.803072360616844
       },
       "prevControl": {
-        "x": 7.217782640333338,
-        "y": 7.472562277574691
+        "x": 0.7062870699881383,
+        "y": 1.9746144721233692
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "left start cb"
+      "linkedName": "Climb"
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [],
+  "constraintZones": [
+    {
+      "name": "Constraints Zone",
+      "minWaypointRelativePos": 0.7008681925808995,
+      "maxWaypointRelativePos": 1.0,
+      "constraints": {
+        "maxVelocity": 1.0,
+        "maxAcceleration": 3.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
+    }
+  ],
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
@@ -48,7 +62,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -90.0
+    "rotation": 90.0
   },
   "useDefaultConstraints": true
 }

@@ -5,113 +5,21 @@
     "data": {
       "commands": [
         {
-          "type": "sequential",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "Left start-mid"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Intake"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "left mid-middle"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "LMid-start"
-          }
-        },
-        {
           "type": "named",
           "data": {
             "name": "Start Flywheels"
           }
         },
         {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.5
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Hopper Start"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 3.0
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "HStop"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "FStop"
-          }
-        },
-        {
-          "type": "sequential",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "Left start-mid"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Intake"
-                }
-              }
-            ]
-          }
-        },
-        {
           "type": "path",
           "data": {
-            "pathName": "left mid-middle"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "LMid-start"
+            "pathName": "Center-launch"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "Start Flywheels"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.5
+            "name": "Intake"
           }
         },
         {
@@ -141,7 +49,61 @@
         {
           "type": "path",
           "data": {
-            "pathName": "left-climb"
+            "pathName": "center-outpost"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Start Flywheels"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 2.0
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Hopper Start"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 5.0
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "outpost-climb"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "HStop"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "FStop"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Climb"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "RClimb Forward"
           }
         },
         {
