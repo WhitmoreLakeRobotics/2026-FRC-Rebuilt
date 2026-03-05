@@ -11,6 +11,7 @@ public class LinearCalc {
     private LinearCalcRef short_shot;
     private LinearCalcRef long_shot;
     
+    
 
 
     public LinearCalc(LinearCalcRef shortShot, LinearCalcRef longShot) {
@@ -53,8 +54,8 @@ public static void main(String... args) {
         // example run
         // 2026-FRC-Rebuilt\build\libs> java -cp .\2026-FRC-Rebuilt.jar frc.robot.subsystems.LinearCalc
 
-        LinearCalcRef shortShot = new LinearCalcRef(2503, 196, Centimeter);
-        LinearCalcRef longShot = new LinearCalcRef(4407, 379, Centimeter);
+        LinearCalcRef shortShot = new LinearCalcRef(3250, 9.25, edu.wpi.first.units.Units.Feet);
+     LinearCalcRef longShot = new LinearCalcRef(3700, 10.5, edu.wpi.first.units.Units.Feet);
         LinearCalc LC = new LinearCalc(shortShot, longShot);
         System.out.println("Distance :   RPM ");
         for (int i = (int) shortShot.Distance; i <= (int) longShot.Distance; i++) {

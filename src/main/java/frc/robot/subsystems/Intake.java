@@ -267,7 +267,8 @@ public class Intake extends SubsystemBase {
         // rTowerR_CLOSED_LOOP_SLOT_DOWN);
         // intakeConfig.closedLoop.maxMotion.allowedClosedLoopError(rTowerRPosTol,
         // rTowerR_CLOSED_LOOP_SLOT_DOWN);
-        intakeConfig.closedLoop.pid(0.0005, 0.0, 0.0, ClosedLoopSlot.kSlot0);
+        intakeConfig.closedLoop.pid(0.005, 0.0, 0.0, ClosedLoopSlot.kSlot0);
+        intakeConfig.closedLoop.feedForward.kV(9.0);
 
         // //// Up / in Velocity Values
         // intakeConfig.closedLoop.maxMotion.maxAcceleration(5000,
@@ -282,7 +283,7 @@ public class Intake extends SubsystemBase {
         intakeConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder);
 
         // intakeConfig.smartCurrentLimit(40);
-        intakeConfig.smartCurrentLimit(10, 40);
+        intakeConfig.smartCurrentLimit(35, 50);
 
         intakeMotor.configure(intakeConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
