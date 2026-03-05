@@ -54,8 +54,8 @@ public class Launcher extends SubsystemBase {
     private boolean bAutoAngle = false;
 
 
-    private LinearCalcRef short_shot = new LinearCalcRef(3250, 9.25, edu.wpi.first.units.Units.Feet);
-    private LinearCalcRef long_shot = new LinearCalcRef(3700, 10.5, edu.wpi.first.units.Units.Feet);
+    private LinearCalcRef short_shot = new LinearCalcRef(3215, 99.6, edu.wpi.first.units.Units.Inches);
+    private LinearCalcRef long_shot = new LinearCalcRef(3700, 126, edu.wpi.first.units.Units.Inches);
     private LinearCalc shotCalc = new LinearCalc(short_shot, long_shot);
     private double targetRPM;
 
@@ -197,7 +197,7 @@ public class Launcher extends SubsystemBase {
     }
 
     private void calcDistanceToTarget() {
-        distanceToTarget = DriverAssist.getDistanceToTarget(currentPose, targetPose.getTranslation());
+        distanceToTarget = DriverAssist.getDistanceToTarget(currentPose, targetPose.getTranslation()) * 39.37;  //meters to inches
     }
 
     public double getAngleToTarget() {
@@ -213,7 +213,7 @@ public class Launcher extends SubsystemBase {
 
 
     public double getRelativeAngleToTarget(){
-       return DriverAssist.getRelativeAngleToTarget(currentPose, targetPose.getTranslation()).getDegrees();
+       return DriverAssist.getRelativeAngleToTarget(currentPose, targetPose.getTranslation()).getDegrees() +180;
 
     }
 
@@ -229,7 +229,13 @@ public class Launcher extends SubsystemBase {
 
     public void setAngle (double newAngle, boolean Auto) {
         targetAngle = newAngle;
-        bAutoAngle = Auto;
+        if(newAngle == -1){
+            bAutoAngle = true;
+
+        } else{
+            bAutoAngle = false;
+        }
+        
     }
 
     public void enableTurret (boolean enable){

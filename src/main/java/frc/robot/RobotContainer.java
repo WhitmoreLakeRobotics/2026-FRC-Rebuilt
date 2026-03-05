@@ -151,7 +151,7 @@ public class RobotContainer {
     towerAngle.addOption("Right", 270.0);
     towerAngle.addOption("Back", 180.0);
     towerAngle.addOption("Left", 90.0);
-    towerAngle.addOption("auto", -1.0);
+    towerAngle.addOption("Auto", -1.0);
 
     launchPos.setDefaultOption("Red Hub", Launcher.KnownTargets.RED_HUB.getPose2d());
     launchPos.addOption("Blue Hub", Launcher.KnownTargets.BLUE_HUB.getPose2d());
@@ -327,7 +327,7 @@ public class RobotContainer {
 
     // right bumper
     Trigger rightBumper = new Trigger(driver_Controller.rightBumper());
-    rightBumper.onTrue(new SetTarget(3000, true));
+    rightBumper.onTrue(new SetTarget(-1, true));
 
     // toggle intake
     rightTrigger.onTrue(new SetStatusIntake(Intake.STATUS.EXTENDED_INTAKING, true));

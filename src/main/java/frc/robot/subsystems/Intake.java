@@ -133,6 +133,16 @@ public class Intake extends SubsystemBase {
 
                     }
                     break;
+                    case HALF_EXTENDED:
+                        if (DriverAssist.isInRange(extendMotor.getEncoder().getPosition(), status.position, posTol)) {
+                        // start intake motor
+                        intakeMotor.getClosedLoopController().setSetpoint(targetStatus.getSpeed(), ControlType.kVelocity);
+                        bIntakeMotorRunning = true;
+                        bCommandComplete = true;
+                        // extendMotor.set(0);
+                    }
+
+                    break;
 
                 default:
                     break;
@@ -259,7 +269,7 @@ public class Intake extends SubsystemBase {
         // intakeConfig.closedLoop.minOutput(-1.0);
 
         // intakeConfig.closedLoopRampRate(0.15);
-        // intakeConfig.voltageCompensation(9.0);
+         intakeConfig.voltageCompensation(9.0);
         //// Down / outVelocity Values
         // intakeConfig.closedLoop.maxMotion.maxAcceleration(5000,
         // rTowerR_CLOSED_LOOP_SLOT_DOWN);
@@ -267,8 +277,8 @@ public class Intake extends SubsystemBase {
         // rTowerR_CLOSED_LOOP_SLOT_DOWN);
         // intakeConfig.closedLoop.maxMotion.allowedClosedLoopError(rTowerRPosTol,
         // rTowerR_CLOSED_LOOP_SLOT_DOWN);
-        intakeConfig.closedLoop.pid(0.005, 0.0, 0.0, ClosedLoopSlot.kSlot0);
-        intakeConfig.closedLoop.feedForward.kV(9.0);
+        intakeConfig.closedLoop.pid(0.0005, 0.0, 0.0, ClosedLoopSlot.kSlot0);
+        intakeConfig.closedLoop.feedForward.kV(0.0018);
 
         // //// Up / in Velocity Values
         // intakeConfig.closedLoop.maxMotion.maxAcceleration(5000,
