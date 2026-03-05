@@ -17,6 +17,7 @@ import frc.robot.commands.*;
 import frc.robot.commands.Climb.SetStatusClimb;
 import frc.robot.commands.DriveTrain.DriveToPos;
 import frc.robot.commands.DriveTrain.SetAutoTurn;
+import frc.robot.commands.DriveTrain.ToggleDriveSpeed;
 import frc.robot.commands.Hopper.SetStatusHopper;
 import frc.robot.commands.Intake.SetStatusIntake;
 import frc.robot.commands.Launcher.ToggleLaunchTower;
@@ -351,6 +352,7 @@ public class RobotContainer {
 
     // sotf speed
     Trigger leftJoyStick = new Trigger(driver_Controller.leftStick());
+    leftJoyStick.onTrue(new ToggleDriveSpeed(0.80));
     // leftJoyStick =.onTrue(new)
 
     // intake full in
