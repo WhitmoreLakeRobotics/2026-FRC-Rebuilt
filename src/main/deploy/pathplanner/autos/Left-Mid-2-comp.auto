@@ -7,7 +7,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "left-middle"
+            "pathName": "Left start-mid"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Intake"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "left mid-middle"
           }
         },
         {
