@@ -1,0 +1,103 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "Intake"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Rstart-back mid"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Start Flywheels"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "middle-right start"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Hopper Start"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 3.0
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "HStop"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "FStop"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Rstart-back mid"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Start Flywheels"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "middle-right start"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Hopper Start"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 3.0
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "HStop"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "FStop"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}

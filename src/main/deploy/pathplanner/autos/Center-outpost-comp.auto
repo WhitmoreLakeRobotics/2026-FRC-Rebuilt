@@ -5,46 +5,21 @@
     "data": {
       "commands": [
         {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "right start-mid"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Intake"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "right mid-middle"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "middle-right start"
-          }
-        },
-        {
           "type": "named",
           "data": {
             "name": "Start Flywheels"
           }
         },
         {
-          "type": "wait",
+          "type": "path",
           "data": {
-            "waitTime": 0.5
+            "pathName": "Center-launch"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Intake"
           }
         },
         {
@@ -60,15 +35,21 @@
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "Rstart-back mid"
+            "name": "HStop"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "FStop"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "middle-right start"
+            "pathName": "center-outpost"
           }
         },
         {
@@ -80,7 +61,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 0.5
+            "waitTime": 2.0
           }
         },
         {
@@ -92,7 +73,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 3.0
+            "waitTime": 5.0
           }
         },
         {

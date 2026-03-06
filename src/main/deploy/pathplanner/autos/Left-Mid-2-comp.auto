@@ -5,34 +5,9 @@
     "data": {
       "commands": [
         {
-          "type": "sequential",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "Left start-mid"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Intake"
-                }
-              }
-            ]
-          }
-        },
-        {
           "type": "path",
           "data": {
-            "pathName": "left mid-middle"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "LMid-start"
+            "pathName": "left-middle"
           }
         },
         {
@@ -42,9 +17,9 @@
           }
         },
         {
-          "type": "wait",
+          "type": "path",
           "data": {
-            "waitTime": 0.5
+            "pathName": "LMid-start"
           }
         },
         {
@@ -72,34 +47,9 @@
           }
         },
         {
-          "type": "sequential",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "Left start-mid"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Intake"
-                }
-              }
-            ]
-          }
-        },
-        {
           "type": "path",
           "data": {
-            "pathName": "left mid-middle"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "LMid-start"
+            "pathName": "left-middle"
           }
         },
         {
@@ -109,9 +59,9 @@
           }
         },
         {
-          "type": "wait",
+          "type": "path",
           "data": {
-            "waitTime": 0.5
+            "pathName": "LMid-start"
           }
         },
         {
