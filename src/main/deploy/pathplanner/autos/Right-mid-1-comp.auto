@@ -13,7 +13,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 2.0
+            "waitTime": 1.0
           }
         },
         {
@@ -25,19 +25,25 @@
         {
           "type": "named",
           "data": {
-            "name": "Turret Left"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
             "name": "Start Flywheels"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "middle-right start"
+            "pathName": "R mid-rotation"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Right-start"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Turret Right"
           }
         },
         {
