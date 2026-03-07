@@ -46,10 +46,10 @@ public class Launcher extends SubsystemBase {
     private boolean bLHF_Enabled = true;
     private boolean bturret_Enabled = true;
     private boolean bShotCalc = false;
-    private double[] pidFlyWheelLH1 = {0.00037, 0.0, 0.0,0.0018};  // 9 tower 2 right               increase p by 10%
-    private double[] pidFlyWheelLH2 = {0.00037, 0.0, 0.0,0.0018};   //10  tower 2 left
-    private double[] pidFlyWheelRH1 = {0.00037, 0.0, 0.0,0.0018};   //11   tower 1 right 
-    private double[] pidFlyWheelRH2 = {0.00037, 0.0, 0.0,0.0018};   //12   tower 1 left
+    private double[] pidFlyWheelLH1 = {0.00039, 0.0, 0.0,0.0018};  // 9 tower 2 right            p was 0.00037
+    private double[] pidFlyWheelLH2 = {0.00039, 0.0, 0.0,0.0018};   //10  tower 2 left
+    private double[] pidFlyWheelRH1 = {0.00039, 0.0, 0.0,0.0018};   //11   tower 1 right 
+    private double[] pidFlyWheelRH2 = {0.00039, 0.0, 0.0,0.0018};   //12   tower 1 left
 
     private boolean bAutoAngle = false;
 
@@ -213,7 +213,12 @@ public class Launcher extends SubsystemBase {
 
 
     public double getRelativeAngleToTarget(){
+        if(RobotContainer.getInstance().m_fmsSystem.getAlliance() == Alliance.Blue) {
        return DriverAssist.getRelativeAngleToTarget(currentPose, targetPose.getTranslation()).getDegrees() +180;
+       }
+       else {
+        return DriverAssist.getRelativeAngleToTarget(currentPose, targetPose.getTranslation()).getDegrees();
+       }
 
     }
 

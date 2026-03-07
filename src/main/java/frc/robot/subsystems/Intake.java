@@ -359,7 +359,7 @@ public class Intake extends SubsystemBase {
         EXTENDED_STOPPED(15.1, 0.0),
         EXTENDING(15.1, 0.0),
         EXTENDED_INTAKING(14.5, 3500),        // used to be 15.5
-        EXTENDED_OUTPUT(14.5, -3000);         // used to be 15.1
+        EXTENDED_OUTPUT(14.5, -4300);         // used to be 15.1
 
         private final double position;
         private final double speed; // setpower , //set velocity
