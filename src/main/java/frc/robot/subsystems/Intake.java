@@ -324,7 +324,7 @@ public class Intake extends SubsystemBase {
         //// IntakeClosedLoopSlotDown);
         // extendConfig.closedLoop.maxMotion.allowedProfileError(0.1,
         //// IntakeClosedLoopSlotDown);
-        extendConfig.closedLoop.pid(0.08, 0.0, 0.0, IntakeClosedLoopSlotDown);
+        extendConfig.closedLoop.pid(0.07, 0.0, 0.0, IntakeClosedLoopSlotDown);      //p used to be 0.08
 
         // //// Up / in Velocity Values
         // extendConfig.closedLoop.maxMotion.maxAcceleration(5000000,
@@ -358,8 +358,8 @@ public class Intake extends SubsystemBase {
         RETRACTING(0.0, 0.0),
         EXTENDED_STOPPED(15.1, 0.0),
         EXTENDING(15.1, 0.0),
-        EXTENDED_INTAKING(15.5, 3500),
-        EXTENDED_OUTPUT(15.1, -3000);
+        EXTENDED_INTAKING(14.5, 3500),        // used to be 15.5
+        EXTENDED_OUTPUT(14.5, -3000);         // used to be 15.1
 
         private final double position;
         private final double speed; // setpower , //set velocity

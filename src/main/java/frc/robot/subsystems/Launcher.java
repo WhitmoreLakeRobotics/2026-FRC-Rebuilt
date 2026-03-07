@@ -46,7 +46,7 @@ public class Launcher extends SubsystemBase {
     private boolean bLHF_Enabled = true;
     private boolean bturret_Enabled = true;
     private boolean bShotCalc = false;
-    private double[] pidFlyWheelLH1 = {0.00037, 0.0, 0.0,0.0018};  // 9 tower 2 right
+    private double[] pidFlyWheelLH1 = {0.00037, 0.0, 0.0,0.0018};  // 9 tower 2 right               increase p by 10%
     private double[] pidFlyWheelLH2 = {0.00037, 0.0, 0.0,0.0018};   //10  tower 2 left
     private double[] pidFlyWheelRH1 = {0.00037, 0.0, 0.0,0.0018};   //11   tower 1 right 
     private double[] pidFlyWheelRH2 = {0.00037, 0.0, 0.0,0.0018};   //12   tower 1 left
