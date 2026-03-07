@@ -57,7 +57,7 @@ public class Constants {
     // create enum to store motor name, subsystem, can id, and SparkMaxConfig object data for easy reference.
     public enum MOTORS {
         TOWER1_MOTOR_RIGHT("Tower 1 Motor Right", "Flywheels", 9),
-        TOWER1_MOTOR_LEFT("Tower 1 Motor Left", "Flywheels", 10),
+        TOWER1_MOTOR_LEFT("Tower 1 Motor Left", "Flywheels", 18),
         TOWER2_MOTOR_RIGHT("Tower 2 Motor Right", "Flywheels", 11),
         TOWER2_MOTOR_LEFT("Tower 2 Motor Left", "Flywheels", 12),
         FEEDER_MOTOR("Feeder Motor", "Hopper", 13),
@@ -65,7 +65,7 @@ public class Constants {
         CLIMBER_MOTOR("Climber Motor", "Climb", 15),
         FUNNEL_MOTOR("Funnel Motor", "Hopper", 16),
         EXTEND_MOTOR("Extend Motor", "Intake", 17),
-        RCLIMB_MOTOR("Right Climb Motor", "Climb", 18),
+        RCLIMB_MOTOR("Right Climb Motor", "Climb", 10),
         LCLIMB_MOTOR("Left Climb Motor", "Climb", 19),
         TURN_MOTOR("Turret Turn Motor", "LTurret", 20);
 

@@ -64,8 +64,8 @@ public class LFlywheels extends SubsystemBase {
         TowerLM = new SparkMax(TowerMotorL_canid, MotorType.kBrushless);
         this.flyWheelRight = flyWheelRight;
         this.flyWheelLeft = flyWheelLeft;
-        configrRTowerMotor();
-        configLTowerMotor();
+       // configrRTowerMotor();
+       // configLTowerMotor();
        
     }
 
@@ -76,7 +76,7 @@ public class LFlywheels extends SubsystemBase {
             case RAMPING:
                 if ((Math.abs(TargetRPM - 
                     TowerRM.getEncoder().getVelocity()) < RPM_Tolerance)
-                 || (Math.abs(TargetRPM - 
+                 && (Math.abs(TargetRPM - 
                     TowerLM.getEncoder().getVelocity()) < RPM_Tolerance)) {
                     if(TargetRPM > 0){
                         status = FlywheelStatus.AT_SPEED;

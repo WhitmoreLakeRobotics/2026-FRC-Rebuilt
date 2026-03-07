@@ -47,15 +47,15 @@ public class Launcher extends SubsystemBase {
     private boolean bturret_Enabled = true;
     private boolean bShotCalc = false;
     private double[] pidFlyWheelLH1 = {0.00039, 0.0, 0.0,0.0018};  // 9 tower 2 right            p was 0.00037
-    private double[] pidFlyWheelLH2 = {0.00039, 0.0, 0.0,0.0018};   //10  tower 2 left
+    private double[] pidFlyWheelLH2 = {0.00039, 0.0, 0.0,0.0029};   //18  tower 2 left
     private double[] pidFlyWheelRH1 = {0.00039, 0.0, 0.0,0.0018};   //11   tower 1 right 
     private double[] pidFlyWheelRH2 = {0.00039, 0.0, 0.0,0.0018};   //12   tower 1 left
 
     private boolean bAutoAngle = false;
 
 
-    private LinearCalcRef short_shot = new LinearCalcRef(3215, 99.6, edu.wpi.first.units.Units.Inches);
-    private LinearCalcRef long_shot = new LinearCalcRef(3700, 126, edu.wpi.first.units.Units.Inches);
+    private LinearCalcRef short_shot = new LinearCalcRef(3265, 99.6, edu.wpi.first.units.Units.Inches);  //was 3215
+    private LinearCalcRef long_shot = new LinearCalcRef(3760, 126, edu.wpi.first.units.Units.Inches);   //3700
     private LinearCalc shotCalc = new LinearCalc(short_shot, long_shot);
     private double targetRPM;
 
@@ -123,8 +123,8 @@ public class Launcher extends SubsystemBase {
             if (bShotCalc)  {
                 calcDistanceToTarget();
             targetRPM = shotCalc.getRPM(distanceToTarget);
-            }
-
+            
+}
             // insert calcuation for shoot on the fly
             //shootOnTheFly();
 
@@ -143,6 +143,7 @@ public class Launcher extends SubsystemBase {
             } else {
                 flywheels_RH.setRPM(0);
             }
+            
 
             if (bturret_Enabled == true) {
                 turret.setAngle(targetAngle);

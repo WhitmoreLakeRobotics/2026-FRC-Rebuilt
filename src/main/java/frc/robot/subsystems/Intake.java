@@ -293,7 +293,7 @@ public class Intake extends SubsystemBase {
         intakeConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder);
 
         // intakeConfig.smartCurrentLimit(40);
-        intakeConfig.smartCurrentLimit(50, 50);
+        intakeConfig.smartCurrentLimit(60, 50);
 
         intakeMotor.configure(intakeConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
@@ -354,12 +354,12 @@ public class Intake extends SubsystemBase {
     // Enumeration of status which should store position and speed values
     public enum STATUS {
         RETRACTED(0.0, 0.0),
-        HALF_EXTENDED(5.5, 1500),
+        HALF_EXTENDED(4.0, 1500),
         RETRACTING(0.0, 0.0),
         EXTENDED_STOPPED(15.1, 0.0),
         EXTENDING(15.1, 0.0),
-        EXTENDED_INTAKING(14.5, 3500),        // used to be 15.5
-        EXTENDED_OUTPUT(14.5, -4300);         // used to be 15.1
+        EXTENDED_INTAKING(15.1, 3500),        // used to be 15.5
+        EXTENDED_OUTPUT(15.1, -4300);         // used to be 15.1
 
         private final double position;
         private final double speed; // setpower , //set velocity

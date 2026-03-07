@@ -113,7 +113,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("Intake", new SetStatusIntake(Intake.STATUS.EXTENDED_INTAKING, m_intake));
     NamedCommands.registerCommand("Climb", new SetStatusClimb(Climb.Status.DEPLOYEDL1));
     NamedCommands.registerCommand("Hopper Start", new SetStatusHopper(Hopper.HopperStatus.FUELING));
-    NamedCommands.registerCommand("Start Flywheels", new SetTarget(3700, false));
+    NamedCommands.registerCommand("Start Flywheels", new SetTarget(-1, true));
     // NamedCommands.registerCommand("All Drive", new
     // SetPowerProfile(PMGT.Profiles.ALLDRIVE));
     // NamedCommands.registerCommand("All Launch", new
@@ -127,7 +127,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("HStop", new SetStatusHopper(HopperStatus.STOP));
     NamedCommands.registerCommand("FStop", new SetTarget(0.0, false));
     NamedCommands.registerCommand("Down Climb", new SetStatusClimb(Climb.Status.L1));
-    NamedCommands.registerCommand("Turret Left", new SetTurret(85.0, true));
+    NamedCommands.registerCommand("Turret Left", new SetTurret(80.0, true));
     NamedCommands.registerCommand("Turret Right", new SetTurret(275.0, true));
 
     // SmartDashboard Buttons
