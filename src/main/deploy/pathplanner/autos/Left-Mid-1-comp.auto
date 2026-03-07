@@ -5,6 +5,18 @@
     "data": {
       "commands": [
         {
+          "type": "path",
+          "data": {
+            "pathName": "left-middle"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "left-middle"
+          }
+        },
+        {
           "type": "named",
           "data": {
             "name": "Start Flywheels"
@@ -13,19 +25,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Center-launch"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Intake"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 4.0
+            "pathName": "LMid-start"
           }
         },
         {
@@ -37,7 +37,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 4.0
+            "waitTime": 3.0
           }
         },
         {

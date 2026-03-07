@@ -127,6 +127,8 @@ public class RobotContainer {
     NamedCommands.registerCommand("HStop", new SetStatusHopper(HopperStatus.STOP));
     NamedCommands.registerCommand("FStop", new SetTarget(0.0, false));
     NamedCommands.registerCommand("Down Climb", new SetStatusClimb(Climb.Status.L1));
+    NamedCommands.registerCommand("Turret Left", new SetTurret(90.0, false));
+    NamedCommands.registerCommand("Turret Right", new SetTurret(270.0, false));
 
     // SmartDashboard Buttons
     SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
@@ -320,12 +322,11 @@ public class RobotContainer {
     B_Drive.onTrue(new SetTarget(0.0, false));
 
     Trigger Y_Trigger = new Trigger(driver_Controller.y());
-    Y_Trigger.onTrue(new SetAutoTurn(true, m_driveTrain));
+   // Y_Trigger.onTrue(new SetAutoTurn(true, m_driveTrain));
 
     // dump hopper
     Trigger leftTrigger = new Trigger(driver_Controller.leftTrigger());
-    leftTrigger
-            .onTrue(new SetStatusIntake(STATUS.EXTENDED_OUTPUT))
+    leftTrigger.onTrue(new SetStatusIntake(STATUS.EXTENDED_OUTPUT))
             .onFalse(new SetStatusIntake(STATUS.EXTENDED_INTAKING));
             //.onTrue(new SetStatusHopper(HopperStatus.REVERSAL))
             // .onFalse(new SetStatusHopper(HopperStatus.INDEXING));

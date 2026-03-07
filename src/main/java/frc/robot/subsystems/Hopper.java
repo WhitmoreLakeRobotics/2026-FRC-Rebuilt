@@ -121,7 +121,7 @@ public HopperStatus getStatus() {
         beltMotorConfig.closedLoop.minOutput(-1.0);
 
         beltMotorConfig.closedLoopRampRate(0.15);
-        beltMotorConfig.voltageCompensation(9.0);
+        //beltMotorConfig.voltageCompensation(9.0);
         //// Down / outVelocity Values
         // beltMotorConfig.closedLoop.maxMotion.maxAcceleration(5000, beltMotor_CLOSED_LOOP_SLOT_DOWN);
         // beltMotorConfig.closedLoop.maxMotion.maxVelocity(5000, beltMotor_CLOSED_LOOP_SLOT_DOWN);
