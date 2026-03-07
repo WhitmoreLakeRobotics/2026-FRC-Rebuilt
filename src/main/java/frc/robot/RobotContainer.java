@@ -127,8 +127,8 @@ public class RobotContainer {
     NamedCommands.registerCommand("HStop", new SetStatusHopper(HopperStatus.STOP));
     NamedCommands.registerCommand("FStop", new SetTarget(0.0, false));
     NamedCommands.registerCommand("Down Climb", new SetStatusClimb(Climb.Status.L1));
-    NamedCommands.registerCommand("Turret Left", new SetTurret(90.0, false));
-    NamedCommands.registerCommand("Turret Right", new SetTurret(270.0, false));
+    NamedCommands.registerCommand("Turret Left", new SetTurret(85.0, true));
+    NamedCommands.registerCommand("Turret Right", new SetTurret(275.0, true));
 
     // SmartDashboard Buttons
     SmartDashboard.putData("Autonomous Command", new AutonomousCommand());

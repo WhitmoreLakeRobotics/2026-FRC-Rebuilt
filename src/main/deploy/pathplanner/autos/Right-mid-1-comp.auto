@@ -19,13 +19,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "left-middle"
+            "pathName": "RStart-mid"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "Turret Right"
+            "name": "Turret Left"
           }
         },
         {
@@ -37,7 +37,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "LMid-start"
+            "pathName": "middle-right start"
           }
         },
         {
