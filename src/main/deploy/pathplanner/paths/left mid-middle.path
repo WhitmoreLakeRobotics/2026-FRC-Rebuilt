@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.613689205219455,
-        "y": 7.278896797153025
+        "x": 7.074090909090909,
+        "y": 7.53967803030303
       },
       "prevControl": null,
       "nextControl": {
-        "x": 9.37819691577699,
-        "y": 7.1820640569395024
+        "x": 8.838598619648444,
+        "y": 7.442845290089507
       },
       "isLocked": false,
       "linkedName": "left mid intake"
@@ -48,7 +48,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 1.3,
-    "rotation": -90.0
+    "rotation": 0.0
   },
   "useDefaultConstraints": true
 }

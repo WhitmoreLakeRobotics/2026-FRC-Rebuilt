@@ -13,7 +13,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 2.0
+            "waitTime": 1.0
           }
         },
         {
@@ -37,7 +37,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "LMid-start"
+            "pathName": "left mid-rotation"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "left-launch"
           }
         },
         {

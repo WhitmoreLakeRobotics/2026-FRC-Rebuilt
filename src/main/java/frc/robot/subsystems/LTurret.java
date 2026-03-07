@@ -150,6 +150,7 @@ public class LTurret extends SubsystemBase {
         absEncConfig.zeroOffset(0.942343); // this needs to be set to the offset where the turret is "zeroed"
         absEncConfig.inverted(false);
         absEncConfig.positionConversionFactor(360);
+        absEncConfig.zeroCentered(true);
 
         turningConfig.absoluteEncoder.apply(absEncConfig);
         turningConfig.closedLoop.feedbackSensor(FeedbackSensor.kAbsoluteEncoder);

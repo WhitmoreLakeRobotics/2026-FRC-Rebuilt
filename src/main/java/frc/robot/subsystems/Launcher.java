@@ -40,6 +40,8 @@ public class Launcher extends SubsystemBase {
     private Pose2d currentPose = new Pose2d(1, 4, new Rotation2d(0));
     private double distanceToTarget;
     private double targetAngle;
+
+    private double autoOffsetRPM = 0;
     private double currentAngle;
     private boolean bActive = true;
     private boolean bRHF_Enabled = true;
@@ -122,7 +124,7 @@ public class Launcher extends SubsystemBase {
 
             if (bShotCalc)  {
                 calcDistanceToTarget();
-            targetRPM = shotCalc.getRPM(distanceToTarget);
+            targetRPM = shotCalc.getRPM(distanceToTarget) + autoOffsetRPM;
             
 }
             // insert calcuation for shoot on the fly
@@ -214,12 +216,18 @@ public class Launcher extends SubsystemBase {
 
 
     public double getRelativeAngleToTarget(){
-        if(RobotContainer.getInstance().m_fmsSystem.getAlliance() == Alliance.Blue) {
+/*         if(RobotContainer.getInstance().m_fmsSystem.getAlliance() == Alliance.Blue) {
        return DriverAssist.getRelativeAngleToTarget(currentPose, targetPose.getTranslation()).getDegrees() +180;
        }
        else {
         return DriverAssist.getRelativeAngleToTarget(currentPose, targetPose.getTranslation()).getDegrees();
-       }
+
+
+       }  */
+        return targetPose.getTranslation().minus(currentPose.getTranslation()).getAngle()
+        .minus(new Rotation2d(currentPose.getRotation().getRadians())).getDegrees();
+
+        //return DriverAssist.getRelativeAngleToTarget(currentPose, targetPose.getTranslation()).getDegrees();
 
     }
 
@@ -231,6 +239,9 @@ public class Launcher extends SubsystemBase {
     public void setTargetRPM (double newRPM, boolean auto) {
         targetRPM = newRPM;
         bShotCalc = auto;
+    }
+    public boolean getBShotCalc(){
+        return bShotCalc;
     }
 
     public void setAngle (double newAngle, boolean Auto) {
@@ -254,11 +265,19 @@ public class Launcher extends SubsystemBase {
 
 
     public void addRPM(){
+        if(bShotCalc){
+            autoOffsetRPM = autoOffsetRPM + 50;
+        }else {
         targetRPM = targetRPM + 50;
+        }
     }
 
     public void minusRPM() {
+        if(bShotCalc){
+            autoOffsetRPM = autoOffsetRPM - 50;
+        }else {
         targetRPM = targetRPM - 50;
+        }
     }
 
     public double getTargetRPM (){
@@ -275,6 +294,14 @@ public class Launcher extends SubsystemBase {
 
     public void setbRHF_Enabled(boolean bRHF_E) {
         this.bRHF_Enabled = bRHF_E;
+    }
+
+    public double getAutoOffSetARPM (){
+        return autoOffsetRPM;
+    }
+
+    public void setAutoOffSetRPM (double newOffset){
+        autoOffsetRPM = autoOffsetRPM + newOffset;
     }
 
     public void setStatus(LauncherStatus newStatus) {

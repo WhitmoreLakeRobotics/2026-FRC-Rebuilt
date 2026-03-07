@@ -56,10 +56,10 @@ public class ToggleDriveSpeed extends Command {
     public void initialize() {
 
             double newspeed = RobotContainer.getInstance().speed_multi;
-            if (newspeed == 0.80) {
-                RobotContainer.getInstance().speed_multi = 0.60;
+            if (newspeed == 0.90) {
+                RobotContainer.getInstance().speed_multi = 0.70;
             } else {
-                RobotContainer.getInstance().speed_multi = 0.80;
+                RobotContainer.getInstance().speed_multi = 0.90;
             }
 
        
