@@ -101,7 +101,7 @@ public class Launcher extends SubsystemBase {
         }
         // update current robot pose from drivetrain odometry
         currentPose = RobotContainer.getInstance().m_driveTrain.getPose();
-        UpdateTurretPose(); //compensating for turret position 
+        //UpdateTurretPose(); //compensating for turret position 
         if (bActive) {
 
             // calculate distance and angle to target
