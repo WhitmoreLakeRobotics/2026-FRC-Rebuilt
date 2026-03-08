@@ -24,6 +24,7 @@ import frc.robot.commands.Launcher.ToggleLaunchTower;
 import frc.robot.commands.PMGT.SetPowerProfile;
 import frc.robot.commands.Turret.EnableTurret;
 import frc.robot.commands.Turret.SetTarget;
+import frc.robot.commands.Launcher.AimOffset;
 import frc.robot.commands.Launcher.SetTurret;
 import frc.robot.commands.Launcher.SpeedChange;
 import frc.robot.subsystems.*;
@@ -113,7 +114,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("Intake", new SetStatusIntake(Intake.STATUS.EXTENDED_INTAKING, m_intake));
     NamedCommands.registerCommand("Climb", new SetStatusClimb(Climb.Status.DEPLOYEDL1));
     NamedCommands.registerCommand("Hopper Start", new SetStatusHopper(Hopper.HopperStatus.FUELING));
-    NamedCommands.registerCommand("Start Flywheels", new SetTarget(4300, false));
+    NamedCommands.registerCommand("Start Flywheels", new SetTarget(-1, true));
     // NamedCommands.registerCommand("All Drive", new
     // SetPowerProfile(PMGT.Profiles.ALLDRIVE));
     // NamedCommands.registerCommand("All Launch", new
@@ -246,6 +247,7 @@ public class RobotContainer {
         (DriverAssist.getDistanceToTarget(m_driveTrain.getPose(), m_launcher.getTargetPose().getTranslation())
             * 3.28084));
         SmartDashboard.putNumber("Auto RPM Offset", m_launcher.getAutoOffSetARPM());
+        SmartDashboard.putNumber("Autio Aim Offset", m_launcher.getautioffsetAim());
 
     // add Hopper data to SmartDashboard
     SmartDashboard.putString("Hopper Status", m_feeder.getStatus().toString());
@@ -374,7 +376,7 @@ public class RobotContainer {
     Back_Button.onTrue(new SetStatusIntake(Intake.STATUS.RETRACTED));
 
     Trigger aRight_Bumper = new Trigger(articulator_Controller.rightBumper());
-    aRight_Bumper.onTrue(new SetStatusIntake(Intake.STATUS.RETRACTED));
+    aRight_Bumper.onTrue(new SpeedChange(0.0));
 
     Trigger aLeft_Bumper = new Trigger(articulator_Controller.leftBumper());
     //aLeft_Bumper.onTrue(new SetStatusIntake(Intake.STATUS.EXTENDED_INTAKING));
@@ -384,6 +386,12 @@ public class RobotContainer {
 
     Trigger aDpad_Down = new Trigger(articulator_Controller.povDown());
     aDpad_Down.onTrue(new SpeedChange(false));
+
+    Trigger aDpad_left = new Trigger((articulator_Controller.povLeft()));
+    aDpad_left.onTrue(new AimOffset(true));
+
+    Trigger aDpad_right = new Trigger(articulator_Controller.povRight());
+    aDpad_right.onTrue(new AimOffset(false));
 
     Trigger artic_a = new Trigger(articulator_Controller.a());
     artic_a.onTrue(new SetTarget(3800, false));

@@ -42,6 +42,7 @@ public class Launcher extends SubsystemBase {
     private double targetAngle;
 
     private double autoOffsetRPM = 0;
+    private double autioffsetAim = 0; 
     private double currentAngle;
     private boolean bActive = true;
     private boolean bRHF_Enabled = true;
@@ -56,8 +57,8 @@ public class Launcher extends SubsystemBase {
     private boolean bAutoAngle = false;
 
 
-    private LinearCalcRef short_shot = new LinearCalcRef(3265, 99.6, edu.wpi.first.units.Units.Inches);  //was 3215
-    private LinearCalcRef long_shot = new LinearCalcRef(3760, 126, edu.wpi.first.units.Units.Inches);   //3700
+    private LinearCalcRef short_shot = new LinearCalcRef(3250, 99.6, edu.wpi.first.units.Units.Inches);  //was 3215
+    private LinearCalcRef long_shot = new LinearCalcRef(4400, 150, edu.wpi.first.units.Units.Inches);   //3700  126
     private LinearCalc shotCalc = new LinearCalc(short_shot, long_shot);
     private double targetRPM;
 
@@ -109,9 +110,9 @@ public class Launcher extends SubsystemBase {
             //calcDistanceToTarget();
            if( bAutoAngle ){
             if (bturret_Enabled){
-           targetAngle = getRelativeAngleToTarget();
+           targetAngle = getRelativeAngleToTarget() + autioffsetAim;
             }else {
-                targetAngle = getAngleToTarget();
+                targetAngle = getAngleToTarget() ;
             }
            }else{
             //set static angle
@@ -271,6 +272,17 @@ public class Launcher extends SubsystemBase {
         targetRPM = targetRPM + 50;
         }
     }
+    public double getautioffsetAim(){
+        return autioffsetAim;
+    }
+
+    public void addAimoffset(){
+        autioffsetAim = autioffsetAim + 2;
+    }
+
+    public void minusAimoffSet(){
+        autioffsetAim = autioffsetAim - 2;
+    }
 
     public void minusRPM() {
         if(bShotCalc){
@@ -278,6 +290,10 @@ public class Launcher extends SubsystemBase {
         }else {
         targetRPM = targetRPM - 50;
         }
+    }
+
+    public void resetRPM(){
+        autoOffsetRPM = 0;
     }
 
     public double getTargetRPM (){
@@ -385,7 +401,7 @@ public class Launcher extends SubsystemBase {
                 new edu.wpi.first.math.geometry.Pose2d(11.600, 4.040, new edu.wpi.first.math.geometry.Rotation2d(0)),
                 "Hub", Alliance.Red),
         BLUE_HUB("Blue Hub",
-                new edu.wpi.first.math.geometry.Pose2d(4.623, 4.040, new edu.wpi.first.math.geometry.Rotation2d(0)),
+                new edu.wpi.first.math.geometry.Pose2d(5.123, 4.040, new edu.wpi.first.math.geometry.Rotation2d(0)),
                 "Hub", Alliance.Blue),
         RED_DEPOT("Red Depot",
                 new edu.wpi.first.math.geometry.Pose2d(15.877, 1.135, new edu.wpi.first.math.geometry.Rotation2d(0)),
@@ -403,7 +419,7 @@ public class Launcher extends SubsystemBase {
                 new edu.wpi.first.math.geometry.Pose2d(2.706, 1.618, new edu.wpi.first.math.geometry.Rotation2d(0)),
                 "Center Target", Alliance.Blue),
         RED_CENTERTARGET("Red Center Target",
-                new edu.wpi.first.math.geometry.Pose2d(13.934, 6.219, new edu.wpi.first.math.geometry.Rotation2d(0)),
+                new edu.wpi.first.math.geometry.Pose2d(14.220, 5.461, new edu.wpi.first.math.geometry.Rotation2d(0)),
                 "Center Target", Alliance.Red);
 
         // Store name, pose2d, and "type" for each target

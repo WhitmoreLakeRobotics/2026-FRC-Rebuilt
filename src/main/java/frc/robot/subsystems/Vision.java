@@ -382,7 +382,7 @@ private double VisionTimeStamp;
      */
     RIGHT_CAM("right",
               new Rotation3d(Math.toRadians(15), Math.toRadians(0), Math.toRadians(-96)),
-              new Translation3d(Units.inchesToMeters(-9.5),
+              new Translation3d(Units.inchesToMeters(-9.5), //was -9.5
                                 Units.inchesToMeters(-12.2),
                                 Units.inchesToMeters(17.75)),
               VecBuilder.fill(4, 4, 8), VecBuilder.fill(0.5, 0.5, 1));
