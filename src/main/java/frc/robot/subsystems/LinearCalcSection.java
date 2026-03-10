@@ -16,7 +16,7 @@ public class LinearCalcSection {
 
 
     private void calcM () {
-        this.m = (long_shot.RPM - short_shot.RPM ) / (long_shot.Distance - short_shot.Distance);
+        this.m = (long_shot.getRPM() - short_shot.getRPM()) / (long_shot.getDistance() - short_shot.getDistance());
     }
 
     private void calcB () {
@@ -24,7 +24,7 @@ public class LinearCalcSection {
         // y - mx = b
         // b = y - mx
 
-        this.b = this.short_shot.RPM - (this.m * this.short_shot.Distance);
+        this.b = this.short_shot.getRPM() - (this.m * this.short_shot.getDistance());
 
     }
 

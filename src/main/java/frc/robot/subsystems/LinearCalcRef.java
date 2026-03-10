@@ -1,39 +1,42 @@
 package frc.robot.subsystems;
-import edu.wpi.first.units.DistanceUnit;
 
+import edu.wpi.first.units.AngleUnit;
+import edu.wpi.first.units.DistanceUnit;
+import edu.wpi.first.units.Unit;
 
 public class LinearCalcRef {
 
-    double RPM;
-    double Distance;
-    DistanceUnit unitOfMeasure;
+    private final double rpm;
+    private final double distance;
+    // Removed <?> because Unit is not a generic type in this version
+    private final Unit unitOfMeasure;
 
-    public LinearCalcRef (double rpm, double distance,  DistanceUnit units) {
-        this.RPM = rpm;
-        this.Distance = distance;
-        this.unitOfMeasure = units;
-
-    }
-
-    public LinearCalcRef (int rpm, int distance,  DistanceUnit units) {
-        this.RPM = rpm;
-        this.Distance = distance;
+    public LinearCalcRef(double rpm, double distance, DistanceUnit units) {
+        this.rpm = rpm;
+        this.distance = distance;
         this.unitOfMeasure = units;
     }
 
-
-    public double getRPM () {
-        return RPM;
+    public LinearCalcRef(double rpm, double distance, AngleUnit units) {
+        this.rpm = rpm;
+        this.distance = distance;
+        this.unitOfMeasure = units;
     }
 
-    public  double getDistance() {
-        return Distance;
+    public double getRPM() {
+        return rpm;
     }
 
-    public DistanceUnit getUnitofMeasure() {
-        return unitOfMeasure;
+    public double getDistance() {
+        // Ensure this matches the field name 'distance' exactly
+        return distance;
     }
 
-    
-
+    /**
+     * Casts the unit to the specific type expected by the caller.
+     */
+    @SuppressWarnings("unchecked")
+    public <U extends Unit> U getUnitOfMeasure() {
+        return (U) unitOfMeasure;
+    }
 }

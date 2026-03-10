@@ -89,11 +89,11 @@ public class Launcher extends SubsystemBase {
         shotCalc.Calculate();
 
         shotCalc.setMinimumRPM(1200);
-        turretCalc.add(new LinearCalcRef(0, 0, edu.wpi.first.units.Units.Centimeters));
-        turretCalc.add(new LinearCalcRef(0, 90, edu.wpi.first.units.Units.Centimeters));
-        turretCalc.add(new LinearCalcRef(0, 180, edu.wpi.first.units.Units.Centimeters));
-        turretCalc.add(new LinearCalcRef(0, 270, edu.wpi.first.units.Units.Centimeters));
-        turretCalc.add(new LinearCalcRef(0, 360, edu.wpi.first.units.Units.Centimeters));
+        turretCalc.add(new LinearCalcRef(0, 0, edu.wpi.first.units.Units.Degrees));
+        turretCalc.add(new LinearCalcRef(0, 90, edu.wpi.first.units.Units.Degrees));
+        turretCalc.add(new LinearCalcRef(0, 180, edu.wpi.first.units.Units.Degrees));
+        turretCalc.add(new LinearCalcRef(0, 270, edu.wpi.first.units.Units.Degrees));
+        turretCalc.add(new LinearCalcRef(0, 360, edu.wpi.first.units.Units.Degrees));
 
         turretCalc.Calculate();
     }
@@ -252,8 +252,8 @@ public class Launcher extends SubsystemBase {
          * else {
          * return DriverAssist.getRelativeAngleToTarget(currentPose,
          * targetPose.getTranslation()).getDegrees();
-         * 
-         * 
+         *
+         *
          * }
          */
         return targetPose.getTranslation().minus(currentPose.getTranslation()).getAngle()

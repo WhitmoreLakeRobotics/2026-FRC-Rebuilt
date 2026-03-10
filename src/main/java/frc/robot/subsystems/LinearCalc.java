@@ -11,7 +11,12 @@ public class LinearCalc {
     // Create the ArrayList for the storage of data.
     ArrayList<LinearCalcRef> references = new ArrayList<>();
     ArrayList<LinearCalcSection> sections = new ArrayList<>();
-    double minimumRPM = 0.0;
+    private double minimumRPM = 0.0;
+    private boolean minRPMSet = false;
+    private double maximumRPM = 1000000;
+    private boolean maxRPMSet = false;
+
+
     LinearCalc() {
 
     }
@@ -38,8 +43,22 @@ public class LinearCalc {
 
     public void setMinimumRPM(double minRPM) {
         minimumRPM = minRPM;
-
+        minRPMSet = true;
     }
+
+    public void unsetMinimumRPM(){
+        minRPMSet = false;
+    }
+
+    public void setMaximumRPM(double maxRPM){
+        maximumRPM = maxRPM;
+        maxRPMSet = true;
+    }
+
+    public void unsetMaximumRPM() {
+        maxRPMSet = false;
+    }
+
     public int getRefCount() {
         return references.size();
     }
@@ -88,9 +107,20 @@ public class LinearCalc {
 
         }
 
-        if (rpm < 0.0) {
-            rpm = minimumRPM;
+        // If the value has been set then clamp the minimum value
+        if (minRPMSet) {
+            if (rpm < minimumRPM) {
+                rpm = minimumRPM;
+            }
         }
+
+        // if the value has been set then clamp the maximum value
+        if (maxRPMSet) {
+            if (rpm > maximumRPM){
+                rpm = maximumRPM;
+            }
+        }
+
         return rpm;
 
     }
@@ -164,13 +194,21 @@ public class LinearCalc {
 
         // Not in order but we figure it out... but good programming is to put it in
         // order
-        LC.add(new LinearCalcRef(2000, 8, Feet));
-        LC.add(new LinearCalcRef( 1400, 4, Feet));
-        LC.add(new LinearCalcRef(4700, 10.9, Feet));
-        LC.add(new LinearCalcRef(2250, 5.2, Feet));
-        LC.add(new LinearCalcRef(8000, 6.4, Feet));
+        LC.add(new LinearCalcRef(0, 0, Degree));
+        LC.add(new LinearCalcRef(5, 45, Degree));
+        LC.add(new LinearCalcRef(15, 90, Degree));
+        LC.add(new LinearCalcRef(35, 135, Degree));
+        LC.add(new LinearCalcRef(70, 180, Degree));
+        LC.add(new LinearCalcRef(35, 225, Degree));
+        LC.add(new LinearCalcRef(15, 270, Degree));
+        LC.add(new LinearCalcRef(5, 315, Degree));
+        LC.add(new LinearCalcRef(0, 360, Degree));
 
-        LC.setMinimumRPM(50);
+        LC.setMinimumRPM(0);
+        //LC.setMaximumRPM(5000);
+        //LC.unsetMaximumRPM();
+        // LC.unsetMinimumRPM();
+
         // You must call calculate to find the segments correctly and then they will be
         // used to
         // do the calculations
@@ -185,8 +223,10 @@ public class LinearCalc {
         System.out.printf("\n\n\n");
 
         for (int i = (int) 0; i <= (int) (LC.getLongDistance() + 1); i++) {
-            for (int j = (int) 0; j < 10; j++)
-                System.out.printf(" %4.2f     : %.2f%n", (double) (i + (j * .1)), LC.getRPM((double) (i + (j * .1))));
+            // for (int j = (int) 0; j < 10; j++)
+                //System.out.printf(" %4.2f     : %.2f%n", (double) (i + (j * .1)), LC.getRPM((double) (i + (j * .1))));
+                System.out.printf(" %4.2f     : %.2f%n", (double) (i + (0 * .1)), LC.getRPM((double) (i + (0 * .1))));
+            //}
         }
 
     }
