@@ -123,8 +123,7 @@ public class LinearCalc {
     public static void main(String... args) {
 
         /*
-         * https://docs.google.com/spreadsheets/d/1zKXJPH7-
-         * HwzlicH3zPTKLC_NpEUBZXdVKZMOL9hayEg/edit?usp=sharing
+         * https://docs.google.com/spreadsheets/d/1zKXJPH7-HwzlicH3zPTKLC_NpEUBZXdVKZMOL9hayEg/edit?usp=sharing
          * example run
          * cd ~/workspace/2026-FRC-Rebuilt/build/libs$
          * java -cp 2026-FRC-Rebuilt.jar frc.robot.subsystems.LinearCalc
