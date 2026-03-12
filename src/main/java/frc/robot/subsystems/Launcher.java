@@ -124,13 +124,13 @@ public class Launcher extends SubsystemBase {
                     targetAngle = getRelativeAngleToTarget() + autioffsetAim;
                 } else {
                     targetAngle = getAngleToTarget();
+                    RobotContainer.getInstance().m_driveTrain.THeading = targetAngle;
                 }
             } else {
                 // set static angle
 
             }
 
-            RobotContainer.getInstance().m_driveTrain.THeading = getAngleToTarget();
             // set rpm based on distance to target
 
             if (bShotCalc) {
@@ -400,8 +400,13 @@ public class Launcher extends SubsystemBase {
 
         // 3. CALCULATE IDEAL SHOT (Stationary)
         // Note: This returns HORIZONTAL velocity component
-        double idealHorizontalSpeed = targetRPM; // Placeholder: Convert RPM to m/s based on your shooter
-                                                 // characteristics
+        // Gear ratio should include ratio of motor to gears to wheels 
+        // Times wheel diameter times pi.
+        double wheelDiameter = 0.0635; 
+        double gearRatio = 1;
+        double totalRatio = gearRatio * wheelDiameter * Math.PI;
+         // Placeholder: Convert RPM to m/s based on your shooter characteristics
+        double idealHorizontalSpeed = (targetRPM * totalRatio) * Math.sin(targetAngle);
 
         // 4. VECTOR SUBTRACTION
         Translation2d robotVelVec = new Translation2d(vxMPS, vyMPS);
