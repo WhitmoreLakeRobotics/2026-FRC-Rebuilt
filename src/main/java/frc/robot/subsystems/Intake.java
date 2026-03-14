@@ -269,7 +269,7 @@ public class Intake extends SubsystemBase {
         // intakeConfig.closedLoop.minOutput(-1.0);
 
         // intakeConfig.closedLoopRampRate(0.15);
-         intakeConfig.voltageCompensation(9.0);
+         intakeConfig.voltageCompensation(10.0);
         //// Down / outVelocity Values
         // intakeConfig.closedLoop.maxMotion.maxAcceleration(5000,
         // rTowerR_CLOSED_LOOP_SLOT_DOWN);
@@ -354,11 +354,11 @@ public class Intake extends SubsystemBase {
     // Enumeration of status which should store position and speed values
     public enum STATUS {
         RETRACTED(-1.0, 0.0),
-        HALF_EXTENDED(4.0, 1500),
+        HALF_EXTENDED(4.0, 4000),
         RETRACTING(0.0, 0.0),
         EXTENDED_STOPPED(15.1, 0.0),
         EXTENDING(15.1, 0.0),
-        EXTENDED_INTAKING(15.1, 3700),        // used to be 15.5
+        EXTENDED_INTAKING(15.1, 4257),        // used to be 15.5
         EXTENDED_OUTPUT(15.1, -4300);         // used to be 15.1
 
         private final double position;
