@@ -2,7 +2,7 @@ package frc.robot.subsystems;
 
 public class LTurretCalc {
 
-    double baseRPM = 0.0;
+    double baseRPM = 866;
 
     LTurretCalc() {
 
@@ -13,7 +13,7 @@ public class LTurretCalc {
     }
 
     public double getCosRPM(double degrees) {
-        return ((1 - Math.cos(Math.toRadians(degrees)))/2) * baseRPM;
+        return ((1- Math.cos(Math.toRadians(degrees)))/2) * baseRPM;
     }
 
 

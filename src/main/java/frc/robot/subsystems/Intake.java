@@ -354,12 +354,12 @@ public class Intake extends SubsystemBase {
     // Enumeration of status which should store position and speed values
     public enum STATUS {
         RETRACTED(-1.0, 0.0),
-        HALF_EXTENDED(4.0, 4000),
+        HALF_EXTENDED(4.0, 3000),
         RETRACTING(0.0, 0.0),
         EXTENDED_STOPPED(15.1, 0.0),
         EXTENDING(15.1, 0.0),
         EXTENDED_INTAKING(15.1, 4257),        // used to be 15.5
-        EXTENDED_OUTPUT(15.1, -4300);         // used to be 15.1
+        EXTENDED_OUTPUT(15.1, -4257);         // used to be 15.1
 
         private final double position;
         private final double speed; // setpower , //set velocity

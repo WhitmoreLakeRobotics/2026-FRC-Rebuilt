@@ -48,17 +48,18 @@ public class Launcher extends SubsystemBase {
     private boolean bLHF_Enabled = true;
     private boolean bturret_Enabled = true;
     private boolean bShotCalc = false;
-    private double[] pidFlyWheelLH1 = { 0.00039, 0.0, 0.0, 0.0018 }; // 9 tower 2 right p was 0.00037
-    private double[] pidFlyWheelLH2 = { 0.00039, 0.0, 0.0, 0.0029 }; // 18 tower 2 left
-    private double[] pidFlyWheelRH1 = { 0.00039, 0.0, 0.0, 0.0018 }; // 11 tower 1 right
-    private double[] pidFlyWheelRH2 = { 0.00039, 0.0, 0.0, 0.0018 }; // 12 tower 1 left
+    private double[] pidFlyWheelLH1 = { 0.00040, 0.0, 0.00000001, 0.00182 }; // 9 tower 2 right p was 0.00037
+    private double[] pidFlyWheelLH2 = { 0.00040, 0.0, 0.00000001, 0.001821 }; // 18 tower 2 left
+    private double[] pidFlyWheelRH1 = { 0.00040, 0.0, 0.00000001, 0.001822 }; // 11 tower 1 right
+    private double[] pidFlyWheelRH2 = { 0.00040, 0.0, 0.00000001, 0.001823 }; // 12 tower 1 left
 
     private boolean bAutoAngle = false;
 
     private LinearCalc shotCalc = new LinearCalc();
-    private LinearCalc turretCalc = new LinearCalc();
+    private LTurretCalc turretCalc = new LTurretCalc();
 
     private double targetRPM;
+    private double FieldDistanceOffSet = -5.0;  // in inches
 
     public static final double TURRET_OFFSET_X = -0.2; // 20 cm back from robot center
     public static final double TURRET_OFFSET_Y = 0.0; // centered left-right
@@ -84,18 +85,22 @@ public class Launcher extends SubsystemBase {
                 CanIds.MOTORS.TOWER2_MOTOR_LEFT.canId, pidFlyWheelRH1, pidFlyWheelRH2);
         turret = new LTurret();
 
-        shotCalc.add(new LinearCalcRef(3250, 99.6, edu.wpi.first.units.Units.Inches));
-        shotCalc.add(new LinearCalcRef(4400, 150, edu.wpi.first.units.Units.Inches));
+        //shotCalc.add(new LinearCalcRef(3337, 131, edu.wpi.first.units.Units.Inches));  unnecessary point 
+        shotCalc.add(new LinearCalcRef(3650, 145, edu.wpi.first.units.Units.Inches));
+        shotCalc.add(new LinearCalcRef(3520, 132, edu.wpi.first.units.Units.Inches));
+        shotCalc.add(new LinearCalcRef(3815, 156, edu.wpi.first.units.Units.Inches));
+        shotCalc.add(new LinearCalcRef(4056, 167, edu.wpi.first.units.Units.Inches));
         shotCalc.Calculate();
 
-        shotCalc.setMinimumRPM(1200);
-        turretCalc.add(new LinearCalcRef(0, 0, edu.wpi.first.units.Units.Degrees));
-        turretCalc.add(new LinearCalcRef(0, 90, edu.wpi.first.units.Units.Degrees));
-        turretCalc.add(new LinearCalcRef(0, 180, edu.wpi.first.units.Units.Degrees));
-        turretCalc.add(new LinearCalcRef(0, 270, edu.wpi.first.units.Units.Degrees));
-        turretCalc.add(new LinearCalcRef(0, 360, edu.wpi.first.units.Units.Degrees));
+        shotCalc.setMinimumRPM(0);
+       // turretCalc.add(new LinearCalcRef(0, 0, edu.wpi.first.units.Units.Degrees));
+       // turretCalc.add(new LinearCalcRef(0, 90, edu.wpi.first.units.Units.Degrees));
+       // turretCalc.add(new LinearCalcRef(0, 180, edu.wpi.first.units.Units.Degrees));
+       // turretCalc.add(new LinearCalcRef(0, 270, edu.wpi.first.units.Units.Degrees));
+       // turretCalc.add(new LinearCalcRef(0, 360, edu.wpi.first.units.Units.Degrees));
 
-        turretCalc.Calculate();
+        //turretCalc.Calculate();
+        turretCalc.setBaseRPM(866);  //was 866
     }
 
     @Override
@@ -113,7 +118,7 @@ public class Launcher extends SubsystemBase {
         }
         // update current robot pose from drivetrain odometry
         currentPose = RobotContainer.getInstance().m_driveTrain.getPose();
-        // UpdateTurretPose(); //compensating for turret position
+         UpdateTurretPose(); //compensating for turret position
         if (bActive) {
 
             // calculate distance and angle to target
@@ -135,7 +140,7 @@ public class Launcher extends SubsystemBase {
 
             if (bShotCalc) {
                 calcDistanceToTarget();
-                targetRPM = shotCalc.getRPM(distanceToTarget) + turretCalc.getRPM(distanceToTarget) + autoOffsetRPM;
+                targetRPM = shotCalc.getRPM(distanceToTarget) + turretCalc.getCosRPM(targetAngle) + autoOffsetRPM;
 
             }
             // insert calcuation for shoot on the fly
@@ -210,9 +215,12 @@ public class Launcher extends SubsystemBase {
     }
 
     private void calcDistanceToTarget() {
-        distanceToTarget = DriverAssist.getDistanceToTarget(currentPose, targetPose.getTranslation()) * 39.37; // meters
+        distanceToTarget = (DriverAssist.getDistanceToTarget(currentPose, targetPose.getTranslation()) * 39.37) + FieldDistanceOffSet; // meters
                                                                                                                // to
                                                                                                                // inches
+    }
+    public double getDistanceToTarget(){
+        return distanceToTarget;
     }
 
     public double getAngleToTarget() {
@@ -298,7 +306,7 @@ public class Launcher extends SubsystemBase {
 
     public void addRPM() {
         if (bShotCalc) {
-            autoOffsetRPM = autoOffsetRPM + 50;
+            autoOffsetRPM = autoOffsetRPM + 25;
         } else {
             targetRPM = targetRPM + 50;
         }
@@ -318,7 +326,7 @@ public class Launcher extends SubsystemBase {
 
     public void minusRPM() {
         if (bShotCalc) {
-            autoOffsetRPM = autoOffsetRPM - 50;
+            autoOffsetRPM = autoOffsetRPM - 25;
         } else {
             targetRPM = targetRPM - 50;
         }
@@ -402,8 +410,8 @@ public class Launcher extends SubsystemBase {
         // Note: This returns HORIZONTAL velocity component
         // Gear ratio should include ratio of motor to gears to wheels 
         // Times wheel diameter times pi.
-        double wheelDiameter = 0.0635; 
-        double gearRatio = 1;
+        double wheelDiameter = 0.0635;  //in metersd 
+        double gearRatio = 1.5;
         double totalRatio = gearRatio * wheelDiameter * Math.PI;
          // Placeholder: Convert RPM to m/s based on your shooter characteristics
         double idealHorizontalSpeed = (targetRPM * totalRatio) * Math.sin(targetAngle);

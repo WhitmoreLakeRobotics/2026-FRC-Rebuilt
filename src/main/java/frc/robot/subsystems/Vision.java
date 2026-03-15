@@ -381,7 +381,7 @@ private double VisionTimeStamp;
      * Right Camera
      */
     RIGHT_CAM("right",
-              new Rotation3d(Math.toRadians(15), Math.toRadians(0), Math.toRadians(-96)),
+              new Rotation3d(Math.toRadians(15), Math.toRadians(0), Math.toRadians(-93)),
               new Translation3d(Units.inchesToMeters(-9.5), //was -9.5
                                 Units.inchesToMeters(-12.2),
                                 Units.inchesToMeters(17.75)),
