@@ -11,15 +11,15 @@
           }
         },
         {
-          "type": "wait",
+          "type": "path",
           "data": {
-            "waitTime": 1.0
+            "pathName": "Rstart-back mid"
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "left-middle"
+            "name": "Turret Left"
           }
         },
         {
@@ -31,13 +31,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "left mid-rotation"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "left-launch"
+            "pathName": "middle-right start"
           }
         },
         {
@@ -49,19 +43,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 0.5
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Intake Half"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 4.0
+            "waitTime": 3.0
           }
         },
         {
@@ -79,13 +61,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "left-middle"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "left mid-rotation"
+            "pathName": "Rstart-back mid"
           }
         },
         {
@@ -97,7 +73,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "left-launch"
+            "pathName": "middle-right start"
           }
         },
         {
@@ -109,19 +85,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 0.5
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Intake Half"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 4.0
+            "waitTime": 3.0
           }
         },
         {
