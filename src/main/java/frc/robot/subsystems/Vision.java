@@ -58,6 +58,8 @@ StructPublisher<Pose2d> estimatedCaemraPose = NetworkTableInstance.getDefault().
 public int latestID = -1;
 private double VisionTimeStamp;
 
+public boolean hasVision = false;
+
   /**
    * April Tag Field Layout of the year.
    */
@@ -154,6 +156,7 @@ private double VisionTimeStamp;
       try{
       if (poseEst.isPresent()) {
         var pose = poseEst.get();
+        hasVision = true;
         //System.out.println("timestamp " + pose.timestampSeconds);
 
         /*added custom code 3668 here */
@@ -175,6 +178,8 @@ private double VisionTimeStamp;
        swerveDrive.addVisionMeasurement(pose.estimatedPose.toPose2d(),
             pose.timestampSeconds,
             camera.curStdDevs);
+      } else {
+        hasVision = false;
       }
     
       } catch (Exception e) {
@@ -670,14 +675,14 @@ public double getVisionTimestamp(){
 }
 
 
-public void UpdateTargetList(){
-  //var result = Cameras.RIGHT_CAM.getLatestResult();
-  PhotonPipelineResult result = Cameras.RIGHT_CAM.getLatestResult().get();
-  if(result!=null && result.hasTargets()) {
-    latestID = result.getBestTarget().getFiducialId();
-  }
-  else {
-    latestID = -1;
-  }
-}
+// public void UpdateTargetList(){
+//   //var result = Cameras.RIGHT_CAM.getLatestResult();
+//   PhotonPipelineResult result = Cameras.RIGHT_CAM.getLatestResult().get();
+//   if(result!=null && result.hasTargets()) {
+//     latestID = result.getBestTarget().getFiducialId();
+//   }
+//   else {
+//     latestID = -1;
+//   }
+// }
 }
