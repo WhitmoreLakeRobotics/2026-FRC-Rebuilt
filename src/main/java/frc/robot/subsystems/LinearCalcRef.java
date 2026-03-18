@@ -1,5 +1,7 @@
 package frc.robot.subsystems;
 
+import java.text.Format;
+
 import edu.wpi.first.units.AngleUnit;
 import edu.wpi.first.units.DistanceUnit;
 import edu.wpi.first.units.Unit;
@@ -32,6 +34,9 @@ public class LinearCalcRef {
         return distance;
     }
 
+    public String toString(){
+        return ("Distance : " + this.distance + " " + "RPM : " + this.rpm +"\n");
+    }
     /**
      * Casts the unit to the specific type expected by the caller.
      */
