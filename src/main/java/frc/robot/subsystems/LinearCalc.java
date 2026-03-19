@@ -141,6 +141,33 @@ public class LinearCalc {
 
     }
 
+    public boolean isReferenceDist(double refDist){
+
+        boolean retValue = false;
+        for (int i = 0; i < references.size(); i++) {
+            if (refDist == references.get(i).getDistance()) {
+                retValue = true;
+                break;
+            }
+        }
+        return retValue;
+
+    }
+
+    public boolean isReferenceRPM(double refRPM){
+
+        boolean retValue = false;
+        for (int i = 0; i < references.size(); i++) {
+            if (refRPM == references.get(i).getDistance()) {
+                retValue = true;
+                break;
+            }
+        }
+        return retValue;
+
+    }
+
+
     public void printSections() {
 
         System.out.printf("Number of sections  %d\n", sections.size());
@@ -151,6 +178,7 @@ public class LinearCalc {
                     sections.get(i).getLongRPM());
         }
     }
+
 
     public double getMikeRPM(double distanceInches, double turretAngleDegrees) {
 
@@ -244,7 +272,7 @@ public class LinearCalc {
          */
 
         LinearCalc shotCalc = new LinearCalc();
-        LTurretCalc turretCalc = new LTurretCalc();
+        LinearCalc turretCalc = new LinearCalc();
 
         // Not in order but we figure it out... but good programming is to put it in
         // order
@@ -258,13 +286,23 @@ public class LinearCalc {
 
 
 
-        shotCalc.add(new LinearCalcRef(3520, 135, edu.wpi.first.units.Units.Inches));
+        shotCalc.add(new LinearCalcRef(3470, 115, edu.wpi.first.units.Units.Inches));
+        shotCalc.add(new LinearCalcRef(3520, 132, edu.wpi.first.units.Units.Inches));
         shotCalc.add(new LinearCalcRef(3650, 145, edu.wpi.first.units.Units.Inches));
         shotCalc.add(new LinearCalcRef(3815, 156, edu.wpi.first.units.Units.Inches));
         shotCalc.add(new LinearCalcRef(4056, 167, edu.wpi.first.units.Units.Inches));
         shotCalc.Calculate();
 
-        turretCalc.baseRPM = 822;
+        turretCalc.add(new LinearCalcRef(0, 0, edu.wpi.first.units.Units.Degrees));
+        turretCalc.add(new LinearCalcRef(250, 45, edu.wpi.first.units.Units.Degrees));
+        turretCalc.add(new LinearCalcRef(779, 100, edu.wpi.first.units.Units.Degrees));
+        turretCalc.add(new LinearCalcRef(812, 135, edu.wpi.first.units.Units.Degrees));
+        turretCalc.add(new LinearCalcRef(846, 180, edu.wpi.first.units.Units.Degrees));
+        turretCalc.add(new LinearCalcRef(812, 225, edu.wpi.first.units.Units.Degrees));
+        turretCalc.add(new LinearCalcRef(779, 260, edu.wpi.first.units.Units.Degrees));
+        turretCalc.add(new LinearCalcRef(250, 315, edu.wpi.first.units.Units.Degrees));
+        turretCalc.add(new LinearCalcRef(0, 360, edu.wpi.first.units.Units.Degrees));
+        turretCalc.Calculate();
 
         shotCalc.setMinimumRPM(1200);
         // LC.setMaximumRPM(5000);
@@ -281,16 +319,62 @@ public class LinearCalc {
         shotCalc.printSections();
         System.out.printf("\n\n\n");
 
-        for (int i = (int) 96; i <= (int) (shotCalc.getLongDistance() + 12); i++) {
-            // for (int j = (int) 0; j < 10; j++)
-            // System.out.printf(" %4.2f : %.2f%n", (double) (i + (j * .1)),
-            // LC.getRPM((double) (i + (j * .1))));
-            System.out.printf(" %4.2f : %.2f : %.2f :  %.2f : %.2f%n", (double) i, shotCalc.getRPM(i),
-                    (shotCalc.getRPM(i) + turretCalc.getSinSinRPM(180)),
-                    //shotCalc.getVelRPM(i),
-                    (shotCalc.getMikeRPM(i,0)),
-                    (shotCalc.getMikeRPM(i,180)));
-                    //(shotCalc.getPollyRPM(i)));
+
+        System.out.printf("    Dist :");
+        System.out.printf(" 0 DEG  :");
+        System.out.printf(" 45 DEG :");
+        System.out.printf(" 90 DEG :");
+        System.out.printf(" 135 DEG:");
+        System.out.printf(" 180 DEG:");
+        System.out.printf(" 270 DEG:");
+        System.out.printf("   REF");
+        System.out.printf("\n");
+
+
+
+        for (int i = (int) 60; i <= (int) (shotCalc.getLongDistance() + 10); i++) {
+            System.out.printf(" %6.2f ", (double) i);
+            System.out.printf(" : %.1f", shotCalc.getRPM(i) + turretCalc.getRPM(0));
+            System.out.printf(" : %.1f", shotCalc.getRPM(i) + turretCalc.getRPM(45));
+            System.out.printf(" : %.1f", shotCalc.getRPM(i) + turretCalc.getRPM(90));
+            System.out.printf(" : %.1f", shotCalc.getRPM(i) + turretCalc.getRPM(135));
+            System.out.printf(" : %.1f", shotCalc.getRPM(i) + turretCalc.getRPM(180));
+            System.out.printf(" : %.1f", shotCalc.getRPM(i) + turretCalc.getRPM(270));
+            if (shotCalc.isReferenceDist(i)) {
+                System.out.printf(" : %.1f", shotCalc.getRPM(i) + turretCalc.getRPM(0));
+            }
+            System.out.printf("\n");
         }
+
+        // Calculating the Turret Curve
+        System.out.println("\n\n");
+        System.out.println("Turret Curve:\n\n");
+        System.out.println("\tAssuming that all angles over 90 are the same as 180 degrees.\n\n\n");
+        System.out.println("Turret Angle : Added RPM");
+
+        System.out.printf("\n\n\n");
+        turretCalc.printReferences();
+        System.out.printf("\n\n\n");
+        turretCalc.printSections();
+        System.out.printf("\n\n\n");
+
+
+        System.out.printf(" DEG  :");
+        System.out.printf(" RPM+ :");
+        System.out.printf(" Ref");
+        System.out.printf("\n");
+
+
+
+        for (int i = (int) 0; i <= 360; i+=5) {
+            System.out.printf(" %4.2f ", (double) i);
+            System.out.printf(" : %.1f", turretCalc.getRPM(i));
+            if (turretCalc.isReferenceDist(i)) {
+                System.out.printf(" : %.1f", turretCalc.getRPM(i) + turretCalc.getRPM(0));
+            }
+            System.out.printf("\n");
+        }
+
+
     }
 }
