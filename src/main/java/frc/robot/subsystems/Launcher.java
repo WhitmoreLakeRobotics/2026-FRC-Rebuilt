@@ -89,8 +89,9 @@ public class Launcher extends SubsystemBase {
         turret = new LTurret();
 
         //shotCalc.add(new LinearCalcRef(3337, 131, edu.wpi.first.units.Units.Inches));  unnecessary point 
-        shotCalc.add(new LinearCalcRef(3650, 145, edu.wpi.first.units.Units.Inches));
+        shotCalc.add(new LinearCalcRef(3470, 114.5, edu.wpi.first.units.Units.Inches));
         shotCalc.add(new LinearCalcRef(3520, 132, edu.wpi.first.units.Units.Inches));
+        shotCalc.add(new LinearCalcRef(3650, 145, edu.wpi.first.units.Units.Inches));
         shotCalc.add(new LinearCalcRef(3815, 156, edu.wpi.first.units.Units.Inches));
         shotCalc.add(new LinearCalcRef(4056, 167, edu.wpi.first.units.Units.Inches));
         shotCalc.Calculate();
@@ -103,7 +104,7 @@ public class Launcher extends SubsystemBase {
        // turretCalc.add(new LinearCalcRef(0, 360, edu.wpi.first.units.Units.Degrees));
 
         //turretCalc.Calculate();
-        turretCalc.setBaseRPM(866);  //was 866
+        turretCalc.setBaseRPM(826);  //was 866
     }
 
     @Override
@@ -143,11 +144,11 @@ public class Launcher extends SubsystemBase {
 
             if (bShotCalc) {
                 calcDistanceToTarget();
-                //targetRPM = shotCalc.getRPM(distanceToTarget) + turretCalc.getCosRPM(targetAngle) + autoOffsetRPM;
-                targetRPM = getTargetRPM(distanceToTarget, targetAngle) + autoOffsetRPM; // testing new method
+                targetRPM = shotCalc.getRPM(distanceToTarget) + turretCalc.getSinSinRPM(targetAngle) + autoOffsetRPM;
+                // targetRPM = getTargetRPM(distanceToTarget, targetAngle) + autoOffsetRPM; // testing new method
             }
             // insert calcuation for shoot on the fly
-            // shootOnTheFly();
+            //shootOnTheFly();
 
             // once we define turret zones we may have to adujust RPM based on angle to
             // target
@@ -223,7 +224,7 @@ public class Launcher extends SubsystemBase {
                                                                                                                // inches
     }
     public double getDistanceToTarget(){
-        return distanceToTarget;
+        return (DriverAssist.getDistanceToTarget(currentPose, targetPose.getTranslation()) * 39.37) + FieldDistanceOffSet;
     }
 
     public double getAngleToTarget() {
@@ -441,8 +442,8 @@ public class Launcher extends SubsystemBase {
         targetAngle = shotVec.getAngle().getDegrees();
         //targetRPM = shotVec.getNorm(); // convert back to RPM based on your shooter characteristics, still need to verify
 
-        //targetRPM = shotCalc.getRPM((shotVec.getNorm() * 39.37)) + turretCalc.getCosRPM(targetAngle) + autoOffsetRPM;
-        targetRPM = getTargetRPM((shotVec.getNorm() * 39.37), targetAngle) + autoOffsetRPM; 
+        targetRPM = shotCalc.getRPM((shotVec.getNorm() * 39.37)) + turretCalc.getSinSinRPM(targetAngle) + autoOffsetRPM;
+        // targetRPM = getTargetRPM((shotVec.getNorm() * 39.37), targetAngle) + autoOffsetRPM; 
 
 
         // 6. SOLVE FOR NEW PITCH/RPM

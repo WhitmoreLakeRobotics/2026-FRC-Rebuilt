@@ -45,9 +45,12 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import java.io.File;
 import java.io.ObjectInputFilter.Status;
+import java.util.Optional;
 
 import edu.wpi.first.epilogue.Logged.Importance;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
@@ -90,9 +93,12 @@ public class RobotContainer {
   public final PMGT m_pmgt = new PMGT();
   public double speed_multi = 0.6;
   private double TAngle = 0;
+  private String launchTarg; 
+
 
   private boolean bAdrive = false;
 
+private String alliance; 
   // Joysticks
   private final CommandXboxController articulator_Controller = new CommandXboxController(1);
   private final CommandXboxController driver_Controller = new CommandXboxController(0);
@@ -163,6 +169,20 @@ public class RobotContainer {
     towerAngle.addOption("Auto", -1.0);
     towerAngle.addOption("other right", 282.0);
 
+    // alliance = DriverStation.getAlliance().toString();
+
+    // if(alliance == "red") {
+    // launchPos.setDefaultOption("Red Hub", Launcher.KnownTargets.RED_HUB.getPose2d());
+    // launchPos.addOption("Red Center", Launcher.KnownTargets.RED_CENTERTARGET.getPose2d());
+    // launchPos.addOption("Red OutPost", Launcher.KnownTargets.RED_OUTPOST.getPose2d());
+    // launchPos.addOption("Red Depot", Launcher.KnownTargets.RED_DEPOT.getPose2d());
+    // } else if(alliance == "blue"){
+    // launchPos.setDefaultOption("Blue Hub", Launcher.KnownTargets.BLUE_HUB.getPose2d());
+    // launchPos.addOption("Blue Center", Launcher.KnownTargets.BLUE_CENTERTARGET.getPose2d());
+    // launchPos.addOption("Blue OutPost", Launcher.KnownTargets.BLUE_OUTPOST.getPose2d());
+    // launchPos.addOption("Blue Depot", Launcher.KnownTargets.BLUE_DEPOT.getPose2d());
+    // }
+
     launchPos.setDefaultOption("Red Hub", Launcher.KnownTargets.RED_HUB.getPose2d());
     launchPos.addOption("Blue Hub", Launcher.KnownTargets.BLUE_HUB.getPose2d());
     launchPos.addOption("Red OutPost", Launcher.KnownTargets.RED_OUTPOST.getPose2d());
@@ -221,7 +241,7 @@ public class RobotContainer {
     SmartDashboard.putNumber("Current Speed Setting", speed_multi);
     SmartDashboard.putData("Drive Speed Selector", cruiseControl);
 
-    String launchTarg = launchPos.getSelected().toString();
+    launchTarg = launchPos.getSelected().toString();
     m_launcher.setNewTarget(launchPos.getSelected());
     SmartDashboard.putString("Curr Selected Launch Targ", launchTarg);
     SmartDashboard.putData("Launcher Targets", launchPos);

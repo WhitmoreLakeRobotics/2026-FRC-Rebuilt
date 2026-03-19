@@ -27,7 +27,7 @@ public class LTurretCalc {
         // 3. Raising to the power of 6.5 matches your "70 RPM at 90 deg" requirement
         // y = 862 * (sin(theta/2))^6.5
 
-        return this.baseRPM * Math.pow(base, 6.5);
+        return this.baseRPM * Math.pow(base, 6.5) + 25;
 
     }
 

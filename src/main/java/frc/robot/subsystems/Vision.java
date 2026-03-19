@@ -390,18 +390,17 @@ public boolean hasVision = false;
               new Translation3d(Units.inchesToMeters(-9.5), //was -9.5
                                 Units.inchesToMeters(-12.2),
                                 Units.inchesToMeters(17.75)),
-              VecBuilder.fill(4, 4, 8), VecBuilder.fill(0.5, 0.5, 1));
+              VecBuilder.fill(4, 4, 8), VecBuilder.fill(0.5, 0.5, 1)),
     /**
      * Center Camera
      */
-    /* 
+    
     CENTER_CAM("center",
-               new Rotation3d(0, Units.degreesToRadians(18), 0),
-               new Translation3d(Units.inchesToMeters(-4.628),
-                                 Units.inchesToMeters(-10.687),
-                                 Units.inchesToMeters(16.129)),
+               new Rotation3d(0, Units.degreesToRadians(-1), 0),
+               new Translation3d(Units.inchesToMeters(-4.0),
+                                 Units.inchesToMeters(0.0),
+                                 Units.inchesToMeters(21.5)),
                VecBuilder.fill(4, 4, 8), VecBuilder.fill(0.5, 0.5, 1));
-*/
     /**
      * Latency alert to use when high latency is detected.
      */
