@@ -386,20 +386,20 @@ public boolean hasVision = false;
      * Right Camera
      */
     RIGHT_CAM("right",
-              new Rotation3d(Math.toRadians(15), Math.toRadians(0), Math.toRadians(-93)),
-              new Translation3d(Units.inchesToMeters(-9.5), //was -9.5
-                                Units.inchesToMeters(-12.2),
-                                Units.inchesToMeters(17.75)),
+              new Rotation3d(Math.toRadians(15), Math.toRadians(0), Math.toRadians(-95)),
+              new Translation3d(Units.inchesToMeters(-10.75), //was -9.5
+                                Units.inchesToMeters(-12.35),
+                                Units.inchesToMeters(17.70)),
               VecBuilder.fill(4, 4, 8), VecBuilder.fill(0.5, 0.5, 1)),
     /**
      * Center Camera
      */
     
     CENTER_CAM("center",
-               new Rotation3d(0, Units.degreesToRadians(-1), 0),
+               new Rotation3d(0, Math.toRadians(-1), Math.toRadians(-6)),
                new Translation3d(Units.inchesToMeters(-4.0),
-                                 Units.inchesToMeters(0.0),
-                                 Units.inchesToMeters(21.5)),
+                                 Units.inchesToMeters(-0.5),
+                                 Units.inchesToMeters(20.5)),
                VecBuilder.fill(4, 4, 8), VecBuilder.fill(0.5, 0.5, 1));
     /**
      * Latency alert to use when high latency is detected.

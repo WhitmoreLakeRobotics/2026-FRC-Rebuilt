@@ -89,7 +89,8 @@ public class Launcher extends SubsystemBase {
         turret = new LTurret();
 
         //shotCalc.add(new LinearCalcRef(3337, 131, edu.wpi.first.units.Units.Inches));  unnecessary point
-        shotCalc.add(new LinearCalcRef(3470, 114.5, edu.wpi.first.units.Units.Inches));
+        shotCalc.add(new LinearCalcRef(3190, 99, edu.wpi.first.units.Units.Inches));  
+        shotCalc.add(new LinearCalcRef(3470, 122, edu.wpi.first.units.Units.Inches));  //114.5
         shotCalc.add(new LinearCalcRef(3520, 132, edu.wpi.first.units.Units.Inches));
         shotCalc.add(new LinearCalcRef(3650, 145, edu.wpi.first.units.Units.Inches));
         shotCalc.add(new LinearCalcRef(3815, 156, edu.wpi.first.units.Units.Inches));
