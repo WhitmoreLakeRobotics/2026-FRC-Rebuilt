@@ -28,12 +28,7 @@
       "linkedName": "Lclosefar"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.83,
-      "rotationDegrees": -32.54797087920008
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [
     {
       "name": "Constraints Zone",

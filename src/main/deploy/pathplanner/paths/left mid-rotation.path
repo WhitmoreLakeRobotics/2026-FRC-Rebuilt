@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.484578884934758,
-        "y": 5.0947805456702255
+        "x": 7.775077105575328,
+        "y": 4.728967971530249
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.269395017793595,
-        "y": 6.482716488730723
+        "x": 7.559893238434165,
+        "y": 6.116903914590747
       },
       "isLocked": false,
       "linkedName": "r mid"
@@ -28,12 +28,7 @@
       "linkedName": "left mid intake"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.83,
-      "rotationDegrees": -32.54797087920008
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [
     {
       "name": "Constraints Zone",

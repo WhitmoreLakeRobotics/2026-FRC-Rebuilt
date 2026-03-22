@@ -92,21 +92,21 @@ public class LTurret extends SubsystemBase {
 
     public void setAngle(double angle) {
         //need  if else chain to handle right side 
-        if (DriverAssist.isInRange(angle, 90, 45)){
-            TargetAngle = angle - 2;
+        // if (DriverAssist.isInRange(angle, 90, 45)){
+        //     TargetAngle = angle - 2;
 
-        }
-        else if (DriverAssist.isInRange(angle, -90, 45)){
-            //handle left side
-            TargetAngle = angle + 2;
-        }
-        else {
-            ///handle other angles
-            TargetAngle = angle;
+        // }
+        // else if (DriverAssist.isInRange(angle, -90, 45)){
+        //     //handle left side
+        //     TargetAngle = angle + 2;
+        // }
+        // else {
+        //     ///handle other angles
+             TargetAngle = angle;
 
-        }
+        // }
         
-        turningMotor.getClosedLoopController().setSetpoint(angle, ControlType.kPosition);
+        turningMotor.getClosedLoopController().setSetpoint(TargetAngle, ControlType.kPosition);
         status = TurretStatus.TARGETING;
     }
 
@@ -161,7 +161,7 @@ public class LTurret extends SubsystemBase {
 
         turningConfig.closedLoop.feedbackSensor(FeedbackSensor.kAbsoluteEncoder);
         AbsoluteEncoderConfig absEncConfig = new AbsoluteEncoderConfig();
-        absEncConfig.zeroOffset(0.6360064); // this needs to be set to the offset where the turret is "zeroed"
+        absEncConfig.zeroOffset(0.63115174); // this needs to be set to the offset where the turret is "zeroed"
         absEncConfig.inverted(false);
         absEncConfig.positionConversionFactor(360);
         absEncConfig.zeroCentered(true);   // splits 0 -- 360 into -179 -- 180

@@ -137,7 +137,7 @@ public class Intake extends SubsystemBase {
                         if (DriverAssist.isInRange(extendMotor.getEncoder().getPosition(), status.position, posTol)) {
                         // start intake motor
                         //intakeMotor.getClosedLoopController().setSetpoint(status.getSpeed(), ControlType.kVelocity);
-                        intakeMotor.set(0.10);
+                        intakeMotor.set(0.30);
                         bIntakeMotorRunning = true;
                         bCommandComplete = true;
                         // extendMotor.set(0);
@@ -201,7 +201,8 @@ public class Intake extends SubsystemBase {
                 targetStatus = STATUS.HALF_EXTENDED;
                 status = STATUS.EXTENDING;
                 setExtendMotorPosition(targetStatus.getPosition(), IntakeClosedLoopSlotUp);
-                intakeMotor.getClosedLoopController().setSetpoint(status.getSpeed(), ControlType.kVelocity);
+                //intakeMotor.getClosedLoopController().setSetpoint(status.getSpeed(), ControlType.kVelocity);
+                intakeMotor.set(0);
                 bIntakeMotorRunning = false;
                 break;
             case EXTENDING: // transition state

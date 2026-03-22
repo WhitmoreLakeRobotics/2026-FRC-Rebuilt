@@ -108,7 +108,7 @@ private String alliance;
   // A chooser for autonomous commands
   SendableChooser<Command> autoChooser = new SendableChooser<>();
   SendableChooser<Double> cruiseControl = new SendableChooser();
-  SendableChooser<Pose2d> launchPos = new SendableChooser<>();
+  public SendableChooser<Launcher.KnownTargets> launchPos = new SendableChooser<>();
   SendableChooser<Double> towerAngle = new SendableChooser<>();
 
   /**
@@ -183,14 +183,18 @@ private String alliance;
     // launchPos.addOption("Blue Depot", Launcher.KnownTargets.BLUE_DEPOT.getPose2d());
     // }
 
-    launchPos.setDefaultOption("Red Hub", Launcher.KnownTargets.RED_HUB.getPose2d());
-    launchPos.addOption("Red Center", Launcher.KnownTargets.RED_CENTERTARGET.getPose2d());
-    launchPos.addOption("Blue Hub", Launcher.KnownTargets.BLUE_HUB.getPose2d());
-    launchPos.addOption("Blue Center", Launcher.KnownTargets.BLUE_CENTERTARGET.getPose2d());
-    launchPos.addOption("Red OutPost", Launcher.KnownTargets.RED_OUTPOST.getPose2d());
-    launchPos.addOption("Blue OutPost", Launcher.KnownTargets.BLUE_OUTPOST.getPose2d());
-    launchPos.addOption("Red Depot", Launcher.KnownTargets.RED_DEPOT.getPose2d());
-    launchPos.addOption("Blue Depot", Launcher.KnownTargets.BLUE_DEPOT.getPose2d());
+    launchPos.setDefaultOption("Red Hub", Launcher.KnownTargets.RED_HUB);
+    launchPos.addOption("Red Center", Launcher.KnownTargets.RED_CENTERTARGET);
+    launchPos.addOption("Red Left Center", Launcher.KnownTargets.RED_LEFTCENTERTARGET);
+    launchPos.addOption("Blue Hub", Launcher.KnownTargets.BLUE_HUB);
+    launchPos.addOption("Blue Center", Launcher.KnownTargets.BLUE_CENTERTARGET);
+    launchPos.addOption("Blue Left Center", Launcher.KnownTargets.BLUE_LEFTCENTERTARGET);
+    launchPos.addOption("Red OutPost", Launcher.KnownTargets.RED_OUTPOST);
+    launchPos.addOption("Blue OutPost", Launcher.KnownTargets.BLUE_OUTPOST);
+    launchPos.addOption("Red Depot", Launcher.KnownTargets.RED_DEPOT);
+    launchPos.addOption("Blue Depot", Launcher.KnownTargets.BLUE_DEPOT);
+
+    
 
     boolean isCompetition = true; // CHANGE AT COMP
 
@@ -241,8 +245,8 @@ private String alliance;
     SmartDashboard.putNumber("Current Speed Setting", speed_multi);
     SmartDashboard.putData("Drive Speed Selector", cruiseControl);
 
-    launchTarg = launchPos.getSelected().toString();
-    m_launcher.setNewTarget(launchPos.getSelected());
+    launchTarg = launchPos.getSelected().getPose2d().toString();
+    m_launcher.setNewTarget(launchPos.getSelected().getPose2d());
     SmartDashboard.putString("Curr Selected Launch Targ", launchTarg);
     SmartDashboard.putData("Launcher Targets", launchPos);
 
@@ -420,7 +424,10 @@ private String alliance;
     aDpad_right.onTrue(new AimOffset(false));
 
     Trigger artic_a = new Trigger(articulator_Controller.a());
-    artic_a.onTrue(new SetTarget(3800, false));
+    artic_a.onTrue(new SetTarget(2500, false))
+      .onTrue(new SetTurret(0, false))
+      .onFalse(new SetTarget(-1,true))
+      .onFalse(new SetTurret(0, true));
 
     Trigger artic_b = new Trigger(articulator_Controller.b());
     artic_b.onTrue(new SetTarget(0.0, false));
