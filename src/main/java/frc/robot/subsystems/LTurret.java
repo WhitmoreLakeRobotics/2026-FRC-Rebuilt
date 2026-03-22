@@ -91,7 +91,21 @@ public class LTurret extends SubsystemBase {
     }
 
     public void setAngle(double angle) {
-        TargetAngle = angle;
+        //need  if else chain to handle right side 
+        if (DriverAssist.isInRange(angle, 90, 45)){
+            TargetAngle = angle - 2;
+
+        }
+        else if (DriverAssist.isInRange(angle, -90, 45)){
+            //handle left side
+            TargetAngle = angle + 2;
+        }
+        else {
+            ///handle other angles
+            TargetAngle = angle;
+
+        }
+        
         turningMotor.getClosedLoopController().setSetpoint(angle, ControlType.kPosition);
         status = TurretStatus.TARGETING;
     }
