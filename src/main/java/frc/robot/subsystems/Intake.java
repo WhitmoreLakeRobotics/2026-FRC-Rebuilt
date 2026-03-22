@@ -136,7 +136,8 @@ public class Intake extends SubsystemBase {
                     case HALF_EXTENDED:
                         if (DriverAssist.isInRange(extendMotor.getEncoder().getPosition(), status.position, posTol)) {
                         // start intake motor
-                        intakeMotor.getClosedLoopController().setSetpoint(status.getSpeed(), ControlType.kVelocity);
+                        //intakeMotor.getClosedLoopController().setSetpoint(status.getSpeed(), ControlType.kVelocity);
+                        intakeMotor.set(0.10);
                         bIntakeMotorRunning = true;
                         bCommandComplete = true;
                         // extendMotor.set(0);
@@ -218,9 +219,10 @@ public class Intake extends SubsystemBase {
                 break;
             case EXTENDED_STOPPED:
                 targetStatus = STATUS.EXTENDED_STOPPED;
-                status = STATUS.EXTENDING;
+                status = STATUS.EXTENDED_STOPPED;
                 setExtendMotorPosition(targetStatus.getPosition(), IntakeClosedLoopSlotDown);
-                intakeMotor.getClosedLoopController().setSetpoint(status.getSpeed(), ControlType.kVelocity);
+                //intakeMotor.getClosedLoopController().setSetpoint(status.getSpeed(), ControlType.kVelocity);
+                intakeMotor.set(0);
                 bIntakeMotorRunning = false;
                 break;
             case EXTENDED_INTAKING:
@@ -293,7 +295,7 @@ public class Intake extends SubsystemBase {
         intakeConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder);
 
         // intakeConfig.smartCurrentLimit(40);
-        intakeConfig.smartCurrentLimit(60, 50);
+        intakeConfig.smartCurrentLimit(50, 70);
 
         intakeMotor.configure(intakeConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
@@ -353,7 +355,7 @@ public class Intake extends SubsystemBase {
 
     // Enumeration of status which should store position and speed values
     public enum STATUS {
-        RETRACTED(-1.0, 0.0),
+        RETRACTED(-1.5, 0.0),
         HALF_EXTENDED(4.0, 3000),
         RETRACTING(0.0, 0.0),
         EXTENDED_STOPPED(15.1, 0.0),

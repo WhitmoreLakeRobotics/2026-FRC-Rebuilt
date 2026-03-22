@@ -101,13 +101,13 @@ public class Launcher extends SubsystemBase {
 
         turretCalc.add(new LinearCalcRef(0, 0, edu.wpi.first.units.Units.Degrees));
         turretCalc.add(new LinearCalcRef(250, 45, edu.wpi.first.units.Units.Degrees));
-        turretCalc.add(new LinearCalcRef(779, 100, edu.wpi.first.units.Units.Degrees));
-        turretCalc.add(new LinearCalcRef(812, 135, edu.wpi.first.units.Units.Degrees));
-        turretCalc.add(new LinearCalcRef(846, 180, edu.wpi.first.units.Units.Degrees));
-        turretCalc.add(new LinearCalcRef(812, 225, edu.wpi.first.units.Units.Degrees));
-        turretCalc.add(new LinearCalcRef(779, 260, edu.wpi.first.units.Units.Degrees));
-        turretCalc.add(new LinearCalcRef(250, 315, edu.wpi.first.units.Units.Degrees));
-        turretCalc.add(new LinearCalcRef(0, 360, edu.wpi.first.units.Units.Degrees));
+        turretCalc.add(new LinearCalcRef(754, 100, edu.wpi.first.units.Units.Degrees));
+        turretCalc.add(new LinearCalcRef(787, 135, edu.wpi.first.units.Units.Degrees));
+        turretCalc.add(new LinearCalcRef(795, 179, edu.wpi.first.units.Units.Degrees));
+        turretCalc.add(new LinearCalcRef(787, -135, edu.wpi.first.units.Units.Degrees));
+        turretCalc.add(new LinearCalcRef(754, -100, edu.wpi.first.units.Units.Degrees));
+        turretCalc.add(new LinearCalcRef(250, -45, edu.wpi.first.units.Units.Degrees));
+        turretCalc.add(new LinearCalcRef(0, -1, edu.wpi.first.units.Units.Degrees));
         turretCalc.Calculate();
 
 
@@ -448,7 +448,7 @@ public class Launcher extends SubsystemBase {
         targetAngle = shotVec.getAngle().getDegrees();
         //targetRPM = shotVec.getNorm(); // convert back to RPM based on your shooter characteristics, still need to verify
 
-        targetRPM = shotCalc.getRPM((shotVec.getNorm() * 39.37)) + turretCalc.getRPM(targetAngle) + autoOffsetRPM;
+        targetRPM = shotCalc.getRPM((shotVec.getNorm() * 39.37)) + turretCalc.getRPM(distanceToTarget) + autoOffsetRPM;
         // targetRPM = getTargetRPM((shotVec.getNorm() * 39.37), targetAngle) + autoOffsetRPM;
 
 
@@ -491,8 +491,14 @@ public class Launcher extends SubsystemBase {
         BLUE_CENTERTARGET("Blue Center Target",
                 new edu.wpi.first.math.geometry.Pose2d(2.706, 1.618, new edu.wpi.first.math.geometry.Rotation2d(0)),
                 "Center Target", Alliance.Blue),
+        BLUE_LEFTCENTERTARGET("Blue Left Center Target",
+                new edu.wpi.first.math.geometry.Pose2d(3.378, 5.837, new edu.wpi.first.math.geometry.Rotation2d(0)),
+                "Center Target", Alliance.Blue),
         RED_CENTERTARGET("Red Center Target",
                 new edu.wpi.first.math.geometry.Pose2d(14.220, 5.461, new edu.wpi.first.math.geometry.Rotation2d(0)),
+                "Center Target", Alliance.Red),
+        RED_LEFTCENTERTARGET("Red Left Center Target",
+                new edu.wpi.first.math.geometry.Pose2d(14.220, 2.299, new edu.wpi.first.math.geometry.Rotation2d(0)),
                 "Center Target", Alliance.Red);
 
         // Store name, pose2d, and "type" for each target

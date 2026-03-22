@@ -13,7 +13,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 1.0
+            "waitTime": 0.5
           }
         },
         {
@@ -23,15 +23,15 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "Start Flywheels"
-          }
-        },
-        {
           "type": "path",
           "data": {
             "pathName": "left mid-rotation"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Start Flywheels"
           }
         },
         {
@@ -61,7 +61,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 4.0
+            "waitTime": 5.5
           }
         },
         {
@@ -77,15 +77,21 @@
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "left-middle"
+            "name": "Intake"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "left mid-rotation"
+            "pathName": "left-middle far"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "left mid-rotation far"
           }
         },
         {
@@ -97,7 +103,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "left-launch"
+            "pathName": "left-launch far"
           }
         },
         {
@@ -121,7 +127,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 4.0
+            "waitTime": 4.5
           }
         },
         {
