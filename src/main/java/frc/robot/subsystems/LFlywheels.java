@@ -128,7 +128,7 @@ public class LFlywheels extends SubsystemBase {
             TowerLM.getClosedLoopController().setSetpoint(rpm, ControlType.kVelocity);
             status = FlywheelStatus.RAMPING;
 
-            }else{
+            } else{
                 status = FlywheelStatus.STOPPED;
                 TowerRM.set(0);
                 TowerLM.set(0);

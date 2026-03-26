@@ -65,9 +65,10 @@ public class Constants {
         CLIMBER_MOTOR("Climber Motor", "Climb", 15),
         FUNNEL_MOTOR("Funnel Motor", "Hopper", 16),
         EXTEND_MOTOR("Extend Motor", "Intake", 17),
-        RCLIMB_MOTOR("Right Climb Motor", "Climb", 10),
+        TRANSITION_MOTOR("Transition Motor", "Hopper", 10),
         LCLIMB_MOTOR("Left Climb Motor", "Climb", 19),
         TURN_MOTOR("Turret Turn Motor", "LTurret", 20);
+
 
         public final String motorName;
         public final String subSystem;

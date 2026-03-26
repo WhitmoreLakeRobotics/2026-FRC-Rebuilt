@@ -296,7 +296,7 @@ public class Intake extends SubsystemBase {
         intakeConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder);
 
         // intakeConfig.smartCurrentLimit(40);
-        intakeConfig.smartCurrentLimit(50, 70);
+        intakeConfig.smartCurrentLimit(40, 70);
 
         intakeMotor.configure(intakeConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
@@ -346,7 +346,7 @@ public class Intake extends SubsystemBase {
 
         // extendConfig.absoluteEncoder.apply(absEncConfig);
 
-        extendConfig.smartCurrentLimit(50);
+        extendConfig.smartCurrentLimit(40);
         // extendConfig.smartCurrentLimit(normalStallCurrentLimit,
         // normalFreeCurrentLimit);
 
