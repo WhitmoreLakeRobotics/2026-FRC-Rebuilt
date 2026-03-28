@@ -284,6 +284,8 @@ private String alliance;
 
     // add Hopper data to SmartDashboard
     SmartDashboard.putString("Hopper Status", m_feeder.getStatus().toString());
+    SmartDashboard.putNumber("Transition Velocity", m_feeder.getTransitionVelocity());
+    SmartDashboard.putNumber("Belt Velocity", m_feeder.getBeltMotorVelocity());
 
     // add Intake to SmartDashboard
     SmartDashboard.putString("Intake Status", m_intake.getStatus().toString());
@@ -332,6 +334,10 @@ private String alliance;
 
     SmartDashboard.putBoolean("Left Turret", m_launcher.getbLHF_Enabled());
     SmartDashboard.putBoolean("Right Turret", m_launcher.getbRHF_Enabled());
+
+
+    //add PMGT 
+    SmartDashboard.putNumber("Total Current Draw", m_pmgt.getTotalCurrPower());
 
   }
 
@@ -515,9 +521,9 @@ private String alliance;
       () -> driver_Controller.getLeftX() * -1 * speed_multi)
       .withControllerRotationAxis(this::getRightXInverted)
       .deadband(OperatorConstants.DEADBAND)
-      .scaleTranslation(0.8)
+      .scaleTranslation(1.0)
       .allianceRelativeControl(true);
 
   Command driveFieldOrientedDirectAngle = m_driveTrain.driveFieldOriented(driveAngularVelocity);
-
+ 
 }

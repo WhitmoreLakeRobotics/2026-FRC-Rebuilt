@@ -60,6 +60,7 @@ public class SwerveSubsystem extends SubsystemBase
    * Swerve drive object.
    */
   private final SwerveDrive swerveDrive;
+
   
   /**
    * Enable vision odometry updates while driving.
@@ -69,6 +70,7 @@ public class SwerveSubsystem extends SubsystemBase
   private PID turnPID = new PID(0.02,0.0,0.0);
   public double THeading = 0;
   private double maxTurnRate = 0.55;
+  public double totalDriveCurr = 0;
 
   /**
    * PhotonVision class to keep an accurate odometry.
@@ -150,6 +152,7 @@ public class SwerveSubsystem extends SubsystemBase
     {
       swerveDrive.updateOdometry();
       vision.updatePoseEstimation(swerveDrive);
+
     }
   }
 

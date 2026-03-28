@@ -118,6 +118,7 @@ public class Hopper extends SubsystemBase {
                     beltMotor.setVoltage(status.getBeltMotorVoltage());
                     funnelMotor.setVoltage(status.getFunnelMotorVoltage());
                 }
+                
                 // this assumes flywheels are operating
                 // if flywheels are not operating, dont start hopper
 
@@ -139,6 +140,14 @@ public class Hopper extends SubsystemBase {
 
         }
     }
+
+    public double getTransitionVelocity(){
+        return transitionMotor.getEncoder().getVelocity();
+    }
+     public double getBeltMotorVelocity(){
+        return beltMotor.getEncoder().getVelocity();
+    }
+
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -196,7 +205,7 @@ public class Hopper extends SubsystemBase {
         // config.encoder.positionConversionFactor(Math.PI * elevator_gearDiameter /
         // elevator_gearRatio);
         transitionMotorConfig.encoder.positionConversionFactor(1);
-        transitionMotorConfig.inverted(true);
+        transitionMotorConfig.inverted(false);
         transitionMotorConfig.softLimit.forwardSoftLimitEnabled(false);
         transitionMotorConfig.softLimit.reverseSoftLimit(0);
         transitionMotorConfig.softLimit.reverseSoftLimitEnabled(false);
@@ -216,8 +225,8 @@ public class Hopper extends SubsystemBase {
         // beltMotor_CLOSED_LOOP_SLOT_DOWN);
         // transitionMotorConfig.closedLoop.maxMotion.allowedClosedLoopError(beltMotorPosTol,
         // beltMotor_CLOSED_LOOP_SLOT_DOWN);
-        transitionMotorConfig.closedLoop.pid(0.0004, 0.0, 0.0);
-        transitionMotorConfig.closedLoop.feedForward.kV(0.0018);
+        transitionMotorConfig.closedLoop.pid(0.0002, 0.0, 0.0);
+        transitionMotorConfig.closedLoop.feedForward.kV(0.0018001);
 
         transitionMotorConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder);
 
@@ -296,6 +305,7 @@ public class Hopper extends SubsystemBase {
 
         public double getBeltMotorVoltage() {
             return beltMotorVoltage;
+
         }
 
         public double getFunnelMotorVoltage() {

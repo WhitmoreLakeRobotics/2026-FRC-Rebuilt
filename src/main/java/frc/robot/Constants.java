@@ -30,8 +30,8 @@ public class Constants {
     * }
     */ 
 
-      public static final double MAX_SPEED  = Units.feetToMeters(14.5);
-  public static class OperatorConstants {
+    public static final double MAX_SPEED  = Units.feetToMeters(16.15);
+    public static class OperatorConstants {
 
     // Joystick Deadband
     public static final double DEADBAND = 0.01;
