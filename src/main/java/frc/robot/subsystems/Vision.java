@@ -374,12 +374,12 @@ public boolean hasVision = false;
     /**
      * Left Camera
      */
-     /*LEFT_CAM("left",
+     LEFT_CAM("left",
              new Rotation3d(Math.toRadians(-15), Math.toRadians(0), Math.toRadians(88)),
              new Translation3d(Units.inchesToMeters(-9.5),
                                Units.inchesToMeters(14.0),
                                Units.inchesToMeters(17.75)),
-             VecBuilder.fill(4, 4, 8), VecBuilder.fill(0.5, 0.5, 1));*/
+             VecBuilder.fill(4, 4, 8), VecBuilder.fill(0.5, 0.5, 1)),
 
              
     /*

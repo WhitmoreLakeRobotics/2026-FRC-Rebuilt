@@ -76,22 +76,22 @@ public class DriverAssist extends SubsystemBase {
     // GLOBAL VARIABLES GO ABOVE THIS LINE
     // SYSTEM METHODS GO BELOW THIS LINE
     public DriverAssist() {
-        try{
-        driveTrain = RobotContainer.getInstance().m_driveTrain;
-        intake = RobotContainer.getInstance().m_intake;
-        launcher = RobotContainer.getInstance().m_launcher;
-        hopper = RobotContainer.getInstance().m_feeder;
-        fmsSystem = RobotContainer.getInstance().m_fmsSystem;
-        pmgt = RobotContainer.getInstance().m_pmgt;
-        climb = RobotContainer.getInstance().m_climb;
-} catch (Exception e) {
-    System.out.println("Error initializing DriverAssist subsystem: " + e.getMessage());
-}
+        try {
+            driveTrain = RobotContainer.getInstance().m_driveTrain;
+            intake = RobotContainer.getInstance().m_intake;
+            launcher = RobotContainer.getInstance().m_launcher;
+            hopper = RobotContainer.getInstance().m_feeder;
+            fmsSystem = RobotContainer.getInstance().m_fmsSystem;
+            pmgt = RobotContainer.getInstance().m_pmgt;
+            climb = RobotContainer.getInstance().m_climb;
+        } catch (Exception e) {
+            System.out.println("Error initializing DriverAssist subsystem: " + e.getMessage());
+        }
 
-    if(driveTrain !=null){
-        currDAStatus = DAStatus.RUNNING;
+        if (driveTrain != null) {
+            currDAStatus = DAStatus.RUNNING;
 
-    }
+        }
 
     }
 
@@ -106,10 +106,10 @@ public class DriverAssist extends SubsystemBase {
                 determinePossibleTargets();
                 determineBestTarget();
                 setDriveTarget();
+                executeAction();
                 break;
             case INIT:
                 getSubsystems();
-                
 
                 break;
 
@@ -150,6 +150,7 @@ public class DriverAssist extends SubsystemBase {
     // PROCESSING METHODS GO BELOW THIS LINE
     private void getSubsystems() {
         driveTrain = RobotContainer.getInstance().m_driveTrain;
+        launcher = RobotContainer.getInstance().m_launcher;
 
         // coral = RobotContainer.getInstance().m_Coral;
 
@@ -333,6 +334,7 @@ public class DriverAssist extends SubsystemBase {
         // Need to set articulation and drivebase targets.
 
         // this should be a drive target and articulation target set.
+        launcher.setNewTarget(targetPose);
 
     }
 
@@ -358,16 +360,16 @@ public class DriverAssist extends SubsystemBase {
     }
 
     private void determineTargetBasedOnTactic() {
-// Determine launch target based on current tactic approach.
-if (currALLIANCEZONE.alliance == currAlliance) {
-    if (launcherStatus == Launcher.LauncherStatus.IDLE) {
-    targetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "HUB").getPose2d();
-    }
+        // Determine launch target based on current tactic approach.
+        if (currALLIANCEZONE.alliance == currAlliance) {
+            if (launcherStatus == Launcher.LauncherStatus.IDLE) {
+                targetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "HUB").getPose2d();
+            }
 
-}else {
-launcher.setStatus(Launcher.LauncherStatus.IDLE);
+        } else {
+            //launcher.setStatus(Launcher.LauncherStatus.IDLE);
 
-}
+        }
 
         // Determine the target based on the current tactic approach.
         switch (currentTactic.onshiftTactic) {
@@ -397,8 +399,8 @@ launcher.setStatus(Launcher.LauncherStatus.IDLE);
                 break;
             case LEFTSIDE:
                 // select right pickup
-               
-                 if (currALLIANCEZONE.alliance == currAlliance) {
+
+                if (currALLIANCEZONE.alliance == currAlliance) {
                     CurrDriveSelectedTarget = distances.entrySet().stream()
                             .filter(entry -> entry.getKey().getTargetType().equals("DMZ") &&
                                     entry.getKey().alliance == currAlliance &&
@@ -420,7 +422,7 @@ launcher.setStatus(Launcher.LauncherStatus.IDLE);
 
                 break;
             case CLOSE:
-             if (currALLIANCEZONE.alliance == currAlliance) {
+                if (currALLIANCEZONE.alliance == currAlliance) {
                     CurrDriveSelectedTarget = distances.entrySet().stream()
                             .filter(entry -> entry.getKey().getTargetType().equals("DMZ") &&
                                     entry.getKey().alliance == currAlliance &&
@@ -440,7 +442,7 @@ launcher.setStatus(Launcher.LauncherStatus.IDLE);
                             .orElse(null);
                 }
                 // select left pickup
-              
+
                 break;
 
             default:
@@ -451,143 +453,143 @@ launcher.setStatus(Launcher.LauncherStatus.IDLE);
 
     private void determineTargetBasedOffTactic() {
         // Determine the target based on the current tactic approach.
-if (currALLIANCEZONE.alliance == currAlliance) {
-    if (launcherStatus == Launcher.LauncherStatus.IDLE) {
- //   targetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "HUB").getPose2d();
-    }
+        if (currALLIANCEZONE.alliance == currAlliance) {
+            if (launcherStatus == Launcher.LauncherStatus.IDLE) {
+                // targetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" +
+                // "HUB").getPose2d();
+            }
 
-}else {
-if(currFIELDZONE == FIELDZONES.RIGHTZONE) {
-    targetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "OUTPOST").getPose2d();
-}else if(currFIELDZONE == FIELDZONES.LEFTZONE) {
-    targetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "DEPOT").getPose2d();
-} else {
-    targetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "CENTERTARGET").getPose2d();
-}
-        switch (currentTactic.offshiftTactic) {
-            case RIGHTFAR:
-                // find nearest deploy
-                if ( (currALLIANCEZONE.alliance == currAlliance) || (currALLIANCEZONE == ALLIANCEZONE.DMZ) ) {
-                    CurrDriveSelectedTarget = distances.entrySet().stream()
-                            .filter(entry -> entry.getKey().getTargetType().equals("DRIVE") &&
-                                    entry.getKey().alliance == oppAlliance &&
-                                    entry.getKey().side.equals("LEFT"))
-                            .min((e1, e2) -> Double.compare(e1.getValue(), e2.getValue()))
-                            .map(entry -> entry.getKey())
-                            .orElse(null);
+        } else {
+            if (currFIELDZONE == FIELDZONES.RIGHTZONE) {
+                targetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "CENTERTARGET").getPose2d();
+            } else if (currFIELDZONE == FIELDZONES.LEFTZONE) {
+                targetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "LEFTCENTERTARGET").getPose2d();
+            } else {
+                targetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "CENTERTARGET").getPose2d();
+            }
+            switch (currentTactic.offshiftTactic) {
+                case RIGHTFAR:
+                    // find nearest deploy
+                    if ((currALLIANCEZONE.alliance == currAlliance) || (currALLIANCEZONE == ALLIANCEZONE.DMZ)) {
+                        CurrDriveSelectedTarget = distances.entrySet().stream()
+                                .filter(entry -> entry.getKey().getTargetType().equals("DRIVE") &&
+                                        entry.getKey().alliance == oppAlliance &&
+                                        entry.getKey().side.equals("LEFT"))
+                                .min((e1, e2) -> Double.compare(e1.getValue(), e2.getValue()))
+                                .map(entry -> entry.getKey())
+                                .orElse(null);
 
-                } else {
-                    // if in neutral zone, head to alliance zone
-                    CurrDriveSelectedTarget = distances.entrySet().stream()
-                            .filter(entry -> entry.getKey().getTargetType().equals("DRIVE") &&
-                                    entry.getKey().alliance == currAlliance &&
-                                    entry.getKey().side.equals(currentTactic.onshiftTactic.getSide()))
-                            .min((e1, e2) -> Double.compare(e1.getValue(), e2.getValue()))
-                            .map(entry -> entry.getKey())
-                            .orElse(null);
-                }
+                    } else {
+                        // if in neutral zone, head to alliance zone
+                        CurrDriveSelectedTarget = distances.entrySet().stream()
+                                .filter(entry -> entry.getKey().getTargetType().equals("DRIVE") &&
+                                        entry.getKey().alliance == currAlliance &&
+                                        entry.getKey().side.equals(currentTactic.onshiftTactic.getSide()))
+                                .min((e1, e2) -> Double.compare(e1.getValue(), e2.getValue()))
+                                .map(entry -> entry.getKey())
+                                .orElse(null);
+                    }
 
-                break;
-                
-            case LEFTFAR:
-                // select right deploy
-                if ( (currALLIANCEZONE.alliance == currAlliance) || (currALLIANCEZONE == ALLIANCEZONE.DMZ) ) {
-                    CurrDriveSelectedTarget = distances.entrySet().stream()
-                            .filter(entry -> entry.getKey().getTargetType().equals("DRIVE") &&
-                                    entry.getKey().alliance == oppAlliance &&
-                                    entry.getKey().side.equals("RIGHT"))
-                            .min((e1, e2) -> Double.compare(e1.getValue(), e2.getValue()))
-                            .map(entry -> entry.getKey())
-                            .orElse(null);
+                    break;
 
-                } else {
-                    // if in neutral zone, head to alliance zone
-                    CurrDriveSelectedTarget = distances.entrySet().stream()
-                            .filter(entry -> entry.getKey().getTargetType().equals("DRIVE") &&
-                                    entry.getKey().alliance == currAlliance &&
-                                    entry.getKey().side.equals(currentTactic.onshiftTactic.getSide()))
-                            .min((e1, e2) -> Double.compare(e1.getValue(), e2.getValue()))
-                            .map(entry -> entry.getKey())
-                            .orElse(null);
-                }
+                case LEFTFAR:
+                    // select right deploy
+                    if ((currALLIANCEZONE.alliance == currAlliance) || (currALLIANCEZONE == ALLIANCEZONE.DMZ)) {
+                        CurrDriveSelectedTarget = distances.entrySet().stream()
+                                .filter(entry -> entry.getKey().getTargetType().equals("DRIVE") &&
+                                        entry.getKey().alliance == oppAlliance &&
+                                        entry.getKey().side.equals("RIGHT"))
+                                .min((e1, e2) -> Double.compare(e1.getValue(), e2.getValue()))
+                                .map(entry -> entry.getKey())
+                                .orElse(null);
 
-                break;
-            case CENTER:
-                // select center deploy
-                if ( (currALLIANCEZONE.alliance == currAlliance) || (currALLIANCEZONE.alliance == oppAlliance) ) {
-                    CurrDriveSelectedTarget = distances.entrySet().stream()
-                            .filter(entry -> entry.getKey().getTargetType().equals("DMZ") &&
-                                    entry.getKey().alliance == oppAlliance &&
-                                    entry.getKey().side.equals("CENTER"))
-                            .min((e1, e2) -> Double.compare(e1.getValue(), e2.getValue()))
-                            .map(entry -> entry.getKey())
-                            .orElse(null);
+                    } else {
+                        // if in neutral zone, head to alliance zone
+                        CurrDriveSelectedTarget = distances.entrySet().stream()
+                                .filter(entry -> entry.getKey().getTargetType().equals("DRIVE") &&
+                                        entry.getKey().alliance == currAlliance &&
+                                        entry.getKey().side.equals(currentTactic.onshiftTactic.getSide()))
+                                .min((e1, e2) -> Double.compare(e1.getValue(), e2.getValue()))
+                                .map(entry -> entry.getKey())
+                                .orElse(null);
+                    }
 
-                } else {
-                    // if in neutral zone, head to alliance zone
-                    CurrDriveSelectedTarget = distances.entrySet().stream()
-                            .filter(entry -> entry.getKey().getTargetType().equals("DRIVE") &&
-                                    entry.getKey().alliance == currAlliance &&
-                                    entry.getKey().side.equals(currentTactic.onshiftTactic.getSide()))
-                            .min((e1, e2) -> Double.compare(e1.getValue(), e2.getValue()))
-                            .map(entry -> entry.getKey())
-                            .orElse(null);
-                }
+                    break;
+                case CENTER:
+                    // select center deploy
+                    if ((currALLIANCEZONE.alliance == currAlliance) || (currALLIANCEZONE.alliance == oppAlliance)) {
+                        CurrDriveSelectedTarget = distances.entrySet().stream()
+                                .filter(entry -> entry.getKey().getTargetType().equals("DMZ") &&
+                                        entry.getKey().alliance == oppAlliance &&
+                                        entry.getKey().side.equals("CENTER"))
+                                .min((e1, e2) -> Double.compare(e1.getValue(), e2.getValue()))
+                                .map(entry -> entry.getKey())
+                                .orElse(null);
 
-                break;
+                    } else {
+                        // if in neutral zone, head to alliance zone
+                        CurrDriveSelectedTarget = distances.entrySet().stream()
+                                .filter(entry -> entry.getKey().getTargetType().equals("DRIVE") &&
+                                        entry.getKey().alliance == currAlliance &&
+                                        entry.getKey().side.equals(currentTactic.onshiftTactic.getSide()))
+                                .min((e1, e2) -> Double.compare(e1.getValue(), e2.getValue()))
+                                .map(entry -> entry.getKey())
+                                .orElse(null);
+                    }
 
-            default:
-                break;
+                    break;
+
+                default:
+                    break;
+            }
         }
-    }
     }
 
     private void determineTargetBasedClimbTactic() {
         // Determine the target based on the current tactic approach.
-if (currALLIANCEZONE.alliance == currAlliance) {
-    if (launcherStatus == Launcher.LauncherStatus.IDLE) {
-    targetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "HUB").getPose2d();
-    }
+        if (currALLIANCEZONE.alliance == currAlliance) {
+            if (launcherStatus == Launcher.LauncherStatus.IDLE) {
+                targetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "HUB").getPose2d();
+            }
 
-}else {
-launcher.setStatus(Launcher.LauncherStatus.IDLE);
+        } else {
+            //launcher.setStatus(Launcher.LauncherStatus.IDLE);
 
-}
+        }
         switch (currentTactic.climbTactic) {
             case RIGHTCLIMB:
                 // find nearest climb
-               
-                    CurrDriveSelectedTarget = distances.entrySet().stream()
-                            .filter(entry -> entry.getKey().getTargetType().equals("CLIMB") &&
-                                    entry.getKey().alliance == currAlliance &&
-                                    entry.getKey().side.equals("RIGHT"))
-                            .min((e1, e2) -> Double.compare(e1.getValue(), e2.getValue()))
-                            .map(entry -> entry.getKey())
-                            .orElse(null);
 
-                
+                CurrDriveSelectedTarget = distances.entrySet().stream()
+                        .filter(entry -> entry.getKey().getTargetType().equals("CLIMB") &&
+                                entry.getKey().alliance == currAlliance &&
+                                entry.getKey().side.equals("RIGHT"))
+                        .min((e1, e2) -> Double.compare(e1.getValue(), e2.getValue()))
+                        .map(entry -> entry.getKey())
+                        .orElse(null);
+
                 break;
             case LEFTCLIMB:
                 // select left climb
-               CurrDriveSelectedTarget = distances.entrySet().stream()
-                            .filter(entry -> entry.getKey().getTargetType().equals("CLIMB") &&
-                                    entry.getKey().alliance == currAlliance &&
-                                    entry.getKey().side.equals("LEFT"))
-                            .min((e1, e2) -> Double.compare(e1.getValue(), e2.getValue()))
-                            .map(entry -> entry.getKey())
-                            .orElse(null);
+                CurrDriveSelectedTarget = distances.entrySet().stream()
+                        .filter(entry -> entry.getKey().getTargetType().equals("CLIMB") &&
+                                entry.getKey().alliance == currAlliance &&
+                                entry.getKey().side.equals("LEFT"))
+                        .min((e1, e2) -> Double.compare(e1.getValue(), e2.getValue()))
+                        .map(entry -> entry.getKey())
+                        .orElse(null);
 
                 break;
 
             case CENTERCLIMB:
                 // select center climb
                 CurrDriveSelectedTarget = distances.entrySet().stream()
-                            .filter(entry -> entry.getKey().getTargetType().equals("CLIMB") &&
-                                    entry.getKey().alliance == currAlliance &&
-                                    entry.getKey().side.equals("CENTER"))
-                            .min((e1, e2) -> Double.compare(e1.getValue(), e2.getValue()))
-                            .map(entry -> entry.getKey())
-                            .orElse(null);
+                        .filter(entry -> entry.getKey().getTargetType().equals("CLIMB") &&
+                                entry.getKey().alliance == currAlliance &&
+                                entry.getKey().side.equals("CENTER"))
+                        .min((e1, e2) -> Double.compare(e1.getValue(), e2.getValue()))
+                        .map(entry -> entry.getKey())
+                        .orElse(null);
                 break;
             default:
                 break;
@@ -778,21 +780,23 @@ launcher.setStatus(Launcher.LauncherStatus.IDLE);
     }
 
     public enum FIELDZONES {
-        RIGHTZONE (0.0, 7.62),
-        LEFTZONE (7.62, 16.4592),
-        CENTERZONE (7.62, 8.2296);
+        RIGHTZONE(0.0, 7.62),
+        LEFTZONE(7.62, 16.4592),
+        CENTERZONE(7.62, 8.2296);
 
         private double start;
         private double end;
+
         FIELDZONES(double start, double end) {
             this.start = start;
             this.end = end;
         }
+
         public boolean isInZone(double y) {
             return y >= start && y <= end;
         }
     }
-    
+
     public FIELDZONES getFIELDZONE(double y) {
         for (FIELDZONES zone : FIELDZONES.values()) {
             if (zone.isInZone(y)) {
@@ -858,14 +862,16 @@ launcher.setStatus(Launcher.LauncherStatus.IDLE);
 
     // Tactic Approaches pickup
     public enum ONSHIFT_TACTIC {
-        LEFTSIDE ("LEFT"),
-        RIGHTSIDE ("RIGHT"),
-        CLOSE ("CENTER");
+        LEFTSIDE("LEFT"),
+        RIGHTSIDE("RIGHT"),
+        CLOSE("CENTER");
 
         private String side;
+
         ONSHIFT_TACTIC(String side) {
             this.side = side;
         }
+
         public String getSide() {
             return side;
         }

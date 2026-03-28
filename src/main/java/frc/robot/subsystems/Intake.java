@@ -280,7 +280,7 @@ public class Intake extends SubsystemBase {
         // rTowerR_CLOSED_LOOP_SLOT_DOWN);
         // intakeConfig.closedLoop.maxMotion.allowedClosedLoopError(rTowerRPosTol,
         // rTowerR_CLOSED_LOOP_SLOT_DOWN);
-        intakeConfig.closedLoop.pid(0.0005, 0.0, 0.0, ClosedLoopSlot.kSlot0);
+        intakeConfig.closedLoop.pid(0.0001, 0.0, 0.000009, ClosedLoopSlot.kSlot0);
         intakeConfig.closedLoop.feedForward.kV(0.0018);
 
         // //// Up / in Velocity Values

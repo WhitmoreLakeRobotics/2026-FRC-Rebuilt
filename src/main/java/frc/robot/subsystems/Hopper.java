@@ -107,8 +107,10 @@ public class Hopper extends SubsystemBase {
         switch (status) {
             case FUELING:
                 if ((RobotContainer.getInstance().m_launcher.getStatus() != LauncherStatus.STOPPED)
-                        || (RobotContainer.getInstance().m_launcher.getStatus() != LauncherStatus.IDLE)) {
+                        && (RobotContainer.getInstance().m_launcher.getStatus() != LauncherStatus.IDLE)) {
                     this.status = status;
+
+
 
                     transitionMotor.getClosedLoopController().setSetpoint(
                             RobotContainer.getInstance().m_launcher.getTargetRPM() * 0.5, ControlType.kVelocity);
@@ -214,7 +216,8 @@ public class Hopper extends SubsystemBase {
         // beltMotor_CLOSED_LOOP_SLOT_DOWN);
         // transitionMotorConfig.closedLoop.maxMotion.allowedClosedLoopError(beltMotorPosTol,
         // beltMotor_CLOSED_LOOP_SLOT_DOWN);
-        transitionMotorConfig.closedLoop.pid(0.4, 0.0, 0.0);
+        transitionMotorConfig.closedLoop.pid(0.0004, 0.0, 0.0);
+        transitionMotorConfig.closedLoop.feedForward.kV(0.0018);
 
         transitionMotorConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder);
 

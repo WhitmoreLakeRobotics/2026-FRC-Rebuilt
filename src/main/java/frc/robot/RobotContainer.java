@@ -32,6 +32,7 @@ import frc.robot.subsystems.*;
 import frc.robot.subsystems.Hopper.HopperStatus;
 import frc.robot.subsystems.Intake.STATUS;
 import frc.robot.subsystems.LTurret.TurretStatus;
+import frc.robot.subsystems.Launcher.KnownTargets;
 import swervelib.SwerveInputStream;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -46,6 +47,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import java.io.File;
 import java.io.ObjectInputFilter.Status;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 import edu.wpi.first.epilogue.Logged.Importance;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -193,7 +195,15 @@ private String alliance;
     launchPos.addOption("Blue OutPost", Launcher.KnownTargets.BLUE_OUTPOST);
     launchPos.addOption("Red Depot", Launcher.KnownTargets.RED_DEPOT);
     launchPos.addOption("Blue Depot", Launcher.KnownTargets.BLUE_DEPOT);
-
+    launchPos.onChange(
+            new Consumer<KnownTargets>() {
+                @Override
+                public void accept(KnownTargets newPose) {
+                    new SetTurret(newPose.getPose2d()).schedule();
+                }
+            }
+           // true   // run immediately with current selection
+        );
     
 
     boolean isCompetition = true; // CHANGE AT COMP
@@ -245,8 +255,8 @@ private String alliance;
     SmartDashboard.putNumber("Current Speed Setting", speed_multi);
     SmartDashboard.putData("Drive Speed Selector", cruiseControl);
 
-    launchTarg = launchPos.getSelected().getPose2d().toString();
-    m_launcher.setNewTarget(launchPos.getSelected().getPose2d());
+    launchTarg = launchPos.getSelected().getName().toString();
+    //m_launcher.setNewTarget(launchPos.getSelected().getPose2d());
     SmartDashboard.putString("Curr Selected Launch Targ", launchTarg);
     SmartDashboard.putData("Launcher Targets", launchPos);
 
