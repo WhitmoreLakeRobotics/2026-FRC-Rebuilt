@@ -62,7 +62,7 @@ public class SetTurret extends Command {
         // m_subsystem.setNewTarget(targetPose);
         if (targetAngle != -1){
             RobotContainer.getInstance().m_launcher.setAngle(targetAngle, auto);
-        }else{
+        } else {
         RobotContainer.getInstance().m_launcher.setNewTarget(targetPose);
         }
         bDone = true; 

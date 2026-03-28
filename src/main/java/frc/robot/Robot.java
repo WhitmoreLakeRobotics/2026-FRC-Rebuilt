@@ -115,7 +115,7 @@ public class Robot extends TimedRobot {
         RobotContainer.getInstance().m_fmsSystem.resetAuton();
     }
 
-    /**
+    /**Button
      * This function is called periodically during autonomous.
      */
     @Override

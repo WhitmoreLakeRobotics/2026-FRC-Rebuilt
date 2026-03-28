@@ -76,6 +76,11 @@ public class Hopper extends SubsystemBase {
     public void periodic() {
         // This method will be called once per scheduler run
 
+        if (status == HopperStatus.FUELING) {
+            transitionMotor.getClosedLoopController().setSetpoint(
+                    RobotContainer.getInstance().m_launcher.getTargetRPM() * 0.5, ControlType.kVelocity);
+        }
+
     }
 
     @Override
@@ -102,12 +107,11 @@ public class Hopper extends SubsystemBase {
         switch (status) {
             case FUELING:
                 if ((RobotContainer.getInstance().m_launcher.getStatus() != LauncherStatus.STOPPED)
-                    || (RobotContainer.getInstance().m_launcher.getStatus() != LauncherStatus.IDLE)) {
+                        || (RobotContainer.getInstance().m_launcher.getStatus() != LauncherStatus.IDLE)) {
                     this.status = status;
-                    
 
                     transitionMotor.getClosedLoopController().setSetpoint(
-                    RobotContainer.getInstance().m_launcher.getTargetRPM() * 0.5, ControlType.kVelocity);
+                            RobotContainer.getInstance().m_launcher.getTargetRPM() * 0.5, ControlType.kVelocity);
 
                     beltMotor.setVoltage(status.getBeltMotorVoltage());
                     funnelMotor.setVoltage(status.getFunnelMotorVoltage());
@@ -117,13 +121,12 @@ public class Hopper extends SubsystemBase {
 
                 break;
             case STOP:
-                    this.status = status;
-                    beltMotor.setVoltage(status.getBeltMotorVoltage());
-                    funnelMotor.setVoltage(status.getFunnelMotorVoltage());
+                this.status = status;
+                beltMotor.setVoltage(status.getBeltMotorVoltage());
+                funnelMotor.setVoltage(status.getFunnelMotorVoltage());
 
-                    transitionMotor.set(0);
+                transitionMotor.set(0);
 
-                
                 break;
 
             case REVERSAL:
