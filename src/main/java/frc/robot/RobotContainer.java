@@ -301,6 +301,8 @@ private String alliance;
     SmartDashboard.putString("FMS Data", m_fmsSystem.getPrivateData());
     SmartDashboard.putBoolean("On Shift", m_fmsSystem.getOnShift());
     SmartDashboard.putNumber("Remaining Time", (int) m_fmsSystem.getRemainingTime());
+    SmartDashboard.putString("Alliance", m_fmsSystem.getAlliance().toString());
+    SmartDashboard.putBoolean("Active Alliance", m_fmsSystem.getOnShift());
     // add current odometry position to smartdashboard
     SmartDashboard.putNumber("Robot X Position", m_driveTrain.getPose().getX());
     SmartDashboard.putNumber("Robot Y Position", m_driveTrain.getPose().getY());
