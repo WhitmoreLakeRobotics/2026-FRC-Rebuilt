@@ -106,9 +106,11 @@ public class SetTarget extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        if (clock.get() == timerStart + delay) {
-            RobotContainer.getInstance().m_launcher.setTargetRPM(targetRPM, false);
-            bDone = true;
+        if (!bDone) {
+            if (clock.get() == timerStart + delay) {
+                RobotContainer.getInstance().m_launcher.setTargetRPM(targetRPM, false);
+                bDone = true;
+            }
         }
     }
 

@@ -152,6 +152,7 @@ public boolean hasVision = false;
       visionSim.update(swerveDrive.getSimulationDriveTrainPose().get());
     }
     for (Cameras camera : Cameras.values()) {
+      // camera.multiTagStdDevs.
       Optional<EstimatedRobotPose> poseEst = getEstimatedGlobalPose(camera);
       try{
       if (poseEst.isPresent()) {

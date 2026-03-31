@@ -161,6 +161,10 @@ public class FMSSystem extends SubsystemBase {
         return status;
     }
 
+    public void updateAlliance() {
+        currAlliance = DriverStation.getAlliance().orElse(Alliance.Red);
+    }
+
     private void setStatus(FMSStatus status) {
         // do nothing for now
         this.status = status;

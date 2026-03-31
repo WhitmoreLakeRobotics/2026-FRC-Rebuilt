@@ -213,7 +213,7 @@ public class Climb extends SubsystemBase {
         // lClimbConfig.closedLoop.maxMotion.allowedClosedLoopError(lClimbPosTol, lClimb_CLOSED_LOOP_SLOT_DOWN);
          // lClimbConfig.closedLoop.maxMotion.allowedClosedLoopError(lClimbPosTol, lClimb_CLOSED_LOOP_SLOT_DOWN);
           lClimbConfig.closedLoop.pid(0.4, 0.0, 0.0, lClimbClosedLoopSlotDown); //when we are going down, we may need to add a feedforward
-          lClimbConfig.closedLoop.feedForward.kG(0.02);  //need more tuning
+          lClimbConfig.closedLoop.feedForward.kG(0.1);  //need more tuning // was 0.02
         // //// Up / in Velocity Values
         // lClimbConfig.closedLoop.maxMotion.maxAcceleration(5000, lClimb_CLOSED_LOOP_SLOT_UP);
         // lClimbConfig.closedLoop.maxMotion.maxVelocity(2000, lClimb_CLOSED_LOOP_SLOT_UP);
@@ -223,7 +223,7 @@ public class Climb extends SubsystemBase {
         lClimbConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder);
 
         // config.smartCurrentLimit(50);
-        lClimbConfig.smartCurrentLimit(20, 80 );
+        lClimbConfig.smartCurrentLimit(30, 80 ); // stallLimit was 20
 
         lClimbMotor.configure(lClimbConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 

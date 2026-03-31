@@ -78,7 +78,7 @@ public class Hopper extends SubsystemBase {
 
         if (status == HopperStatus.FUELING) {
             transitionMotor.getClosedLoopController().setSetpoint(
-                    RobotContainer.getInstance().m_launcher.getTargetRPM() * 0.5, ControlType.kVelocity);
+                    RobotContainer.getInstance().m_launcher.getTargetRPM() * 0.8, ControlType.kVelocity);
         }
 
     }
@@ -113,7 +113,7 @@ public class Hopper extends SubsystemBase {
 
 
                     transitionMotor.getClosedLoopController().setSetpoint(
-                            RobotContainer.getInstance().m_launcher.getTargetRPM() * 0.5, ControlType.kVelocity);
+                            RobotContainer.getInstance().m_launcher.getTargetRPM() * 0.8, ControlType.kVelocity);
 
                     beltMotor.setVoltage(status.getBeltMotorVoltage());
                     funnelMotor.setVoltage(status.getFunnelMotorVoltage());
@@ -169,7 +169,7 @@ public class Hopper extends SubsystemBase {
         beltMotorConfig.closedLoop.minOutput(-1.0);
 
         beltMotorConfig.closedLoopRampRate(0.15);
-        // beltMotorConfig.voltageCompensation(9.0);
+        beltMotorConfig.voltageCompensation(10.5);
         //// Down / outVelocity Values
         // beltMotorConfig.closedLoop.maxMotion.maxAcceleration(5000,
         // beltMotor_CLOSED_LOOP_SLOT_DOWN);
@@ -217,15 +217,15 @@ public class Hopper extends SubsystemBase {
         transitionMotorConfig.closedLoop.maxOutput(1.0);
         transitionMotorConfig.closedLoop.minOutput(-1.0);
 
-        transitionMotorConfig.closedLoopRampRate(0.15);
-        transitionMotorConfig.voltageCompensation(9.0);
+        transitionMotorConfig.closedLoopRampRate(0.10);
+        transitionMotorConfig.voltageCompensation(10.0);
         // transitionMotorConfig.closedLoop.maxMotion.maxAcceleration(5000,
         // beltMotor_CLOSED_LOOP_SLOT_DOWN);
         // transitionMotorConfig.closedLoop.maxMotion.maxVelocity(5000,
         // beltMotor_CLOSED_LOOP_SLOT_DOWN);
         // transitionMotorConfig.closedLoop.maxMotion.allowedClosedLoopError(beltMotorPosTol,
         // beltMotor_CLOSED_LOOP_SLOT_DOWN);
-        transitionMotorConfig.closedLoop.pid(0.0002, 0.0, 0.0);
+        transitionMotorConfig.closedLoop.pid(0.00021, 0.0, 0.0);
         transitionMotorConfig.closedLoop.feedForward.kV(0.0018001);
 
         transitionMotorConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder);

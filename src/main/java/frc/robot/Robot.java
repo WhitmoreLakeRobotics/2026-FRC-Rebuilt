@@ -94,6 +94,10 @@ public class Robot extends TimedRobot {
 
     @Override
     public void disabledPeriodic() {
+        
+        RobotContainer.getInstance().m_fmsSystem.updateAlliance();
+
+
     }
 
     /**
@@ -137,6 +141,7 @@ public class Robot extends TimedRobot {
         NetworkTable table = NetworkTableInstance.getDefault().getTable("shifts");
         firstInactiveAlliance = table.getEntry("firstInactiveAlliance");
         RobotController.setBrownoutVoltage(6.3);
+
     }
 
     /**
