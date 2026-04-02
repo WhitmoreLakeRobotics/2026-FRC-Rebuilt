@@ -1,0 +1,145 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "Start Flywheels"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "center drive back"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Intake"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Hopper Start"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.5
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "HStop"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "FStop"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "rcenter drive forward"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "rcenterflip"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "rcenterbumplineup"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Start Flywheels"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "rcenter-climb"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Hopper Start"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Intake Half"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 4.0
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "HStop"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "FStop"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Climb"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "center-climbsetup"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "RClimb Forward"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Down Climb"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}
