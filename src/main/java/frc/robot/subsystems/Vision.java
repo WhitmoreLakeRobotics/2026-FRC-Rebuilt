@@ -154,6 +154,7 @@ public boolean hasVision = false;
     for (Cameras camera : Cameras.values()) {
       // camera.multiTagStdDevs.
       Optional<EstimatedRobotPose> poseEst = getEstimatedGlobalPose(camera);
+      //Optional<EstimatedRobotPose> poseEst = camera.getEstimatedGlobalPose();
       try{
       if (poseEst.isPresent()) {
         var pose = poseEst.get();

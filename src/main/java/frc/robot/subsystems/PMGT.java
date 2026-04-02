@@ -84,8 +84,9 @@ public void setProfile(Profiles profile) {
     }
 
     public double getTotalCurrPower(){
+        totalCurrDraw = 0;
         for(int i = 0; i < 20; i++){
-        totalCurrDraw = PDH.getCurrent(i);
+        totalCurrDraw += PDH.getCurrent(i);
         }
         return totalCurrDraw;
         

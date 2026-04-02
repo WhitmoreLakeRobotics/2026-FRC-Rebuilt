@@ -95,7 +95,7 @@ public class Robot extends TimedRobot {
     @Override
     public void disabledPeriodic() {
         
-        RobotContainer.getInstance().m_fmsSystem.updateAlliance();
+      //  RobotContainer.getInstance().m_fmsSystem.updateAlliance();
 
 
     }

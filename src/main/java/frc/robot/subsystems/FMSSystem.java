@@ -64,6 +64,7 @@ public class FMSSystem extends SubsystemBase {
     public void periodic() {
         // This method will be called once per scheduler run
         // switch statement that changes the status based on the runtime match time
+        updateAlliance();
         double elapsed = time.get();
         switch (status) {
             case PREMATCH:

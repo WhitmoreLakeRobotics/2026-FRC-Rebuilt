@@ -223,7 +223,7 @@ public class Climb extends SubsystemBase {
         lClimbConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder);
 
         // config.smartCurrentLimit(50);
-        lClimbConfig.smartCurrentLimit(30, 80 ); // stallLimit was 20
+        lClimbConfig.smartCurrentLimit(50, 80 ); // stallLimit was 20
 
         lClimbMotor.configure(lClimbConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
@@ -295,7 +295,7 @@ public class Climb extends SubsystemBase {
         MOVING (0.0, 0.0),
         DEPLOYEDL1 (48.0, 48.0),
         CLIMBING (0.0, 0.0),
-        L1 (16.0, 16.0);
+        L1 (0.0, 0.0);
 
         private final double rightPos;
         private final double leftPos;
