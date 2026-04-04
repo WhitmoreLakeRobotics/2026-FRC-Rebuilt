@@ -27,7 +27,7 @@ public class DriverAssist extends SubsystemBase {
     private Launcher launcher;
     private String combinedStatus;
     private Launcher.LauncherStatus launcherStatus;
-    private Pose2d LaunchtargetPose;
+    private Pose2d LaunchtargetPose = new Pose2d(1, 4, new Rotation2d(0));
     private Hopper hopper;
     private Hopper.HopperStatus hopperStatus;
     private Climb climb;
