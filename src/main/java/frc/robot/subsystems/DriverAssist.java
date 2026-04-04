@@ -334,7 +334,12 @@ public class DriverAssist extends SubsystemBase {
         // Need to set articulation and drivebase targets.
 
         // this should be a drive target and articulation target set.
-        launcher.setNewTarget(targetPose);
+        
+        if (RobotContainer.getInstance().launchPos.getSelected().getName().equals("Auto")) {
+            launcher.setNewTarget(targetPose);
+        } else {
+            // do nothing, driver is selecting target manually.
+        }
 
     }
 

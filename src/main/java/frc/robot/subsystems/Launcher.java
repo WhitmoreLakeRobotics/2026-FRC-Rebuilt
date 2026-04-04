@@ -509,7 +509,11 @@ public class Launcher extends SubsystemBase {
                 "Center Target", Alliance.Red),
         RED_LEFTCENTERTARGET("Red Left Center Target",
                 new edu.wpi.first.math.geometry.Pose2d(14.220, 2.299, new edu.wpi.first.math.geometry.Rotation2d(0)),
-                "Center Target", Alliance.Red);
+                "Center Target", Alliance.Red),
+        AUTO("Auto Target",
+                new edu.wpi.first.math.geometry.Pose2d(-1, -1, new edu.wpi.first.math.geometry.Rotation2d(0)),
+                "Auto", Alliance.Red);
+        
 
         // Store name, pose2d, and "type" for each target
         private final String name;

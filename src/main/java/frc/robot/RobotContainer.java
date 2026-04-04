@@ -185,7 +185,8 @@ private String alliance;
     // launchPos.addOption("Blue Depot", Launcher.KnownTargets.BLUE_DEPOT.getPose2d());
     // }
 
-    launchPos.setDefaultOption("Red Hub", Launcher.KnownTargets.RED_HUB);
+    launchPos.setDefaultOption("Auto", Launcher.KnownTargets.AUTO);
+    launchPos.addOption("Red Hub", Launcher.KnownTargets.RED_HUB);
     launchPos.addOption("Red Center", Launcher.KnownTargets.RED_CENTERTARGET);
     launchPos.addOption("Red Left Center", Launcher.KnownTargets.RED_LEFTCENTERTARGET);
     launchPos.addOption("Blue Hub", Launcher.KnownTargets.BLUE_HUB);
@@ -195,6 +196,7 @@ private String alliance;
     launchPos.addOption("Blue OutPost", Launcher.KnownTargets.BLUE_OUTPOST);
     launchPos.addOption("Red Depot", Launcher.KnownTargets.RED_DEPOT);
     launchPos.addOption("Blue Depot", Launcher.KnownTargets.BLUE_DEPOT);
+
     launchPos.onChange(
             new Consumer<KnownTargets>() {
                 @Override
@@ -269,6 +271,8 @@ private String alliance;
       // add turret data to smartdashboard
       SmartDashboard.putNumber("Turret Angle", m_launcher.turret.getCurrAngle());
       SmartDashboard.putNumber("Target Angle", m_launcher.turret.getTargetAngle());
+      SmartDashboard.putString("Launcher Target Pose", m_launcher.getTargetPose().toString());
+
     }
     SmartDashboard.putNumber("Angle To Target", m_launcher.getAngleToTarget());
     SmartDashboard.putNumber("Relative Angle to Target", m_launcher.getRelativeAngleToTarget());
