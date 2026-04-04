@@ -653,6 +653,10 @@ public class DriverAssist extends SubsystemBase {
         return numofTargets;
     }
 
+    public Pose2d getLaunchTargetPose2d(){
+        return LaunchtargetPose; 
+    }
+
     // public ActionStates getCurrActionState() {
     // return currentActionState;
     // }
