@@ -27,7 +27,7 @@ public class DriverAssist extends SubsystemBase {
     private Launcher launcher;
     private String combinedStatus;
     private Launcher.LauncherStatus launcherStatus;
-    private Pose2d targetPose;
+    private Pose2d LaunchtargetPose;
     private Hopper hopper;
     private Hopper.HopperStatus hopperStatus;
     private Climb climb;
@@ -162,7 +162,7 @@ public class DriverAssist extends SubsystemBase {
         intakeStatus = intake.getStatus();
         launcherStatus = launcher.getStatus();
         combinedStatus = launcher.getCombinedStatus();
-        targetPose = launcher.getTargetPose();
+        LaunchtargetPose = launcher.getTargetPose();
         hopperStatus = hopper.getStatus();
         pmgtProfile = pmgt.getCurrentProfile();
         fmsStatus = fmsSystem.getStatus();
@@ -336,7 +336,7 @@ public class DriverAssist extends SubsystemBase {
         // this should be a drive target and articulation target set.
         
         if (RobotContainer.getInstance().launchPos.getSelected().getName().equals("Auto")) {
-            launcher.setNewTarget(targetPose);
+            launcher.setNewTarget(LaunchtargetPose);
         } else {
             // do nothing, driver is selecting target manually.
         }
@@ -367,9 +367,11 @@ public class DriverAssist extends SubsystemBase {
     private void determineTargetBasedOnTactic() {
         // Determine launch target based on current tactic approach.
         if (currALLIANCEZONE.alliance == currAlliance) {
-            if (launcherStatus == Launcher.LauncherStatus.IDLE) {
-                targetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "HUB").getPose2d();
-            }
+          /*   if (launcherStatus == Launcher.LauncherStatus.IDLE) {
+                LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "HUB").getPose2d();
+            }*/
+             LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "HUB").getPose2d();
+
 
         } else {
             //launcher.setStatus(Launcher.LauncherStatus.IDLE);
@@ -460,17 +462,19 @@ public class DriverAssist extends SubsystemBase {
         // Determine the target based on the current tactic approach.
         if (currALLIANCEZONE.alliance == currAlliance) {
             if (launcherStatus == Launcher.LauncherStatus.IDLE) {
-                // targetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" +
+                // LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" +
                 // "HUB").getPose2d();
             }
+             LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "HUB").getPose2d();
+            
 
         } else {
             if (currFIELDZONE == FIELDZONES.RIGHTZONE) {
-                targetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "CENTERTARGET").getPose2d();
+                LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "CENTERTARGET").getPose2d();
             } else if (currFIELDZONE == FIELDZONES.LEFTZONE) {
-                targetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "LEFTCENTERTARGET").getPose2d();
+                LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "LEFTCENTERTARGET").getPose2d();
             } else {
-                targetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "CENTERTARGET").getPose2d();
+                LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "CENTERTARGET").getPose2d();
             }
             switch (currentTactic.offshiftTactic) {
                 case RIGHTFAR:
@@ -554,7 +558,7 @@ public class DriverAssist extends SubsystemBase {
         // Determine the target based on the current tactic approach.
         if (currALLIANCEZONE.alliance == currAlliance) {
             if (launcherStatus == Launcher.LauncherStatus.IDLE) {
-                targetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "HUB").getPose2d();
+                LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "HUB").getPose2d();
             }
 
         } else {
