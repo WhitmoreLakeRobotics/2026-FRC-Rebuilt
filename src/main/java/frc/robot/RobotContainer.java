@@ -337,6 +337,7 @@ private String alliance;
     SmartDashboard.putString("Curr Tactic", m_driverAssist.getCurrTacticApproach().toString());
     SmartDashboard.putBoolean("At Prev Targ", m_driverAssist.getbAtPrevTarg());
     SmartDashboard.putNumber("Num Of Targets", m_driverAssist.getNumOfTargets());
+    //SmartDashboard.putString("da Launch Target Pose",m_driverAssist.getLaunchTargetPose2d().toString());
 
     SmartDashboard.putBoolean("Left Turret", m_launcher.getbLHF_Enabled());
     SmartDashboard.putBoolean("Right Turret", m_launcher.getbRHF_Enabled());

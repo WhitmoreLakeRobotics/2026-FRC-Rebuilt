@@ -91,23 +91,26 @@ public class Launcher extends SubsystemBase {
         // shotCalc.add(new LinearCalcRef(3337, 131, edu.wpi.first.units.Units.Inches));
         // unnecessary point
         shotCalc.add(new LinearCalcRef(3190, 99, edu.wpi.first.units.Units.Inches));
-        shotCalc.add(new LinearCalcRef(3470, 122, edu.wpi.first.units.Units.Inches)); // 114.5
-        shotCalc.add(new LinearCalcRef(3520, 132, edu.wpi.first.units.Units.Inches));
-        shotCalc.add(new LinearCalcRef(3650, 145, edu.wpi.first.units.Units.Inches));
-        shotCalc.add(new LinearCalcRef(3815, 156, edu.wpi.first.units.Units.Inches));
-        shotCalc.add(new LinearCalcRef(4056, 167, edu.wpi.first.units.Units.Inches));
+        shotCalc.add(new LinearCalcRef(3435, 122, edu.wpi.first.units.Units.Inches)); // 114.5
+        shotCalc.add(new LinearCalcRef(3528, 132, edu.wpi.first.units.Units.Inches));
+        shotCalc.add(new LinearCalcRef(3700, 145, edu.wpi.first.units.Units.Inches));
+        shotCalc.add(new LinearCalcRef(3800, 156, edu.wpi.first.units.Units.Inches));
+       // shotCalc.add(new LinearCalcRef(4056, 167, edu.wpi.first.units.Units.Inches));
+
+
+        shotCalc.add(new LinearCalcRef(3570, 148.5, edu.wpi.first.units.Units.Inches));
         shotCalc.Calculate();
 
         shotCalc.setMinimumRPM(1800);
 
         turretCalc.add(new LinearCalcRef(0, 0, edu.wpi.first.units.Units.Degrees));
-        turretCalc.add(new LinearCalcRef(250, 45, edu.wpi.first.units.Units.Degrees));
-        turretCalc.add(new LinearCalcRef(754, 100, edu.wpi.first.units.Units.Degrees));
-        turretCalc.add(new LinearCalcRef(787, 135, edu.wpi.first.units.Units.Degrees));
-        turretCalc.add(new LinearCalcRef(795, 179, edu.wpi.first.units.Units.Degrees));
-        turretCalc.add(new LinearCalcRef(787, -135, edu.wpi.first.units.Units.Degrees));
-        turretCalc.add(new LinearCalcRef(754, -100, edu.wpi.first.units.Units.Degrees));
-        turretCalc.add(new LinearCalcRef(250, -45, edu.wpi.first.units.Units.Degrees));
+        turretCalc.add(new LinearCalcRef(150, 45, edu.wpi.first.units.Units.Degrees));
+        turretCalc.add(new LinearCalcRef(454, 90, edu.wpi.first.units.Units.Degrees));
+        turretCalc.add(new LinearCalcRef(537, 135, edu.wpi.first.units.Units.Degrees));
+        turretCalc.add(new LinearCalcRef(645, 179, edu.wpi.first.units.Units.Degrees));
+        turretCalc.add(new LinearCalcRef(537, -135, edu.wpi.first.units.Units.Degrees));
+        turretCalc.add(new LinearCalcRef(454, -90, edu.wpi.first.units.Units.Degrees));
+        turretCalc.add(new LinearCalcRef(150, -45, edu.wpi.first.units.Units.Degrees));
         turretCalc.add(new LinearCalcRef(0, -1, edu.wpi.first.units.Units.Degrees));
         turretCalc.Calculate();
 

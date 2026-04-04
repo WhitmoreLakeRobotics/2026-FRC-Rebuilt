@@ -181,7 +181,7 @@ public class LFlywheels extends SubsystemBase {
         TowerConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder);
 
        // TowerConfig.smartCurrentLimit(50);
-        TowerConfig.smartCurrentLimit(35, 50);
+        TowerConfig.smartCurrentLimit(35, 45);
 
         TowerLM.configure(TowerConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
@@ -227,7 +227,7 @@ public class LFlywheels extends SubsystemBase {
         TowerConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder);
 
       //  TowerConfig.smartCurrentLimit(50);
-        TowerConfig.smartCurrentLimit(35, 50);
+        TowerConfig.smartCurrentLimit(35, 45);
 
         TowerRM.configure(TowerConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
