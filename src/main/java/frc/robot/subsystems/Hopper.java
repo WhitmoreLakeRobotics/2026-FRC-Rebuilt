@@ -78,7 +78,7 @@ public class Hopper extends SubsystemBase {
 
         if (status == HopperStatus.FUELING) {
             transitionMotor.getClosedLoopController().setSetpoint(
-                    RobotContainer.getInstance().m_launcher.getTargetRPM() * 0.8, ControlType.kVelocity);
+                    RobotContainer.getInstance().m_launcher.getTargetRPM() * 0.325, ControlType.kVelocity);
         }
 
     }
@@ -113,7 +113,7 @@ public class Hopper extends SubsystemBase {
 
 
                     transitionMotor.getClosedLoopController().setSetpoint(
-                            RobotContainer.getInstance().m_launcher.getTargetRPM() * 0.8, ControlType.kVelocity);
+                            RobotContainer.getInstance().m_launcher.getTargetRPM() * 0.325, ControlType.kVelocity);
 
                     beltMotor.setVoltage(status.getBeltMotorVoltage());
                     funnelMotor.setVoltage(status.getFunnelMotorVoltage());

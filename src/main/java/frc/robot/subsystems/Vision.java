@@ -377,10 +377,10 @@ public boolean hasVision = false;
      * Left Camera
      */
      LEFT_CAM("left",
-             new Rotation3d(Math.toRadians(-15), Math.toRadians(0), Math.toRadians(88)),
-             new Translation3d(Units.inchesToMeters(-9.5),
-                               Units.inchesToMeters(14.0),
-                               Units.inchesToMeters(17.75)),
+             new Rotation3d(Math.toRadians(-18), Math.toRadians(0), Math.toRadians(88)),
+             new Translation3d(Units.inchesToMeters(-11),
+                               Units.inchesToMeters(12.125),
+                               Units.inchesToMeters(17.375)),
              VecBuilder.fill(4, 4, 8), VecBuilder.fill(0.5, 0.5, 1)),
 
              
@@ -388,10 +388,10 @@ public boolean hasVision = false;
      * Right Camera
      */
     RIGHT_CAM("right",
-              new Rotation3d(Math.toRadians(15), Math.toRadians(0), Math.toRadians(-95)),
-              new Translation3d(Units.inchesToMeters(-10.75), //was -9.5
-                                Units.inchesToMeters(-12.35),
-                                Units.inchesToMeters(17.70)),
+              new Rotation3d(Math.toRadians(18), Math.toRadians(0), Math.toRadians(-95)),
+              new Translation3d(Units.inchesToMeters(-10.375), //was -9.5
+                                Units.inchesToMeters(-12.125),
+                                Units.inchesToMeters(17.375)),
               VecBuilder.fill(4, 4, 8), VecBuilder.fill(0.5, 0.5, 1)),
     /**
      * Center Camera
@@ -686,4 +686,58 @@ public double getVisionTimestamp(){
 //     latestID = -1;
 //   }
 // }
+
+public void updateGlobalPoseEstimation(SwerveDrive swerveDrive)
+  {
+    if (SwerveDriveTelemetry.isSimulation && swerveDrive.getSimulationDriveTrainPose().isPresent())
+    {
+      /*
+       * In the maple-sim, odometry is simulated using encoder values, accounting for factors like skidding and drifting.
+       * As a result, the odometry may not always be 100% accurate.
+       * However, the vision system should be able to provide a reasonably accurate pose estimation, even when odometry is incorrect.
+       * (This is why teams implement vision system to correct odometry.)
+       * Therefore, we must ensure that the actual robot pose is provided in the simulator when updating the vision simulation during the simulation.
+       */
+      visionSim.update(swerveDrive.getSimulationDriveTrainPose().get());
+    }
+    for (Cameras camera : Cameras.values()) {
+      // camera.multiTagStdDevs.
+      //Optional<EstimatedRobotPose> poseEst = getEstimatedGlobalPose(camera);
+      Optional<EstimatedRobotPose> poseEst = camera.getEstimatedGlobalPose();
+      try{
+      if (poseEst.isPresent()) {
+        var pose = poseEst.get();
+        hasVision = true;
+        //System.out.println("timestamp " + pose.timestampSeconds);
+
+        /*added custom code 3668 here */
+        //latestID = pose.targetsUsed.get(0).getFiducialId(); //get used id from last scan 
+        VisionTimeStamp = pose.timestampSeconds;
+        //Optional<Pose3d> tagPoseOptional = fieldLayout.getTagPose(latestID);   //get april tag location from last viewed tag id
+        //Pose3d tagPose = tagPoseOptional.get();   //convert to actual Pose3d of tag id 
+        // Compute the robot's pose relative to the tag
+        //Pose2d robotPose = pose.estimatedPose.toPose2d();   //grab 2d pose of robot relative to field
+        LastCalcVisionLocation = pose.estimatedPose.toPose2d();
+        //Pose2d tagPose2d = tagPose.toPose2d();  // get 2d pose from 3d of april tag location
+        //Pose2d robotInTagSpace = robotPose.relativeTo(tagPose2d);  //calc robot postion relative to tag 
+        //lastCalculatedDist = Optional.of(robotInTagSpace);  // store robot location 
+
+
+       // lastCalculatedDist.of(poseEst.get().estimatedPose.toPose2d());
+        /* end of custom code 3668 */
+       
+       swerveDrive.addVisionMeasurement(pose.estimatedPose.toPose2d(),
+            pose.timestampSeconds,
+            camera.curStdDevs);
+      } else {
+        hasVision = false;
+      }
+    
+      } catch (Exception e) {
+       //ignore 
+      }
+    }
+
+
+  }
 }
