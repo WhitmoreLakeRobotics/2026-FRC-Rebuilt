@@ -159,7 +159,7 @@ public class LFlywheels extends SubsystemBase {
 
         //TowerConfig.closedLoop.maxOutput(1.0);
         //TowerConfig.closedLoop.minOutput(-1.0);
-
+        TowerConfig.encoder.quadratureAverageDepth(4);
        // TowerConfig.closedLoopRampRate(0.075);
        //TowerConfig.voltageCompensation(9.0);
        // TowerConfig.closedLoop.maxMotion.cruiseVelocity(0);
@@ -204,6 +204,7 @@ public class LFlywheels extends SubsystemBase {
 
         //TowerConfig.closedLoop.maxOutput(1.0);
         //TowerConfig.closedLoop.minOutput(-1.0);
+        TowerConfig.encoder.quadratureAverageDepth(4);
 
         //TowerConfig.closedLoopRampRate(0.075);
         //TowerConfig.voltageCompensation(9.0);

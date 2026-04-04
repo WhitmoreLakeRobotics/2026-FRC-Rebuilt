@@ -361,7 +361,7 @@ public class Intake extends SubsystemBase {
         RETRACTING(0.0, 0.0),
         EXTENDED_STOPPED(15.1, 0.0),
         EXTENDING(15.1, 0.0),
-        EXTENDED_INTAKING(15.1, 4257),        // used to be 15.5
+        EXTENDED_INTAKING(15.1, 4800),        // used to be 4257
         EXTENDED_OUTPUT(15.1, -4257);         // used to be 15.1
 
         private final double position;
