@@ -212,14 +212,14 @@ public class Hopper extends SubsystemBase {
         transitionMotorConfig.softLimit.reverseSoftLimit(0);
         transitionMotorConfig.softLimit.reverseSoftLimitEnabled(false);
         transitionMotorConfig.idleMode(IdleMode.kCoast);
-        transitionMotorConfig.openLoopRampRate(0.15);
+        transitionMotorConfig.openLoopRampRate(0.001);
         // transitionMotorConfig.limitSwitch.forwardLimitSwitchEnabled(false);
         // transitionMotorConfig.limitSwitch.reverseLimitSwitchEnabled(false);
 
         transitionMotorConfig.closedLoop.maxOutput(1.0);
         transitionMotorConfig.closedLoop.minOutput(-1.0);
 
-        transitionMotorConfig.closedLoopRampRate(0.10);
+        transitionMotorConfig.closedLoopRampRate(0.05);
         transitionMotorConfig.voltageCompensation(10.0);
         // transitionMotorConfig.closedLoop.maxMotion.maxAcceleration(5000,
         // beltMotor_CLOSED_LOOP_SLOT_DOWN);
@@ -228,12 +228,12 @@ public class Hopper extends SubsystemBase {
         // transitionMotorConfig.closedLoop.maxMotion.allowedClosedLoopError(beltMotorPosTol,
         // beltMotor_CLOSED_LOOP_SLOT_DOWN);
         transitionMotorConfig.closedLoop.pid(0.0005, 0.0, 0.0);
-        transitionMotorConfig.closedLoop.feedForward.kV(0.0018001);
+        transitionMotorConfig.closedLoop.feedForward.kV(0.00193005);
         transitionMotorConfig.encoder.quadratureAverageDepth(8);
 
         transitionMotorConfig.closedLoop.feedbackSensor(FeedbackSensor.kPrimaryEncoder);
 
-        transitionMotorConfig.smartCurrentLimit(40);
+        transitionMotorConfig.smartCurrentLimit(50);
         // transitionMotorConfig.smartCurrentLimit(normalStallCurrentLimit,
         // normalFreeCurrentLimit);
 

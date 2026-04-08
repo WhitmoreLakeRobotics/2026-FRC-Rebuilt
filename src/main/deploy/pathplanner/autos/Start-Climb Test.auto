@@ -7,25 +7,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Start-climb Test"
+            "pathName": "Start-climb test "
           }
         },
         {
           "type": "named",
           "data": {
             "name": "Start Flywheels"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Intake"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 2.0
           }
         },
         {

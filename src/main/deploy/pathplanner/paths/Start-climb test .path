@@ -37,12 +37,6 @@
       "waypointRelativePos": 0.36464088397790134,
       "endWaypointRelativePos": null,
       "command": null
-    },
-    {
-      "name": "Hopper Start",
-      "waypointRelativePos": 1.0,
-      "endWaypointRelativePos": null,
-      "command": null
     }
   ],
   "globalConstraints": {

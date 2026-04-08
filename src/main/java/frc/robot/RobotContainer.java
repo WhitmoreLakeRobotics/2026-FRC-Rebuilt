@@ -284,7 +284,7 @@ private String alliance;
     SmartDashboard.putNumber("Target RPM", m_launcher.getTargetRPM());
     SmartDashboard.putNumber("Distance to Target", m_launcher.getDistanceToTarget());
         SmartDashboard.putNumber("Auto RPM Offset", m_launcher.getAutoOffSetARPM());
-        SmartDashboard.putNumber("Autio Aim Offset", m_launcher.getautioffsetAim());
+        SmartDashboard.putNumber("Auto Aim Offset", m_launcher.getautioffsetAim());
 
     // add Hopper data to SmartDashboard
     SmartDashboard.putString("Hopper Status", m_feeder.getStatus().toString());

@@ -59,7 +59,7 @@ public class Launcher extends SubsystemBase {
     private LinearCalc turretCalc = new LinearCalc();
 
     private double targetRPM;
-    private double FieldDistanceOffSet = -5.0; // in inches
+    private double FieldDistanceOffSet = -0.0; // in inches
 
     public static final double TURRET_OFFSET_X = -0.2; // 20 cm back from robot center
     public static final double TURRET_OFFSET_Y = 0.0; // centered left-right
@@ -91,10 +91,12 @@ public class Launcher extends SubsystemBase {
         // shotCalc.add(new LinearCalcRef(3337, 131, edu.wpi.first.units.Units.Inches));
         // unnecessary point
         shotCalc.add(new LinearCalcRef(3190, 99, edu.wpi.first.units.Units.Inches));
-        shotCalc.add(new LinearCalcRef(3435, 122, edu.wpi.first.units.Units.Inches)); // 114.5
-        shotCalc.add(new LinearCalcRef(3528, 132, edu.wpi.first.units.Units.Inches));
-        shotCalc.add(new LinearCalcRef(3700, 145, edu.wpi.first.units.Units.Inches));
-        shotCalc.add(new LinearCalcRef(3800, 156, edu.wpi.first.units.Units.Inches));
+        shotCalc.add(new LinearCalcRef(3535, 122, edu.wpi.first.units.Units.Inches)); // 114.5
+        shotCalc.add(new LinearCalcRef(3645, 132, edu.wpi.first.units.Units.Inches));
+        shotCalc.add(new LinearCalcRef(3850, 145, edu.wpi.first.units.Units.Inches));
+        shotCalc.add(new LinearCalcRef(3970, 153, edu.wpi.first.units.Units.Inches));
+        shotCalc.add(new LinearCalcRef(4410, 173, edu.wpi.first.units.Units.Inches));
+        shotCalc.add(new LinearCalcRef(5800, 215, edu.wpi.first.units.Units.Inches));
        // shotCalc.add(new LinearCalcRef(4056, 167, edu.wpi.first.units.Units.Inches));
 
 
@@ -107,7 +109,7 @@ public class Launcher extends SubsystemBase {
         turretCalc.add(new LinearCalcRef(150, 45, edu.wpi.first.units.Units.Degrees));
         turretCalc.add(new LinearCalcRef(454, 90, edu.wpi.first.units.Units.Degrees));
         turretCalc.add(new LinearCalcRef(537, 135, edu.wpi.first.units.Units.Degrees));
-        turretCalc.add(new LinearCalcRef(645, 179, edu.wpi.first.units.Units.Degrees));
+        turretCalc.add(new LinearCalcRef(645, 179, edu.wpi.first.units.Units.Degrees));  //possible 1040  consider adding -179
         turretCalc.add(new LinearCalcRef(537, -135, edu.wpi.first.units.Units.Degrees));
         turretCalc.add(new LinearCalcRef(454, -90, edu.wpi.first.units.Units.Degrees));
         turretCalc.add(new LinearCalcRef(150, -45, edu.wpi.first.units.Units.Degrees));
