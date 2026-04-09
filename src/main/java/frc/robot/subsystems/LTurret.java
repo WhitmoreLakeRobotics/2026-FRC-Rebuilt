@@ -61,16 +61,16 @@ public class LTurret extends SubsystemBase {
         configTurningMotor();
 
         angleCalc.add(new LinearCalcRef(0.0, -180.0, edu.wpi.first.units.Units.Degrees));
-        angleCalc.add(new LinearCalcRef(5.0, -135.0, edu.wpi.first.units.Units.Degrees));
-        angleCalc.add(new LinearCalcRef(7.0, -90.0, edu.wpi.first.units.Units.Degrees));
-        angleCalc.add(new LinearCalcRef(2.0, -45.0, edu.wpi.first.units.Units.Degrees));
+        angleCalc.add(new LinearCalcRef(-2.0, -135.0, edu.wpi.first.units.Units.Degrees));
+        angleCalc.add(new LinearCalcRef(-4.0, -90.0, edu.wpi.first.units.Units.Degrees));
+        angleCalc.add(new LinearCalcRef(0.0, -45.0, edu.wpi.first.units.Units.Degrees));
         angleCalc.add(new LinearCalcRef(0.0, 0.0, edu.wpi.first.units.Units.Degrees));
         angleCalc.add(new LinearCalcRef(2.0, 45.0, edu.wpi.first.units.Units.Degrees));
         //angleCalc.add(new LinearCalcRef(3.0, 60.0, edu.wpi.first.units.Units.Degrees));
         //angleCalc.add(new LinearCalcRef(5.0, 80.0, edu.wpi.first.units.Units.Degrees));
-        angleCalc.add(new LinearCalcRef(7.0, 90.0, edu.wpi.first.units.Units.Degrees));
-        angleCalc.add(new LinearCalcRef(5.0, 135.0, edu.wpi.first.units.Units.Degrees));
-        angleCalc.add(new LinearCalcRef(0.0, 180.0, edu.wpi.first.units.Units.Degrees));
+        angleCalc.add(new LinearCalcRef(6.0, 90.0, edu.wpi.first.units.Units.Degrees));
+        angleCalc.add(new LinearCalcRef(4.0, 135.0, edu.wpi.first.units.Units.Degrees));
+        angleCalc.add(new LinearCalcRef(4.0, 180.0, edu.wpi.first.units.Units.Degrees));
 
         angleCalc.Calculate();
 

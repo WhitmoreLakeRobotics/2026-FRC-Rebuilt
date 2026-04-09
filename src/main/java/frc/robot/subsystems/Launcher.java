@@ -91,13 +91,21 @@ public class Launcher extends SubsystemBase {
         // shotCalc.add(new LinearCalcRef(3337, 131, edu.wpi.first.units.Units.Inches));
         // unnecessary point
         shotCalc.add(new LinearCalcRef(3190, 99, edu.wpi.first.units.Units.Inches));
-        shotCalc.add(new LinearCalcRef(3535, 122, edu.wpi.first.units.Units.Inches)); // 114.5
-        shotCalc.add(new LinearCalcRef(3645, 132, edu.wpi.first.units.Units.Inches));
-        shotCalc.add(new LinearCalcRef(3850, 145, edu.wpi.first.units.Units.Inches));
-        shotCalc.add(new LinearCalcRef(3970, 153, edu.wpi.first.units.Units.Inches));
-        shotCalc.add(new LinearCalcRef(4410, 173, edu.wpi.first.units.Units.Inches));
-        shotCalc.add(new LinearCalcRef(5800, 215, edu.wpi.first.units.Units.Inches));
-       // shotCalc.add(new LinearCalcRef(4056, 167, edu.wpi.first.units.Units.Inches));
+
+        //Ann Arbor Library Testing
+        // shotCalc.add(new LinearCalcRef(3535, 122, edu.wpi.first.units.Units.Inches)); // 114.5
+        // shotCalc.add(new LinearCalcRef(3645, 132, edu.wpi.first.units.Units.Inches));
+        // shotCalc.add(new LinearCalcRef(3850, 145, edu.wpi.first.units.Units.Inches));
+        // shotCalc.add(new LinearCalcRef(3970, 153, edu.wpi.first.units.Units.Inches));
+        // shotCalc.add(new LinearCalcRef(4410, 173, edu.wpi.first.units.Units.Inches));
+        // shotCalc.add(new LinearCalcRef(5800, 215, edu.wpi.first.units.Units.Inches));
+
+        // Testing at Lab
+        shotCalc.add(new LinearCalcRef(3435, 122, edu.wpi.first.units.Units.Inches)); // 114.5
+        shotCalc.add(new LinearCalcRef(3528, 132, edu.wpi.first.units.Units.Inches));
+        shotCalc.add(new LinearCalcRef(3700, 145, edu.wpi.first.units.Units.Inches));
+        shotCalc.add(new LinearCalcRef(3800, 156, edu.wpi.first.units.Units.Inches));
+        shotCalc.add(new LinearCalcRef(4056, 167, edu.wpi.first.units.Units.Inches));
 
 
         shotCalc.add(new LinearCalcRef(3570, 148.5, edu.wpi.first.units.Units.Inches));
