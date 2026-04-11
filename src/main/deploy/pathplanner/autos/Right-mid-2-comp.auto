@@ -62,7 +62,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 5.0
+            "waitTime": 4.0
           }
         },
         {
@@ -90,15 +90,22 @@
           }
         },
         {
-          "type": "named",
+          "type": "parallel",
           "data": {
-            "name": "Start Flywheels"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "right bump launch"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "right bump launch"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Start Flywheels"
+                }
+              }
+            ]
           }
         },
         {

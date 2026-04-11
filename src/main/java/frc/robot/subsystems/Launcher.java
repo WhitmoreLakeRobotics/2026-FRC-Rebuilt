@@ -101,7 +101,7 @@ public class Launcher extends SubsystemBase {
         // shotCalc.add(new LinearCalcRef(5800, 215, edu.wpi.first.units.Units.Inches));
 
         // Testing at Lab
-        shotCalc.add(new LinearCalcRef(3435, 122, edu.wpi.first.units.Units.Inches)); // 114.5
+        shotCalc.add(new LinearCalcRef(3435, 122, edu.wpi.first.units.Units.Inches)); // 
         shotCalc.add(new LinearCalcRef(3528, 132, edu.wpi.first.units.Units.Inches));
         shotCalc.add(new LinearCalcRef(3700, 145, edu.wpi.first.units.Units.Inches));
         shotCalc.add(new LinearCalcRef(3800, 156, edu.wpi.first.units.Units.Inches));
@@ -117,9 +117,9 @@ public class Launcher extends SubsystemBase {
         turretCalc.add(new LinearCalcRef(150, 45, edu.wpi.first.units.Units.Degrees));
         turretCalc.add(new LinearCalcRef(454, 90, edu.wpi.first.units.Units.Degrees));
         turretCalc.add(new LinearCalcRef(537, 135, edu.wpi.first.units.Units.Degrees));
-        turretCalc.add(new LinearCalcRef(645, 179, edu.wpi.first.units.Units.Degrees));  //possible 1040  consider adding -179
+        turretCalc.add(new LinearCalcRef(645, 179, edu.wpi.first.units.Units.Degrees));  
         turretCalc.add(new LinearCalcRef(537, -135, edu.wpi.first.units.Units.Degrees));
-        turretCalc.add(new LinearCalcRef(454, -90, edu.wpi.first.units.Units.Degrees));
+        turretCalc.add(new LinearCalcRef(374, -90, edu.wpi.first.units.Units.Degrees));  // was 474
         turretCalc.add(new LinearCalcRef(150, -45, edu.wpi.first.units.Units.Degrees));
         turretCalc.add(new LinearCalcRef(0, -1, edu.wpi.first.units.Units.Degrees));
         turretCalc.Calculate();
@@ -512,16 +512,16 @@ public class Launcher extends SubsystemBase {
                 new edu.wpi.first.math.geometry.Pose2d(0.534, 1.135, new edu.wpi.first.math.geometry.Rotation2d(0)),
                 "Outpost", Alliance.Blue),
         Blue_CENTERTARGET("Blue Center Target",
-                new edu.wpi.first.math.geometry.Pose2d(2.706, 1.618, new edu.wpi.first.math.geometry.Rotation2d(0)),
+                new edu.wpi.first.math.geometry.Pose2d(3.157, 2.685, new edu.wpi.first.math.geometry.Rotation2d(0)),
                 "Center Target", Alliance.Blue),
         Blue_LEFTCENTERTARGET("Blue Left Center Target",
-                new edu.wpi.first.math.geometry.Pose2d(3.378, 5.837, new edu.wpi.first.math.geometry.Rotation2d(0)),
+                new edu.wpi.first.math.geometry.Pose2d(3.547, 5.676, new edu.wpi.first.math.geometry.Rotation2d(0)),
                 "Center Target", Alliance.Blue),
         Red_CENTERTARGET("Red Center Target",
-                new edu.wpi.first.math.geometry.Pose2d(14.220, 5.461, new edu.wpi.first.math.geometry.Rotation2d(0)),
+                new edu.wpi.first.math.geometry.Pose2d(13.133, 5.676, new edu.wpi.first.math.geometry.Rotation2d(0)),
                 "Center Target", Alliance.Red),
         Red_LEFTCENTERTARGET("Red Left Center Target",
-                new edu.wpi.first.math.geometry.Pose2d(14.220, 2.299, new edu.wpi.first.math.geometry.Rotation2d(0)),
+                new edu.wpi.first.math.geometry.Pose2d(12.961, 2.513, new edu.wpi.first.math.geometry.Rotation2d(0)),
                 "Center Target", Alliance.Red),
         AUTO("Auto",
                 new edu.wpi.first.math.geometry.Pose2d(-1, -1, new edu.wpi.first.math.geometry.Rotation2d(0)),
