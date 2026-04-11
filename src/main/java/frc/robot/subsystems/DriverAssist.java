@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import java.lang.Thread.State;
 import java.util.ArrayList; // Ensure this import is complete and used in the code
 import java.util.EnumMap;
 import java.util.List;
@@ -89,7 +90,7 @@ public class DriverAssist extends SubsystemBase {
         }
 
         if (driveTrain != null) {
-            currDAStatus = DAStatus.INIT;
+           currDAStatus = DAStatus.RUNNING;
 
         }
 
@@ -110,7 +111,7 @@ public class DriverAssist extends SubsystemBase {
                 break;
             case INIT:
                 getSubsystems();
-
+                System.out.println("Current DA status: " + currDAStatus.toString());
                 break;
 
             default:
@@ -149,9 +150,26 @@ public class DriverAssist extends SubsystemBase {
     // SYSTEM METHODS GO ABOVE THIS LINE
     // PROCESSING METHODS GO BELOW THIS LINE
     private void getSubsystems() {
-        driveTrain = RobotContainer.getInstance().m_driveTrain;
-        launcher = RobotContainer.getInstance().m_launcher;
+      //  driveTrain = RobotContainer.getInstance().m_driveTrain;
+      //  launcher = RobotContainer.getInstance().m_launcher;
 
+        try {
+            driveTrain = RobotContainer.getInstance().m_driveTrain;
+            intake = RobotContainer.getInstance().m_intake;
+            launcher = RobotContainer.getInstance().m_launcher;
+            hopper = RobotContainer.getInstance().m_feeder;
+            fmsSystem = RobotContainer.getInstance().m_fmsSystem;
+            pmgt = RobotContainer.getInstance().m_pmgt;
+            climb = RobotContainer.getInstance().m_climb;
+        } catch (Exception e) {
+            System.out.println("Error initializing DriverAssist subsystem: " + e.getMessage());
+        }
+
+         if (driveTrain != null) {
+          //  currDAStatus = DAStatus.INIT;
+            currDAStatus = DAStatus.RUNNING;
+
+        }
         // coral = RobotContainer.getInstance().m_Coral;
 
     }
@@ -261,55 +279,56 @@ public class DriverAssist extends SubsystemBase {
 
         // Based on pos of robot, tactics, and shift we need to determine which drive
         // target is best.
-        switch (fmsStatus) {
-            case PREMATCH:
-            determineTargetBasedOnTactic();
-                break;
-            case AUTONOMOUS:
-                break;
-            case PRETELEOP:
-                break;
-            case TRANSITION:
-                determineTargetBasedOnTactic();
-                break;
-            case ALLIANCE_SHIFT_1:
-                if (onShift) {
-                    determineTargetBasedOnTactic();
-                } else {
-                    determineTargetBasedOffTactic();
-                }
-                break;
-            case ALLIANCE_SHIFT_2:
-                if (onShift) {
-                    determineTargetBasedOnTactic();
-                } else {
-                    determineTargetBasedOffTactic();
-                }
-                break;
-            case ALLIANCE_SHIFT_3:
-                if (onShift) {
-                    determineTargetBasedOnTactic();
-                } else {
-                    determineTargetBasedOffTactic();
-                }
-                break;
-            case ALLIANCE_SHIFT_4:
-                if (onShift) {
-                    determineTargetBasedOnTactic();
-                } else {
-                    determineTargetBasedOffTactic();
-                }
-                break;
-            case ENDGAME:
-                determineTargetBasedClimbTactic();
-                break;
-            default:
-                break;
+        // switch (fmsStatus) {
+        //     case PREMATCH:
+        //     determineTargetBasedOnTactic();
+        //         break;
+        //     case AUTONOMOUS:
+        //         break;
+        //     case PRETELEOP:
+        //         break;
+        //     case TRANSITION:
+        //         determineTargetBasedOnTactic();
+        //         break;
+        //     case ALLIANCE_SHIFT_1:
+        //         if (onShift) {
+        //             determineTargetBasedOnTactic();
+        //         } else {
+        //             determineTargetBasedOffTactic();
+        //         }
+        //         break;
+        //     case ALLIANCE_SHIFT_2:
+        //         if (onShift) {
+        //             determineTargetBasedOnTactic();
+        //         } else {
+        //             determineTargetBasedOffTactic();
+        //         }
+        //         break;
+        //     case ALLIANCE_SHIFT_3:
+        //         if (onShift) {
+        //             determineTargetBasedOnTactic();
+        //         } else {
+        //             determineTargetBasedOffTactic();
+        //         }
+        //         break;
+        //     case ALLIANCE_SHIFT_4:
+        //         if (onShift) {
+        //             determineTargetBasedOnTactic();
+        //         } else {
+        //             determineTargetBasedOffTactic();
+        //         }
+        //         break;
+        //     case ENDGAME:
+        //         determineTargetBasedClimbTactic();
+        //         break;
+        //     default:
+        //         break;
 
-        }
+        // }
 
         // based on current pos of robot and shift we need to determine which launch
         // target is best.
+        determineTargetBasedOffTactic(); 
 
     }
 
@@ -335,10 +354,10 @@ public class DriverAssist extends SubsystemBase {
         // Need to set articulation and drivebase targets.
 
         // this should be a drive target and articulation target set.
-        
-        if (RobotContainer.getInstance().launchPos.getSelected().getName().equals("Auto")) {
+        //System.out.println("current launchPos: " + RobotContainer.getInstance().launchPos.getSelected().getName().toString());
+        if (RobotContainer.getInstance().launchPos.getSelected().getName().toString() == "Auto") {
             launcher.setNewTarget(LaunchtargetPose);
-                System.out.println("Current Pose: " + LaunchtargetPose);
+              //  System.out.println("Current Pose: " + LaunchtargetPose);
 
         } else {
             // do nothing, driver is selecting target manually.
@@ -374,7 +393,7 @@ public class DriverAssist extends SubsystemBase {
                 LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "HUB").getPose2d();
             }*/
              LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.toString() + "_" + "HUB").getPose2d();
-                     System.out.println("Updated Pose: " + LaunchtargetPose);
+                     //System.out.println("Updated Pose: " + LaunchtargetPose);
 
 
 
@@ -468,23 +487,34 @@ public class DriverAssist extends SubsystemBase {
     private void determineTargetBasedOffTactic() {
         // Determine the target based on the current tactic approach.
         if (currALLIANCEZONE.alliance == currAlliance) {
-            if (launcherStatus == Launcher.LauncherStatus.IDLE) {
-                // LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" +
-                // "HUB").getPose2d();
-             LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name().toString() + "_" + "HUB").getPose2d();
+            // if (launcherStatus == Launcher.LauncherStatus.IDLE) {
+            //     // LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" +
+            //     // "HUB").getPose2d();
+            //  LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.toString() + "_" + "HUB").getPose2d();
 
-            }
-             LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name().toString() + "_" + "HUB").getPose2d();
+            // }
+             LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.toString() + "_" + "HUB").getPose2d();
             
 
         } else {
-            if (currFIELDZONE == FIELDZONES.RIGHTZONE) {
-                LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name().toString() + "_" + "CENTERTARGET").getPose2d();
+            if(currAlliance == Alliance.Red){  // invert left right for Red alliance
+                if (currFIELDZONE == FIELDZONES.RIGHTZONE) {
+                LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.toString() + "_" + "LEFTCENTERTARGET").getPose2d();
             } else if (currFIELDZONE == FIELDZONES.LEFTZONE) {
-                LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name().toString() + "_" + "LEFTCENTERTARGET").getPose2d();
+                LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.toString() + "_" + "CENTERTARGET").getPose2d();
             } else {
-                LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name().toString() + "_" + "CENTERTARGET").getPose2d();
+                LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.toString() + "_" + "CENTERTARGET").getPose2d();
             }
+            }else{
+            if (currFIELDZONE == FIELDZONES.RIGHTZONE) {
+                LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.toString() + "_" + "CENTERTARGET").getPose2d();
+            } else if (currFIELDZONE == FIELDZONES.LEFTZONE) {
+                LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.toString() + "_" + "LEFTCENTERTARGET").getPose2d();
+            } else {
+                LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.toString() + "_" + "CENTERTARGET").getPose2d();
+            }
+            }
+            
             switch (currentTactic.offshiftTactic) {
                 case RIGHTFAR:
                     // find nearest deploy
@@ -561,7 +591,7 @@ public class DriverAssist extends SubsystemBase {
                     break;
             }
         }
-                System.out.println("Updated Pose: " + LaunchtargetPose);
+                //System.out.println("Updated Pose: " + LaunchtargetPose);
 
     }
 
@@ -631,8 +661,9 @@ public class DriverAssist extends SubsystemBase {
     // Retreive the current command of the drivetrain.
     private void updateDrivetrainStatus() {
         // Get the current status of the drivetrain.
-        if (driveTrain.getCurrentCommand() != null) {
             currRobotPose = driveTrain.getPose();
+        if (driveTrain.getCurrentCommand() != null) {
+
             currCmdName = driveTrain.getCurrentCommand().getName();
 
             if (driveTrain.getSwerveDrive().getRobotVelocity().vxMetersPerSecond <= Math.abs(0.01) &&
@@ -804,9 +835,9 @@ public class DriverAssist extends SubsystemBase {
     }
 
     public enum FIELDZONES {
-        RIGHTZONE(0.0, 7.62),
-        LEFTZONE(7.62, 16.4592),
-        CENTERZONE(7.62, 8.2296);
+        RIGHTZONE(0.0, 4.027),
+        LEFTZONE(4.027, 8.22),
+        CENTERZONE(4.027, 4.027);
 
         private double start;
         private double end;
@@ -831,9 +862,9 @@ public class DriverAssist extends SubsystemBase {
     }
 
     public enum ALLIANCEZONE {
-        REDZONE(0.0, 8.2296, Alliance.Red),
-        BLUEZONE(8.2296, 16.4592, Alliance.Blue),
-        DMZ(7.62, 8.2296, null);
+        BLUEZONE(0.0, 5.22, Alliance.Blue),   //0.00 , 8.2296
+        REDZONE(11.243, 18.00, Alliance.Red),   //8.2296  , 
+        DMZ(5.22, 11.243, null);
 
         double start;
         double end;

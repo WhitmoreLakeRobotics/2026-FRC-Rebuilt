@@ -64,7 +64,7 @@ public class AutoTargetToggle extends Command {
     public void initialize() {
         Launcher.KnownTargets curTarget = RobotContainer.getInstance().launchPos.getSelected();
         if(alliance == alliance.Red){
-            if(curTarget == Launcher.KnownTargets.RED_HUB){
+            if(curTarget == Launcher.KnownTargets.Red_HUB){
 
                 //Update target.  
               //  RobotContainer.getInstance().launchPos

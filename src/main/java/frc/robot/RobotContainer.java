@@ -188,16 +188,16 @@ private String alliance;
     // }
 
     launchPos.setDefaultOption("Auto", Launcher.KnownTargets.AUTO);
-    launchPos.addOption("Red Hub", Launcher.KnownTargets.RED_HUB);
-    launchPos.addOption("Red Center", Launcher.KnownTargets.RED_CENTERTARGET);
-    launchPos.addOption("Red Left Center", Launcher.KnownTargets.RED_LEFTCENTERTARGET);
-    launchPos.addOption("Blue Hub", Launcher.KnownTargets.BLUE_HUB);
-    launchPos.addOption("Blue Center", Launcher.KnownTargets.BLUE_CENTERTARGET);
-    launchPos.addOption("Blue Left Center", Launcher.KnownTargets.BLUE_LEFTCENTERTARGET);
-    launchPos.addOption("Red OutPost", Launcher.KnownTargets.RED_OUTPOST);
-    launchPos.addOption("Blue OutPost", Launcher.KnownTargets.BLUE_OUTPOST);
-    launchPos.addOption("Red Depot", Launcher.KnownTargets.RED_DEPOT);
-    launchPos.addOption("Blue Depot", Launcher.KnownTargets.BLUE_DEPOT);
+    launchPos.addOption("Red Hub", Launcher.KnownTargets.Red_HUB);
+    launchPos.addOption("Red Center", Launcher.KnownTargets.Red_CENTERTARGET);
+    launchPos.addOption("Red Left Center", Launcher.KnownTargets.Red_LEFTCENTERTARGET);
+    launchPos.addOption("Blue Hub", Launcher.KnownTargets.Blue_HUB);
+    launchPos.addOption("Blue Center", Launcher.KnownTargets.Blue_CENTERTARGET);
+    launchPos.addOption("Blue Left Center", Launcher.KnownTargets.Blue_LEFTCENTERTARGET);
+    launchPos.addOption("Red OutPost", Launcher.KnownTargets.Red_OUTPOST);
+    launchPos.addOption("Blue OutPost", Launcher.KnownTargets.Blue_OUTPOST);
+    launchPos.addOption("Red Depot", Launcher.KnownTargets.Red_DEPOT);
+    launchPos.addOption("Blue Depot", Launcher.KnownTargets.Blue_DEPOT);
 
     launchPos.onChange(
             new Consumer<KnownTargets>() {
