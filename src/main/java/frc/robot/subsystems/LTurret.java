@@ -162,7 +162,7 @@ public class LTurret extends SubsystemBase {
         // turningConfig.closedLoop.maxMotion.maxAcceleration(5000, rTowerR_CLOSED_LOOP_SLOT_DOWN);
         // turningConfig.closedLoop.maxMotion.maxVelocity(5000, rTowerR_CLOSED_LOOP_SLOT_DOWN);
         // turningConfig.closedLoop.maxMotion.allowedClosedLoopError(rTowerRPosTol, rTowerR_CLOSED_LOOP_SLOT_DOWN);
-         turningConfig.closedLoop.pid(0.03, 0.0, 0.0, ClosedLoopSlot.kSlot0);
+         turningConfig.closedLoop.pid(0.033, 0.0001, 0.0, ClosedLoopSlot.kSlot0);
          turningConfig.closedLoop.feedForward.kG(0.00018);
          turningConfig.closedLoop.positionWrappingEnabled(true);
          turningConfig.closedLoop.positionWrappingMinInput(0);

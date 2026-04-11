@@ -59,7 +59,7 @@ public class Launcher extends SubsystemBase {
     private LinearCalc turretCalc = new LinearCalc();
 
     private double targetRPM;
-    private double FieldDistanceOffSet = -0.0; // in inches
+    private double FieldDistanceOffSet = 2.0; // in inches
 
     public static final double TURRET_OFFSET_X = -0.2; // 20 cm back from robot center
     public static final double TURRET_OFFSET_Y = 0.0; // centered left-right

@@ -377,8 +377,8 @@ public boolean hasVision = false;
      * Left Camera
      */
      LEFT_CAM("left",
-             new Rotation3d(Math.toRadians(-18), Math.toRadians(0), Math.toRadians(88)),
-             new Translation3d(Units.inchesToMeters(-11),
+             new Rotation3d(Math.toRadians(-18), Math.toRadians(0), Math.toRadians(100)),
+             new Translation3d(Units.inchesToMeters(-11.325),
                                Units.inchesToMeters(12.125),
                                Units.inchesToMeters(17.375)),
              VecBuilder.fill(4, 4, 8), VecBuilder.fill(0.5, 0.5, 1)),
@@ -389,7 +389,7 @@ public boolean hasVision = false;
      */
     RIGHT_CAM("right",
               new Rotation3d(Math.toRadians(18), Math.toRadians(0), Math.toRadians(-95)),
-              new Translation3d(Units.inchesToMeters(-10.375), //was -9.5
+              new Translation3d(Units.inchesToMeters(-10.875), //was -10.375
                                 Units.inchesToMeters(-12.125),
                                 Units.inchesToMeters(17.375)),
               VecBuilder.fill(4, 4, 8), VecBuilder.fill(0.5, 0.5, 1)),

@@ -375,6 +375,8 @@ public class DriverAssist extends SubsystemBase {
 
         } else {
             //launcher.setStatus(Launcher.LauncherStatus.IDLE);
+            LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "HUB").getPose2d();
+
 
         }
 
@@ -464,6 +466,8 @@ public class DriverAssist extends SubsystemBase {
             if (launcherStatus == Launcher.LauncherStatus.IDLE) {
                 // LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" +
                 // "HUB").getPose2d();
+             LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "HUB").getPose2d();
+
             }
              LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "HUB").getPose2d();
             
