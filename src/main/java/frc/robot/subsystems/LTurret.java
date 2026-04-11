@@ -120,7 +120,7 @@ public class LTurret extends SubsystemBase {
         // }
         // else {
         //     ///handle other angles
-             TargetAngle = angle; //+ angleCalc.getRPM(angle);// rpm is turret angle
+             TargetAngle = angle + angleCalc.getRPM(angle);// rpm is turret angle
 
         // }
         

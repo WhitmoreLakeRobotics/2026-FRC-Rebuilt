@@ -263,6 +263,7 @@ public class DriverAssist extends SubsystemBase {
         // target is best.
         switch (fmsStatus) {
             case PREMATCH:
+            determineTargetBasedOnTactic();
                 break;
             case AUTONOMOUS:
                 break;
@@ -371,6 +372,8 @@ public class DriverAssist extends SubsystemBase {
                 LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "HUB").getPose2d();
             }*/
              LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "HUB").getPose2d();
+                     System.out.println("Updated Pose: " + LaunchtargetPose);
+
 
 
         } else {
