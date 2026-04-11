@@ -24,15 +24,15 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "Start Flywheels"
-          }
-        },
-        {
           "type": "path",
           "data": {
             "pathName": "R mid-rotation"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Start Flywheels"
           }
         },
         {
@@ -62,7 +62,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 5.5
+            "waitTime": 5.0
           }
         },
         {
@@ -98,13 +98,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "R mid-rotation-close"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Right-start-short-close"
+            "pathName": "right bump launch"
           }
         },
         {

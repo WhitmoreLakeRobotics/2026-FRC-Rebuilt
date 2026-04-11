@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 8.372327793050946,
-        "y": 0.459437749384075
+        "x": 8.145426136363636,
+        "y": 0.5552367424242437
       },
       "isLocked": false,
       "linkedName": "Right start"
@@ -28,7 +28,12 @@
       "linkedName": "hMiddle"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.4964539007092203,
+      "rotationDegrees": 90.0
+    }
+  ],
   "constraintZones": [
     {
       "name": "Constraints Zone",
