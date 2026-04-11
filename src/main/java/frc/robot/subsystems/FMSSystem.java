@@ -156,7 +156,7 @@ public class FMSSystem extends SubsystemBase {
         DriverStation.Alliance inactive = getInactiveAlliance();
         //DriverStation.Alliance active = getActiveAlliance();
 
-        System.out.println("Inactive alliance: " + inactive);
+      //  System.out.println("Inactive alliance: " + inactive);
         //System.out.println("Active alliance: " + active);
 
     }

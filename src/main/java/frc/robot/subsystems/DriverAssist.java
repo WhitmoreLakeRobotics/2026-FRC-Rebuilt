@@ -89,7 +89,7 @@ public class DriverAssist extends SubsystemBase {
         }
 
         if (driveTrain != null) {
-            currDAStatus = DAStatus.RUNNING;
+            currDAStatus = DAStatus.INIT;
 
         }
 
@@ -338,6 +338,8 @@ public class DriverAssist extends SubsystemBase {
         
         if (RobotContainer.getInstance().launchPos.getSelected().getName().equals("Auto")) {
             launcher.setNewTarget(LaunchtargetPose);
+                System.out.println("Current Pose: " + LaunchtargetPose);
+
         } else {
             // do nothing, driver is selecting target manually.
         }
@@ -371,14 +373,14 @@ public class DriverAssist extends SubsystemBase {
           /*   if (launcherStatus == Launcher.LauncherStatus.IDLE) {
                 LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "HUB").getPose2d();
             }*/
-             LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "HUB").getPose2d();
+             LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.toString() + "_" + "HUB").getPose2d();
                      System.out.println("Updated Pose: " + LaunchtargetPose);
 
 
 
         } else {
             //launcher.setStatus(Launcher.LauncherStatus.IDLE);
-            LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "HUB").getPose2d();
+            LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.toString() + "_" + "HUB").getPose2d();
 
 
         }
@@ -469,19 +471,19 @@ public class DriverAssist extends SubsystemBase {
             if (launcherStatus == Launcher.LauncherStatus.IDLE) {
                 // LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" +
                 // "HUB").getPose2d();
-             LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "HUB").getPose2d();
+             LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name().toString() + "_" + "HUB").getPose2d();
 
             }
-             LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "HUB").getPose2d();
+             LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name().toString() + "_" + "HUB").getPose2d();
             
 
         } else {
             if (currFIELDZONE == FIELDZONES.RIGHTZONE) {
-                LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "CENTERTARGET").getPose2d();
+                LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name().toString() + "_" + "CENTERTARGET").getPose2d();
             } else if (currFIELDZONE == FIELDZONES.LEFTZONE) {
-                LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "LEFTCENTERTARGET").getPose2d();
+                LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name().toString() + "_" + "LEFTCENTERTARGET").getPose2d();
             } else {
-                LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name() + "_" + "CENTERTARGET").getPose2d();
+                LaunchtargetPose = Launcher.KnownTargets.valueOf(currAlliance.name().toString() + "_" + "CENTERTARGET").getPose2d();
             }
             switch (currentTactic.offshiftTactic) {
                 case RIGHTFAR:
@@ -559,6 +561,8 @@ public class DriverAssist extends SubsystemBase {
                     break;
             }
         }
+                System.out.println("Updated Pose: " + LaunchtargetPose);
+
     }
 
     private void determineTargetBasedClimbTactic() {

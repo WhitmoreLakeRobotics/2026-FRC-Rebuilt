@@ -141,7 +141,7 @@ private String alliance;
     NamedCommands.registerCommand("Turret Left", new SetTurret(80.0, true));
     NamedCommands.registerCommand("Turret Right", new SetTurret(275.0, true));
     NamedCommands.registerCommand("Intake Half", new SetStatusIntake(Intake.STATUS.HALF_EXTENDED, m_intake));
-    NamedCommands.registerCommand("Intake Delayed", new SetStatusIntakeDelayed(0.8, Intake.STATUS.EXTENDED_INTAKING, m_intake));
+    NamedCommands.registerCommand("Intake Delayed", new SetStatusIntakeDelayed(0.5, Intake.STATUS.EXTENDED_INTAKING, m_intake));
 
     // SmartDashboard Buttons
     SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
