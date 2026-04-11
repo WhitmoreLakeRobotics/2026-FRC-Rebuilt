@@ -248,6 +248,7 @@ private String alliance;
     // : stream);
 
     SmartDashboard.putData("Auto Mode", autoChooser);
+    SmartDashboard.putData("Launcher Targets", launchPos);
   }
 
   public static RobotContainer getInstance() {
@@ -262,7 +263,7 @@ private String alliance;
     launchTarg = launchPos.getSelected().getName().toString();
     //m_launcher.setNewTarget(launchPos.getSelected().getPose2d());
     SmartDashboard.putString("Curr Selected Launch Targ", launchTarg);
-    SmartDashboard.putData("Launcher Targets", launchPos);
+    //SmartDashboard.putData("Launcher Targets", launchPos);
 
     TAngle = towerAngle.getSelected();
     SmartDashboard.putData("Tower Angle", towerAngle);
