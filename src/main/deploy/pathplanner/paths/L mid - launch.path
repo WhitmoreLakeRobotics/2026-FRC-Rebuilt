@@ -3,32 +3,37 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.424820075757576,
-        "y": 0.4971022727272725
+        "x": 6.3515625,
+        "y": 7.48154356060606
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.284345579909414,
-        "y": 1.0350619405801789
+        "x": 3.1956912878787884,
+        "y": 7.464933712121213
       },
       "isLocked": false,
-      "linkedName": "Right start"
+      "linkedName": "Lcenterforward"
     },
     {
       "anchor": {
-        "x": 2.0619454329774625,
-        "y": 2.0284104389086597
+        "x": 2.232320075757576,
+        "y": 6.667660984848485
       },
       "prevControl": {
-        "x": 2.98723606168446,
-        "y": 0.9524911032028476
+        "x": 3.2123011363636365,
+        "y": 7.473238636363636
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "L alliance launch"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.35886524822695054,
+      "rotationDegrees": 180.0
+    }
+  ],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [],
@@ -42,13 +47,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 39.735924717111224
+    "rotation": -48.262945365917076
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
-    "velocity": 0.0,
-    "rotation": 0.25774622558081633
+    "velocity": 0,
+    "rotation": 180.0
   },
   "useDefaultConstraints": true
 }

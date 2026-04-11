@@ -149,8 +149,8 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopPeriodic() {
-        String alliance = firstInactiveAlliance.getString("Unknown");
-        System.out.println("First inactive alliance: " + alliance);
+        //String alliance = firstInactiveAlliance.getString("Unknown");
+        //System.out.println("First inactive alliance: " + alliance);
     }
 
     @Override
