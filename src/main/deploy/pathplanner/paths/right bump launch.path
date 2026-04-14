@@ -25,13 +25,13 @@
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Right center back launch"
     }
   ],
   "rotationTargets": [
     {
       "waypointRelativePos": 0.5,
-      "rotationDegrees": -45.79398934182644
+      "rotationDegrees": -45.793989341826446
     }
   ],
   "constraintZones": [],
@@ -47,7 +47,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 43.47537722658811
+    "rotation": 41.112090439166934
   },
   "reversed": false,
   "folder": null,

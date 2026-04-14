@@ -111,7 +111,7 @@ public class Launcher extends SubsystemBase {
         shotCalc.add(new LinearCalcRef(4056, 167, edu.wpi.first.units.Units.Inches));
 
 
-        shotCalc.add(new LinearCalcRef(3570, 148.5, edu.wpi.first.units.Units.Inches));
+        //shotCalc.add(new LinearCalcRef(3570, 148.5, edu.wpi.first.units.Units.Inches));
         shotCalc.Calculate();
 
         shotCalc.setMinimumRPM(1800);

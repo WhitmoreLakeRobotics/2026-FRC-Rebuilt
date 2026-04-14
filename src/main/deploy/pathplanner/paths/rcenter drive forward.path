@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.946543560606061,
-        "y": 0.6299810606060612
+        "x": 3.1043371212121205,
+        "y": 0.5967613636363638
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.311826809015422,
-        "y": 0.6512336892052202
+        "x": 6.46962036962148,
+        "y": 0.6180139922355228
       },
       "isLocked": false,
       "linkedName": "rdriveback"
@@ -20,8 +20,8 @@
         "y": 1.0535321969655456
       },
       "prevControl": {
-        "x": 6.983655033430389,
-        "y": 0.44025817561323255
+        "x": 6.957821969696969,
+        "y": 0.5303219696969712
       },
       "nextControl": null,
       "isLocked": false,
@@ -29,6 +29,10 @@
     }
   ],
   "rotationTargets": [
+    {
+      "waypointRelativePos": 0.024113475177305534,
+      "rotationDegrees": 0.0
+    },
     {
       "waypointRelativePos": 0.46276150627615076,
       "rotationDegrees": 0.0
@@ -46,14 +50,14 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 0,
+    "velocity": 1.5,
     "rotation": 90.0
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": 90.0
   },
   "useDefaultConstraints": true
 }
