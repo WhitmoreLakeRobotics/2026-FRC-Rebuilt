@@ -88,6 +88,9 @@ public class Launcher extends SubsystemBase {
                 CanIds.MOTORS.TOWER2_MOTOR_LEFT.canId, pidFlyWheelRH1, pidFlyWheelRH2);
         turret = new LTurret();
 
+        flywheels_LH.angleRPMOffset(-52);
+        flywheels_RH.angleRPMOffset(52);
+
         // shotCalc.add(new LinearCalcRef(3337, 131, edu.wpi.first.units.Units.Inches));
         // unnecessary point
         shotCalc.add(new LinearCalcRef(3190, 99, edu.wpi.first.units.Units.Inches));
@@ -101,7 +104,7 @@ public class Launcher extends SubsystemBase {
         // shotCalc.add(new LinearCalcRef(5800, 215, edu.wpi.first.units.Units.Inches));
 
         // Testing at Lab
-        shotCalc.add(new LinearCalcRef(3435, 122, edu.wpi.first.units.Units.Inches)); // 
+        shotCalc.add(new LinearCalcRef(3435, 122, edu.wpi.first.units.Units.Inches)); //
         shotCalc.add(new LinearCalcRef(3528, 132, edu.wpi.first.units.Units.Inches));
         shotCalc.add(new LinearCalcRef(3700, 145, edu.wpi.first.units.Units.Inches));
         shotCalc.add(new LinearCalcRef(3800, 156, edu.wpi.first.units.Units.Inches));
@@ -117,7 +120,7 @@ public class Launcher extends SubsystemBase {
         turretCalc.add(new LinearCalcRef(150, 45, edu.wpi.first.units.Units.Degrees));
         turretCalc.add(new LinearCalcRef(454, 90, edu.wpi.first.units.Units.Degrees));
         turretCalc.add(new LinearCalcRef(537, 135, edu.wpi.first.units.Units.Degrees));
-        turretCalc.add(new LinearCalcRef(645, 179, edu.wpi.first.units.Units.Degrees));  
+        turretCalc.add(new LinearCalcRef(645, 179, edu.wpi.first.units.Units.Degrees));
         turretCalc.add(new LinearCalcRef(537, -135, edu.wpi.first.units.Units.Degrees));
         turretCalc.add(new LinearCalcRef(374, -90, edu.wpi.first.units.Units.Degrees));  // was 474
         turretCalc.add(new LinearCalcRef(150, -45, edu.wpi.first.units.Units.Degrees));
@@ -161,6 +164,7 @@ public class Launcher extends SubsystemBase {
 
             // set rpm based on distance to target
 
+
             if (bShotCalc) {
                 calcDistanceToTarget();
                 targetRPM = shotCalc.getRPM(distanceToTarget) + turretCalc.getRPM(targetAngle) + autoOffsetRPM;
@@ -172,6 +176,9 @@ public class Launcher extends SubsystemBase {
 
             // once we define turret zones we may have to adujust RPM based on angle to
             // target
+
+            flywheels_LH.informTurretAngle(targetAngle);
+            flywheels_RH.informTurretAngle(targetAngle);
 
             // set final values to flywheel and turret
             if (bLHF_Enabled == true) {
@@ -526,7 +533,7 @@ public class Launcher extends SubsystemBase {
         AUTO("Auto",
                 new edu.wpi.first.math.geometry.Pose2d(-1, -1, new edu.wpi.first.math.geometry.Rotation2d(0)),
                 "Auto", Alliance.Red);
-        
+
 
         // Store name, pose2d, and "type" for each target
         private final String name;
