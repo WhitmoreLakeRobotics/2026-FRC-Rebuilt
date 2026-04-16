@@ -54,6 +54,8 @@ public class LFlywheels extends SubsystemBase {
     private double[] flyWheelRight;
     private double[] flyWheelLeft;
 
+    private double SpinControlLH = 0.0;
+    private double SpinControlRH = 0.0;
     /**
     *
     */
@@ -70,6 +72,10 @@ public class LFlywheels extends SubsystemBase {
 
     }
 
+    public void setSpinControl(double LH, double RH){
+        SpinControlLH = LH;
+        SpinControlRH = RH;
+    }
     public void informTurretAngle(double angle){
         turretAngle = angle;
     }
@@ -134,8 +140,8 @@ public class LFlywheels extends SubsystemBase {
         public void setRPM(double rpm) {
             if (rpm != 0) {
             TargetRPM = rpm + (angleRPMOffset * Math.sin(Math.toRadians(turretAngle)));
-            TowerRM.getClosedLoopController().setSetpoint(rpm, ControlType.kVelocity);
-            TowerLM.getClosedLoopController().setSetpoint(rpm, ControlType.kVelocity);
+            TowerRM.getClosedLoopController().setSetpoint(TargetRPM + (SpinControlRH * Math.sin(Math.toRadians(turretAngle))), ControlType.kVelocity);
+            TowerLM.getClosedLoopController().setSetpoint(TargetRPM - (SpinControlLH * Math.sin(Math.toRadians(turretAngle))), ControlType.kVelocity);
             status = FlywheelStatus.RAMPING;
 
             } else{

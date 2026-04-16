@@ -88,8 +88,11 @@ public class Launcher extends SubsystemBase {
                 CanIds.MOTORS.TOWER2_MOTOR_LEFT.canId, pidFlyWheelRH1, pidFlyWheelRH2);
         turret = new LTurret();
 
-        flywheels_LH.angleRPMOffset(-52);
-        flywheels_RH.angleRPMOffset(52);
+        flywheels_LH.angleRPMOffset(-62);
+        flywheels_LH.setSpinControl(-6, 6);
+        flywheels_RH.angleRPMOffset(62);
+        flywheels_RH.setSpinControl(-6, 6);
+
 
         // shotCalc.add(new LinearCalcRef(3337, 131, edu.wpi.first.units.Units.Inches));
         // unnecessary point
