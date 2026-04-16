@@ -113,12 +113,6 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "Climb"
-          }
-        },
-        {
           "type": "path",
           "data": {
             "pathName": "center-climbsetup"
@@ -128,12 +122,6 @@
           "type": "path",
           "data": {
             "pathName": "RClimb Forward"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Down Climb"
           }
         }
       ]
