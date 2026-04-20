@@ -3,29 +3,45 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.8419886363636362,
-        "y": 5.529886363636364
+        "x": 8.261695075757576,
+        "y": 7.631032196969697
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.541336204572414,
-        "y": 4.615354928286423
+        "x": 9.261695075757576,
+        "y": 7.631032196969697
       },
       "isLocked": false,
-      "linkedName": "Center launch"
+      "linkedName": null
     },
     {
       "anchor": {
-        "x": 0.7374337121212122,
-        "y": 2.8473958333333336
+        "x": 9.399469696969696,
+        "y": 4.591429924242424
       },
       "prevControl": {
-        "x": 0.7481929054782702,
-        "y": 1.663884564056941
+        "x": 9.79810606060606,
+        "y": 4.558210227272728
+      },
+      "nextControl": {
+        "x": 8.402923938724818,
+        "y": 4.674475404096161
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 8.01254734848485,
+        "y": 6.534782196969696
+      },
+      "prevControl": {
+        "x": 9.189398674242426,
+        "y": 5.949285037878787
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Climb"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
@@ -48,7 +64,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -27.92897870868093
+    "rotation": 0.0
   },
   "useDefaultConstraints": true
 }

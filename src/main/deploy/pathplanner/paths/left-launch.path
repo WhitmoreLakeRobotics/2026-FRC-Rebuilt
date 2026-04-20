@@ -16,19 +16,24 @@
     },
     {
       "anchor": {
-        "x": 3.4283629893238445,
-        "y": 7.451043890865955
+        "x": 2.913323863636364,
+        "y": 7.332054924242424
       },
       "prevControl": {
-        "x": 4.342894424673784,
-        "y": 7.47256227758007
+        "x": 3.8268655303030297,
+        "y": 7.53967803030303
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": "left start cb"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.9134751773049669,
+      "rotationDegrees": 0.0
+    }
+  ],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [],
@@ -42,7 +47,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": -49.98106227201884
   },
   "reversed": false,
   "folder": null,

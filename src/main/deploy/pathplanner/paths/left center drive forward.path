@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.7057007575757575,
-        "y": 7.431714015151515
+        "x": 3.0462026515151517,
+        "y": 7.48154356060606
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.177159090909091,
-        "y": 7.406799242424243
+        "x": 6.517660984848486,
+        "y": 7.456628787878787
       },
       "isLocked": false,
       "linkedName": "Left drive back"
@@ -20,8 +20,8 @@
         "y": 7.008162878787878
       },
       "prevControl": {
-        "x": 6.991041666666668,
-        "y": 7.5812026515151505
+        "x": 6.924602272727273,
+        "y": 7.473238636363636
       },
       "nextControl": null,
       "isLocked": false,
@@ -29,6 +29,10 @@
     }
   ],
   "rotationTargets": [
+    {
+      "waypointRelativePos": 0.024113475177305044,
+      "rotationDegrees": 0.0
+    },
     {
       "waypointRelativePos": 0.3971631205673727,
       "rotationDegrees": 0.0
@@ -53,7 +57,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": -90.0
   },
   "useDefaultConstraints": true
 }

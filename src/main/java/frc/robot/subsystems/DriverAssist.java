@@ -835,8 +835,8 @@ public class DriverAssist extends SubsystemBase {
     }
 
     public enum FIELDZONES {
-        RIGHTZONE(0.0, 4.027),
-        LEFTZONE(4.027, 8.22),
+        RIGHTZONE(-60.0, 4.027),    //0.0 , 4.027
+        LEFTZONE(4.027, 60.22),   //4.027 ,  8.22 
         CENTERZONE(4.027, 4.027);
 
         private double start;
@@ -862,9 +862,9 @@ public class DriverAssist extends SubsystemBase {
     }
 
     public enum ALLIANCEZONE {
-        BLUEZONE(0.0, 5.22, Alliance.Blue),   //0.00 , 8.2296
-        REDZONE(11.243, 18.00, Alliance.Red),   //8.2296  , 
-        DMZ(5.22, 11.243, null);
+        BLUEZONE(-60.0, 5.22, Alliance.Blue),   //0.00 , 8.2296
+        REDZONE(11.243, 60.00, Alliance.Red),   //8.2296  , 18.00
+        DMZ(5.22, 11.243, null);  //5.22  , 11.243
 
         double start;
         double end;
@@ -888,7 +888,13 @@ public class DriverAssist extends SubsystemBase {
                 return zone;
             }
         }
-        return null; // or throw an exception if x is out of bounds
+        if(x > 18){
+            return ALLIANCEZONE.REDZONE;
+        }
+        else  {
+            return ALLIANCEZONE.BLUEZONE;
+        }
+        //return  null; // or throw an exception if x is out of bounds
     }
 
     public enum TRANSITION_TACTIC {

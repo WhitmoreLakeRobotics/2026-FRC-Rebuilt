@@ -388,7 +388,7 @@ public boolean hasVision = false;
      * Right Camera
      */
     RIGHT_CAM("right",
-              new Rotation3d(Math.toRadians(18), Math.toRadians(0), Math.toRadians(-95)),
+              new Rotation3d(Math.toRadians(18), Math.toRadians(0), Math.toRadians(-97)),
               new Translation3d(Units.inchesToMeters(-10.875), //was -10.375
                                 Units.inchesToMeters(-12.125),
                                 Units.inchesToMeters(17.375)),

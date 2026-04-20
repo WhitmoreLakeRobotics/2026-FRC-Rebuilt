@@ -5,9 +5,28 @@
     "data": {
       "commands": [
         {
-          "type": "named",
+          "type": "parallel",
           "data": {
-            "name": "Start Flywheels"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Am Lstart-mid"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Intake Delayed"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "left mid-rotation far"
           }
         },
         {
@@ -17,13 +36,13 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Left center drive back"
+                  "pathName": "left-launch far"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "Intake Delayed"
+                  "name": "Start Flywheels"
                 }
               }
             ]
@@ -38,61 +57,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 1.5
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "HStop"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "FStop"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "left center drive forward"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "L mid loop"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "L mid lineup"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Start Flywheels"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "L mid - launch"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Hopper Start"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 1.0
+            "waitTime": 0.5
           }
         },
         {
@@ -120,9 +85,82 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "Intake"
+          }
+        },
+        {
           "type": "path",
           "data": {
-            "pathName": "Left launch-climb"
+            "pathName": "L bump launch-start"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Am Lstart-mid"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "left mid-rotation far"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "left-launch far"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Start Flywheels"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Hopper Start"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.5
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Intake Half"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 4.5
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "HStop"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "FStop"
           }
         }
       ]
