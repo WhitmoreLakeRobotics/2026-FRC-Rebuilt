@@ -1,0 +1,99 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 3.586022727272727,
+        "y": 7.6
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 6.035975378787878,
+        "y": 7.622727272727273
+      },
+      "isLocked": false,
+      "linkedName": "L partner start"
+    },
+    {
+      "anchor": {
+        "x": 6.808333333333333,
+        "y": 7.282225378787879
+      },
+      "prevControl": {
+        "x": 6.307540170609846,
+        "y": 7.514736490052357
+      },
+      "nextControl": {
+        "x": 7.040871212121212,
+        "y": 7.174261363636362
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 8.253390151515152,
+        "y": 6.136145833333333
+      },
+      "prevControl": {
+        "x": 6.8996875,
+        "y": 6.360378787878788
+      },
+      "nextControl": {
+        "x": 9.284702651717897,
+        "y": 5.965314928391774
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 10.238267045454545,
+        "y": 5.0066761363636365
+      },
+      "prevControl": {
+        "x": 9.607092803030303,
+        "y": 6.044791666666666
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "Other alliance hub"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.45,
+      "rotationDegrees": -90.0
+    },
+    {
+      "waypointRelativePos": 1.35,
+      "rotationDegrees": -17.814589747572
+    },
+    {
+      "waypointRelativePos": 2.3390070921985817,
+      "rotationDegrees": -46.09185444257721
+    }
+  ],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 4.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 3.0,
+    "rotation": -64.48612957246559
+  },
+  "reversed": false,
+  "folder": null,
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": -90.0
+  },
+  "useDefaultConstraints": true
+}

@@ -1,0 +1,79 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 3.5777178030303025,
+        "y": 0.4472727272727275
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 6.5348423248523,
+        "y": 0.4472727272727275
+      },
+      "isLocked": false,
+      "linkedName": "A1 start R"
+    },
+    {
+      "anchor": {
+        "x": 8.070681818181818,
+        "y": 0.9538731060606074
+      },
+      "prevControl": {
+        "x": 7.540967192046262,
+        "y": 0.6373363172722873
+      },
+      "nextControl": {
+        "x": 9.432689393939393,
+        "y": 1.7677556818181825
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 10.097083333333332,
+        "y": 2.930445075757575
+      },
+      "prevControl": {
+        "x": 9.532348484848486,
+        "y": 1.734535984848484
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "R-opp hub"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.3375886524822712,
+      "rotationDegrees": 90.0
+    },
+    {
+      "waypointRelativePos": 1.0468085106382978,
+      "rotationDegrees": 30.719909684397578
+    }
+  ],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 4.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 3.0,
+    "rotation": 77.19573393471323
+  },
+  "reversed": false,
+  "folder": null,
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 90.76389846092997
+  },
+  "useDefaultConstraints": true
+}

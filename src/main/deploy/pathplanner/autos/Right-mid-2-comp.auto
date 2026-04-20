@@ -118,19 +118,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 0.5
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Intake Half"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 4.5
+            "waitTime": 5.0
           }
         },
         {

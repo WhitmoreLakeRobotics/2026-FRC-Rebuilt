@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.8360023724792414,
-        "y": 3.147366548042704
+        "x": 1.8419886363636362,
+        "y": 5.529886363636364
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.8144839857651252,
-        "y": 1.7701897983392634
+        "x": 1.82047024964952,
+        "y": 4.152709613932923
       },
       "isLocked": false,
       "linkedName": "Center launch"
@@ -62,7 +62,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 18.099889604312896
+    "rotation": -27.92897870868093
   },
   "useDefaultConstraints": true
 }

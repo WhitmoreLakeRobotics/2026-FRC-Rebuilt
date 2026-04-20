@@ -5,28 +5,28 @@
     "data": {
       "commands": [
         {
-          "type": "named",
-          "data": {
-            "name": "Start Flywheels"
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
               {
-                "type": "path",
+                "type": "named",
                 "data": {
-                  "pathName": "Left center drive back"
+                  "name": "Start Flywheels"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "Intake Delayed"
+                  "name": "Intake"
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 2.0
           }
         },
         {
@@ -38,7 +38,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 1.5
+            "waitTime": 1.0
           }
         },
         {
@@ -54,33 +54,60 @@
           }
         },
         {
-          "type": "path",
+          "type": "wait",
           "data": {
-            "pathName": "left center drive forward"
+            "waitTime": 1.0
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "L mid loop"
+            "pathName": "Rstart-hub"
           }
         },
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "L mid lineup"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "R hub-launch-same"
+                }
+              },
+              {
+                "type": "parallel",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "sequential",
+                      "data": {
+                        "commands": [
+                          {
+                            "type": "wait",
+                            "data": {
+                              "waitTime": 1.5
+                            }
+                          },
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "Start Flywheels"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
           }
         },
         {
-          "type": "named",
+          "type": "wait",
           "data": {
-            "name": "Start Flywheels"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "L mid - launch"
+            "waitTime": 3.0
           }
         },
         {
@@ -120,9 +147,9 @@
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "Left launch-climb"
+            "name": "Intake"
           }
         }
       ]
