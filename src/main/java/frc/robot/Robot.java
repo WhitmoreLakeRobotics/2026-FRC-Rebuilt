@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.Hopper.HopperStatus;
+import edu.wpi.first.wpilibj.Timer;
 
 import java.io.ObjectInputFilter.Status;
 
@@ -41,6 +42,7 @@ public class Robot extends TimedRobot {
 
     private Command m_autonomousCommand;
     private NetworkTableEntry firstInactiveAlliance;
+    private Timer time = new Timer();
 
     private RobotContainer m_robotContainer;
 
@@ -89,15 +91,17 @@ public class Robot extends TimedRobot {
         //StatusLogger.stop();
         RobotContainer.getInstance().m_fmsSystem.pause();
         RobotContainer.getInstance().m_feeder.setStatus(HopperStatus.STOP);
-        
+        time.reset();
+        time.start();
     }
 
     @Override
     public void disabledPeriodic() {
         
       //  RobotContainer.getInstance().m_fmsSystem.updateAlliance();
-
-
+        if (time.hasElapsed(10)) {
+            RobotContainer.getInstance().m_driveTrain.setMotorBrake(false);
+        }
     }
 
     /**
