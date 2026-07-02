@@ -53,6 +53,8 @@ public class Launcher extends SubsystemBase {
     private double[] pidFlyWheelRH1 = { 0.0008, 0.0, 0.00000001, 0.00185 }; // 11 tower 1 right
     private double[] pidFlyWheelRH2 = { 0.0008, 0.0, 0.00000001, 0.00188 }; // 12 tower 1 left
 
+
+
     private boolean bAutoAngle = false;
 
     private LinearCalc shotCalc = new LinearCalc();

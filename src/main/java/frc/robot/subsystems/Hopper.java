@@ -295,7 +295,7 @@ public class Hopper extends SubsystemBase {
     public enum HopperStatus {
         STOP(0.0, 0.0),
         INDEXING(0.0, 0.0),
-        FUELING(12.0, 6.0),
+        FUELING(9.0, 6.0),
         REVERSAL(-5.0, -5.0);
 
         public final double beltMotorVoltage;

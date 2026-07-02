@@ -107,7 +107,7 @@ public class SetTarget extends Command {
     @Override
     public void execute() {
         if (!bDone) {
-            if (clock.get() == timerStart + delay) {
+            if (clock.get() >= timerStart + delay) {
                 RobotContainer.getInstance().m_launcher.setTargetRPM(targetRPM, false);
                 bDone = true;
             }
