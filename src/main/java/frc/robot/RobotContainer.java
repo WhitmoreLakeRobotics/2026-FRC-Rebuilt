@@ -45,7 +45,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.commands.TunePID;
 
 import java.io.File;
 import java.io.ObjectInputFilter.Status;
@@ -275,20 +274,49 @@ private String alliance;
 
     // Manual tuning — tweak kP/kI/kD/Setpoint live from the dashboard.
 // Only one can run at a time; clicking a second button cancels the first.
-SmartDashboard.putData("Tune Intake PID",   new TunePID(m_intake,   m_intake));
-SmartDashboard.putData("Tune Launcher PID", new TunePID(m_launcher, m_launcher));
-SmartDashboard.putData("Tune Hopper PID",   new TunePID(m_feeder,   m_feeder));
+//SmartDashboard.putData("Tune Intake PID",   new TunePID(m_intake,   m_intake));
+//SmartDashboard.putData("Tune Launcher PID", new TunePID(m_launcher, m_launcher));
+//SmartDashboard.putData("Tune Hopper PID",   new TunePID(m_feeder,   m_feeder));
+
+
 
 // Auto-tuning — Ziegler-Nichols. Tunes each motor independently and
 // publishes recommended kP/kI/kD to SmartDashboard when complete.
 // WARNING: the mechanism will oscillate during this process.
 // Run in open space with software limits enabled.
-SmartDashboard.putData("AutoTune Flywheel LH",
-    new AutoTuneMultiMotor(m_launcher.flywheels_LH, m_launcher.flywheels_LH, 3750.0));
+// Tower 1 (LH) — tunes Left motor then Right motor automatically
 
-SmartDashboard.putData("AutoTune Flywheel RH",
-    new AutoTuneMultiMotor(m_launcher.flywheels_RH, m_launcher.flywheels_RH, 3750.0));
+SmartDashboard.putData("AutoTune Tower1 LH",
+    new InstantCommand(() -> m_launcher.setTuningMode(true))
+        .andThen(new AutoTuneMultiMotor(
+            m_launcher.flywheels_LH,
+            m_launcher.flywheels_LH,
+            3750.0))
+        .andThen(new InstantCommand(() -> m_launcher.setTuningMode(false)))
+);
 
+// Tower 2 (RH) — tunes Left motor then Right motor automatically
+SmartDashboard.putData("AutoTune Tower2 RH",
+    new InstantCommand(() -> m_launcher.setTuningMode(true))
+        .andThen(new AutoTuneMultiMotor(
+            m_launcher.flywheels_RH,
+            m_launcher.flywheels_RH,
+            3750.0))
+        .andThen(new InstantCommand(() -> m_launcher.setTuningMode(false)))
+);
+
+// Manual tuning buttons (if you want to hand-tune instead)
+SmartDashboard.putData("Tune Tower1 LH Manual",
+    new InstantCommand(() -> m_launcher.setTuningMode(true))
+        .andThen(new TunePID(m_launcher.flywheels_LH, m_launcher.flywheels_LH))
+        .andThen(new InstantCommand(() -> m_launcher.setTuningMode(false)))
+);
+
+SmartDashboard.putData("Tune Tower2 RH Manual",
+    new InstantCommand(() -> m_launcher.setTuningMode(true))
+        .andThen(new TunePID(m_launcher.flywheels_RH, m_launcher.flywheels_RH))
+        .andThen(new InstantCommand(() -> m_launcher.setTuningMode(false)))
+);
 
 
     if (m_launcher.turret != null) {
