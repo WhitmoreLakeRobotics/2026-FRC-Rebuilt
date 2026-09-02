@@ -688,56 +688,82 @@ public double getVisionTimestamp(){
 // }
 
 public void updateGlobalPoseEstimation(SwerveDrive swerveDrive)
+{
+  if (SwerveDriveTelemetry.isSimulation && swerveDrive.getSimulationDriveTrainPose().isPresent())
   {
-    if (SwerveDriveTelemetry.isSimulation && swerveDrive.getSimulationDriveTrainPose().isPresent())
-    {
-      /*
-       * In the maple-sim, odometry is simulated using encoder values, accounting for factors like skidding and drifting.
-       * As a result, the odometry may not always be 100% accurate.
-       * However, the vision system should be able to provide a reasonably accurate pose estimation, even when odometry is incorrect.
-       * (This is why teams implement vision system to correct odometry.)
-       * Therefore, we must ensure that the actual robot pose is provided in the simulator when updating the vision simulation during the simulation.
-       */
-      visionSim.update(swerveDrive.getSimulationDriveTrainPose().get());
-    }
-    for (Cameras camera : Cameras.values()) {
-      // camera.multiTagStdDevs.
-      //Optional<EstimatedRobotPose> poseEst = getEstimatedGlobalPose(camera);
-      Optional<EstimatedRobotPose> poseEst = camera.getEstimatedGlobalPose();
-      try{
-      if (poseEst.isPresent()) {
-        var pose = poseEst.get();
-        hasVision = true;
-        //System.out.println("timestamp " + pose.timestampSeconds);
-
-        /*added custom code 3668 here */
-        //latestID = pose.targetsUsed.get(0).getFiducialId(); //get used id from last scan 
-        VisionTimeStamp = pose.timestampSeconds;
-        //Optional<Pose3d> tagPoseOptional = fieldLayout.getTagPose(latestID);   //get april tag location from last viewed tag id
-        //Pose3d tagPose = tagPoseOptional.get();   //convert to actual Pose3d of tag id 
-        // Compute the robot's pose relative to the tag
-        //Pose2d robotPose = pose.estimatedPose.toPose2d();   //grab 2d pose of robot relative to field
-        LastCalcVisionLocation = pose.estimatedPose.toPose2d();
-        //Pose2d tagPose2d = tagPose.toPose2d();  // get 2d pose from 3d of april tag location
-        //Pose2d robotInTagSpace = robotPose.relativeTo(tagPose2d);  //calc robot postion relative to tag 
-        //lastCalculatedDist = Optional.of(robotInTagSpace);  // store robot location 
-
-
-       // lastCalculatedDist.of(poseEst.get().estimatedPose.toPose2d());
-        /* end of custom code 3668 */
-       
-       swerveDrive.addVisionMeasurement(pose.estimatedPose.toPose2d(),
-            pose.timestampSeconds,
-            camera.curStdDevs);
-      } else {
-        hasVision = false;
-      }
-    
-      } catch (Exception e) {
-       //ignore 
-      }
-    }
-
-
+    visionSim.update(swerveDrive.getSimulationDriveTrainPose().get());
   }
+
+  for (Cameras camera : Cameras.values())
+  {
+    Optional<EstimatedRobotPose> poseEst = getEstimatedGlobalPose(camera); // routes through sim debug field too
+
+    if (poseEst.isEmpty())
+    {
+      hasVision = false;
+      continue;
+    }
+
+    var pose = poseEst.get();
+
+    if (!isAcceptablePose(pose))
+    {
+      continue; // ambiguous or inconsistent with odometry — don't trust it, don't mark hasVision
+    }
+
+    hasVision = true;
+    VisionTimeStamp = pose.timestampSeconds;
+    latestID = pose.targetsUsed.get(0).getFiducialId();
+
+    Pose2d robotPose = pose.estimatedPose.toPose2d();
+    LastCalcVisionLocation = robotPose;
+    estimatedCaemraPose.set(robotPose); // was declared but never published before — now actually feeds the NT topic
+
+    fieldLayout.getTagPose(latestID).ifPresent(tagPose3d ->
+        lastCalculatedDist = Optional.of(robotPose.relativeTo(tagPose3d.toPose2d())));
+
+    swerveDrive.addVisionMeasurement(robotPose, pose.timestampSeconds, camera.curStdDevs);
+  }
+}
+
+/**
+ * Gate a pose estimate before trusting it. Rejects NaN/garbage poses, ambiguous
+ * single-tag reads, and estimates that disagree with odometry unless that
+ * disagreement persists (which suggests odometry, not vision, is wrong).
+ */
+private boolean isAcceptablePose(EstimatedRobotPose pose)
+{
+  double x = pose.estimatedPose.getX();
+  double y = pose.estimatedPose.getY();
+  if (Double.isNaN(x) || Double.isNaN(y) || Double.isInfinite(x) || Double.isInfinite(y))
+  {
+    return false;
+  }
+
+  // Ambiguity is only meaningful for single-tag solves; multi-tag PNP doesn't
+  // suffer the same pose-flip problem, so don't gate on it there.
+  if (pose.targetsUsed.size() == 1)
+  {
+    double ambiguity = pose.targetsUsed.get(0).getPoseAmbiguity();
+    if (ambiguity < 0 || ambiguity > maximumAmbiguity)
+    {
+      return false;
+    }
+  }
+
+  double distanceFromOdometry = PhotonUtils.getDistanceToPose(currentPose.get(), pose.estimatedPose.toPose2d());
+  if (distanceFromOdometry > 1.0)
+  {
+    longDistangePoseEstimationCount++;
+    if (longDistangePoseEstimationCount < 10)
+    {
+      return false;
+    }
+  } else
+  {
+    longDistangePoseEstimationCount = 0;
+  }
+
+  return true;
+}
 }
