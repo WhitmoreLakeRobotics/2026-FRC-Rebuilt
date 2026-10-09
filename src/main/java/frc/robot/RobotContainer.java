@@ -112,7 +112,7 @@ private String alliance;
 
   // A chooser for autonomous commands
   SendableChooser<Command> autoChooser = new SendableChooser<>();
-  SendableChooser<Double> cruiseControl = new SendableChooser();
+  SendableChooser<Double> cruiseControl = new SendableChooser<>();
   public SendableChooser<Launcher.KnownTargets> launchPos = new SendableChooser<>();
   SendableChooser<Double> towerAngle = new SendableChooser<>();
 
