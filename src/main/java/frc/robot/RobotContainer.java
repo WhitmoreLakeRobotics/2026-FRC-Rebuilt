@@ -274,9 +274,9 @@ private String alliance;
 
     // Manual tuning — tweak kP/kI/kD/Setpoint live from the dashboard.
 // Only one can run at a time; clicking a second button cancels the first.
-//SmartDashboard.putData("Tune Intake PID",   new TunePID(m_intake,   m_intake));
-//SmartDashboard.putData("Tune Launcher PID", new TunePID(m_launcher, m_launcher));
-//SmartDashboard.putData("Tune Hopper PID",   new TunePID(m_feeder,   m_feeder));
+SmartDashboard.putData("Tune Intake PID",   new TunePID(m_intake,   m_intake));
+SmartDashboard.putData("Tune Launcher PID", new TunePID(m_launcher, m_launcher));
+SmartDashboard.putData("Tune Hopper PID",   new TunePID(m_feeder,   m_feeder));
 
 
 
