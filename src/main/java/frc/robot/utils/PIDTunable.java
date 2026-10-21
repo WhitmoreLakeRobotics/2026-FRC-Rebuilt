@@ -1,5 +1,8 @@
 package frc.robot.utils;
 
+
+import com.revrobotics.spark.SparkClosedLoopController;
+
 /**
  * PIDTunable
  * 
@@ -23,17 +26,22 @@ public interface PIDTunable {
      *   Flywheels -> getLMotorRPM()
      *   Hopper    -> getBeltMotorVelocity()
      */
-    double getMeasurement();
+    SparkClosedLoopController getLoopController();
 
     /**
      * Accepts a PID output value and applies it to the motor(s).
      * The tuning command calls this every loop with the computed output.
      */
-    void setOutput(double output);
+    void setOutput(PID output);
 
     /**
      * Returns a short name used to namespace SmartDashboard keys.
      * Example: "Intake" produces keys like "Intake/kP", "Intake/Error"
      */
     String getTunableName();
+
+    /* return accumulative error for pid
+    */
+    //double getCummulativeError();
 }
+

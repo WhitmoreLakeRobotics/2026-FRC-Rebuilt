@@ -28,6 +28,7 @@ import org.dyn4j.collision.broadphase.AABBProducer;
 import com.revrobotics.spark.ClosedLoopSlot;
 import com.revrobotics.spark.FeedbackSensor;
 import com.revrobotics.spark.SparkBase.ControlType;
+import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.PersistMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.ResetMode;
@@ -384,9 +385,10 @@ public class Intake extends SubsystemBase implements PIDTunable {
     }
 
     @Override
-    public double getMeasurement() {
+    public SparkClosedLoopController getLoopController() {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getMeasurement'");
+        return intakeMotor.getClosedLoopController();
+        //throw new UnsupportedOperationException("Unimplemented method 'getMeasurement'");
     }
 
     @Override
