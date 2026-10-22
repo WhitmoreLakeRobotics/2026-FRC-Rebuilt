@@ -383,18 +383,60 @@ public class Intake extends SubsystemBase implements PIDTunable {
             return speed;
         }
     }
+@Override
+    public double getCurrVelocity() {
+        return intakeMotor.getEncoder().getVelocity();
 
-    @Override
-    public SparkClosedLoopController getLoopController() {
-        // TODO Auto-generated method stub
-        return intakeMotor.getClosedLoopController();
-        //throw new UnsupportedOperationException("Unimplemented method 'getMeasurement'");
+    }
+    public double getTargVelocity() {
+        return intakeMotor.getClosedLoopController().getSetpoint();
+
+    }
+    public double getP() {
+        return intakeMotor.configAccessor.closedLoop.getP();
+
+    }
+    public double getI() {
+        return intakeMotor.configAccessor.closedLoop.getI();
+    }
+    public double getD() {
+        return intakeMotor.configAccessor.closedLoop.getD();
+    }
+    public double getF(){
+        return intakeMotor.configAccessor.closedLoop.feedForward.getkV();
+
+    }
+    public double getIACC() {
+        return intakeMotor.getClosedLoopController().getIAccum();
+
     }
 
-    @Override
-    public void setOutput(double output) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setOutput'");
+    public void setCurrVelocity(double velocity) {
+        intakeMotor.getClosedLoopController().setSetpoint(velocity, ControlType.kVelocity);
+
+    }
+    public void setTargVelocity(double velocity) {
+        intakeMotor.getClosedLoopController().setSetpoint(velocity, ControlType.kVelocity); 
+    }
+    public void setP(double p) {
+        intakeMotor.getClosedLoopController().closedLoop.setP(p, ClosedLoopSlot.kSlot0);
+        //trying to update the "P" value for the pid of intake motor.
+        //retrieve I, D, F 
+        //create new config motor object with new P value and old I, D, F values
+        //apply new config to intake motor. do NOT persist
+
+    }
+    public void setI() {
+
+    }
+    public void setD() {
+
+    }
+    public void setF() {
+
+    }
+    public void setIACC() {
+
     }
 
     @Override

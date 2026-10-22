@@ -26,13 +26,23 @@ public interface PIDTunable {
      *   Flywheels -> getLMotorRPM()
      *   Hopper    -> getBeltMotorVelocity()
      */
-    SparkClosedLoopController getLoopController();
+    //SparkClosedLoopController getLoopController();
 
-    /**
-     * Accepts a PID output value and applies it to the motor(s).
-     * The tuning command calls this every loop with the computed output.
-     */
-    void setOutput(PID output);
+    double getCurrVelocity();
+    double getTargVelocity();
+    double getP();
+    double getI();
+    double getD();
+    double getF();
+    double getIACC();
+    
+    void setCurrVelocity();
+    void setTargVelocity();
+    void setP();
+    void setI();
+    void setD();
+    void setF();
+    void setIACC();
 
     /**
      * Returns a short name used to namespace SmartDashboard keys.
@@ -40,8 +50,5 @@ public interface PIDTunable {
      */
     String getTunableName();
 
-    /* return accumulative error for pid
-    */
-    //double getCummulativeError();
 }
 
