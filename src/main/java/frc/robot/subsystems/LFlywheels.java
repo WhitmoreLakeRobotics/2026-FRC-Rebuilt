@@ -200,8 +200,33 @@ public class LFlywheels extends SubsystemBase {
 
     /** Sets both motors to the same RPM — used by manual TunePID command. */
     @Override
-    public void setOutput(double output) {
-        setRPM(output);
+    public void setSetpoint(double rpm) {
+        setRPM(rpm);
+    }
+
+    /** Applies the same gains to both motors — used by manual TunePID command. */
+    @Override
+    public void applyPID(double kP, double kI, double kD, double kV) {
+        for (int i = 0; i < getMotorCount(); i++) {
+            applyGains(i, kP, kI, kD, kV);
+        }
+    }
+
+    @Override
+    public void resetIntegral() {
+        TowerLM.getClosedLoopController().setIAccum(0);
+        TowerRM.getClosedLoopController().setIAccum(0);
+    }
+
+    /** Gains currently on the left motor — used to seed the TunePID dashboard. */
+    @Override
+    public double[] getPID() {
+        return new double[] {
+            TowerLM.configAccessor.closedLoop.getP(ClosedLoopSlot.kSlot0),
+            TowerLM.configAccessor.closedLoop.getI(ClosedLoopSlot.kSlot0),
+            TowerLM.configAccessor.closedLoop.getD(ClosedLoopSlot.kSlot0),
+            TowerLM.configAccessor.closedLoop.feedForward.getkV()
+        };
     }
 
     @Override

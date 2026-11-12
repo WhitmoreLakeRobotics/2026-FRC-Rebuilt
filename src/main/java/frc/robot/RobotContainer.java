@@ -251,30 +251,13 @@ private String alliance;
 
     SmartDashboard.putData("Auto Mode", autoChooser);
     SmartDashboard.putData("Launcher Targets", launchPos);
-  }
 
-  public static RobotContainer getInstance() {
-    return m_robotContainer;
-  }
-
-  public void updateDashboard() {
-    speed_multi = cruiseControl.getSelected();
-    SmartDashboard.putNumber("Current Speed Setting", speed_multi);
-    SmartDashboard.putData("Drive Speed Selector", cruiseControl);
-
-    launchTarg = launchPos.getSelected().getName().toString();
-    //m_launcher.setNewTarget(launchPos.getSelected().getPose2d());
-    SmartDashboard.putString("Curr Selected Launch Targ", launchTarg);
-    //SmartDashboard.putData("Launcher Targets", launchPos);
-
-    TAngle = towerAngle.getSelected();
-    SmartDashboard.putData("Tower Angle", towerAngle);
-    m_launcher.setAngle(TAngle, true);
-    SmartDashboard.putNumber("Target Turret Angle", TAngle);
 
     // Manual tuning — tweak kP/kI/kD/Setpoint live from the dashboard.
 // Only one can run at a time; clicking a second button cancels the first.
-SmartDashboard.putData("Tune Intake PID",   new TunePID(m_intake,   m_intake));
+ //SmartDashboard.putData("Tune Intake PID",   new TunePID(m_intake,   m_intake));
+// Auto tune — finds the roller's kV, kP, kI and kD at the intaking speed (see AutoTuneVelocity)
+SmartDashboard.putData("AutoTune Intake",   new AutoTuneVelocity(m_intake, m_intake, Intake.STATUS.EXTENDED_INTAKING.getSpeed()));
 //SmartDashboard.putData("Tune Launcher PID", new TunePID(m_launcher, m_launcher));
 //SmartDashboard.putData("Tune Hopper PID",   new TunePID(m_feeder,   m_feeder));
 
@@ -317,6 +300,33 @@ SmartDashboard.putData("Tune Tower2 RH Manual",
         .andThen(new TunePID(m_launcher.flywheels_RH, m_launcher.flywheels_RH))
         .andThen(new InstantCommand(() -> m_launcher.setTuningMode(false)))
 );
+
+
+
+
+
+
+  }
+
+  public static RobotContainer getInstance() {
+    return m_robotContainer;
+  }
+
+  public void updateDashboard() {
+    speed_multi = cruiseControl.getSelected();
+    SmartDashboard.putNumber("Current Speed Setting", speed_multi);
+    SmartDashboard.putData("Drive Speed Selector", cruiseControl);
+
+    launchTarg = launchPos.getSelected().getName().toString();
+    //m_launcher.setNewTarget(launchPos.getSelected().getPose2d());
+    SmartDashboard.putString("Curr Selected Launch Targ", launchTarg);
+    //SmartDashboard.putData("Launcher Targets", launchPos);
+
+    TAngle = towerAngle.getSelected();
+    SmartDashboard.putData("Tower Angle", towerAngle);
+    m_launcher.setAngle(TAngle, true);
+    SmartDashboard.putNumber("Target Turret Angle", TAngle);
+
 
 
     if (m_launcher.turret != null) {

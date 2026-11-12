@@ -28,7 +28,6 @@ import org.dyn4j.collision.broadphase.AABBProducer;
 import com.revrobotics.spark.ClosedLoopSlot;
 import com.revrobotics.spark.FeedbackSensor;
 import com.revrobotics.spark.SparkBase.ControlType;
-import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.PersistMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.ResetMode;
@@ -283,8 +282,8 @@ public class Intake extends SubsystemBase implements PIDTunable {
         // rTowerR_CLOSED_LOOP_SLOT_DOWN);
         // intakeConfig.closedLoop.maxMotion.allowedClosedLoopError(rTowerRPosTol,
         // rTowerR_CLOSED_LOOP_SLOT_DOWN);
-        intakeConfig.closedLoop.pid(0.0001, 0.0, 0.000009, ClosedLoopSlot.kSlot0);
-        intakeConfig.closedLoop.feedForward.kV(0.0018);
+        intakeConfig.closedLoop.pid(0.016384, 0.0, 0.0, ClosedLoopSlot.kSlot0);
+        intakeConfig.closedLoop.feedForward.kV(0.002097);
 
         // //// Up / in Velocity Values
         // intakeConfig.closedLoop.maxMotion.maxAcceleration(5000,
@@ -409,6 +408,7 @@ public class Intake extends SubsystemBase implements PIDTunable {
     public double getIACC() {
         return intakeMotor.getClosedLoopController().getIAccum();
 
+<<<<<<< Updated upstream
     }
 
     public void setCurrVelocity(double velocity) {
@@ -437,12 +437,52 @@ public class Intake extends SubsystemBase implements PIDTunable {
     }
     public void setIACC() {
 
+=======
+    // PIDTunable — tunes the intake roller's velocity loop (slot 0, RPM)
+
+    @Override
+    public double getMeasurement() {
+        return getRollerRPM();
+    }
+
+    @Override
+    public void setSetpoint(double rpm) {
+        if(rpm != 0){
+        intakeMotor.getClosedLoopController().setSetpoint(rpm, ControlType.kVelocity, ClosedLoopSlot.kSlot0);
+        }
+        else {
+            intakeMotor.set(0);
+        } 
+    }
+
+    // Not persisted: copy the final values into configintakeMotor() once you are happy with them
+    @Override
+    public void applyPID(double kP, double kI, double kD, double kV) {
+        SparkMaxConfig tuneConfig = new SparkMaxConfig();
+        tuneConfig.closedLoop.pid(kP, kI, kD, ClosedLoopSlot.kSlot0);
+        tuneConfig.closedLoop.feedForward.kV(kV);
+        intakeMotor.configure(tuneConfig, ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
+    }
+
+    @Override
+    public void resetIntegral() {
+        intakeMotor.getClosedLoopController().setIAccum(0);
+    }
+
+    @Override
+    public double[] getPID() {
+        return new double[] {
+            intakeMotor.configAccessor.closedLoop.getP(ClosedLoopSlot.kSlot0),
+            intakeMotor.configAccessor.closedLoop.getI(ClosedLoopSlot.kSlot0),
+            intakeMotor.configAccessor.closedLoop.getD(ClosedLoopSlot.kSlot0),
+            intakeMotor.configAccessor.closedLoop.feedForward.getkV()
+        };
+>>>>>>> Stashed changes
     }
 
     @Override
     public String getTunableName() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getTunableName'");
+        return "Intake";
     }
 
 }
