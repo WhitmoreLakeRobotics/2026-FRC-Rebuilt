@@ -382,7 +382,6 @@ public class Intake extends SubsystemBase implements PIDTunable {
             return speed;
         }
     }
-@Override
     public double getCurrVelocity() {
         return intakeMotor.getEncoder().getVelocity();
 
@@ -408,36 +407,8 @@ public class Intake extends SubsystemBase implements PIDTunable {
     public double getIACC() {
         return intakeMotor.getClosedLoopController().getIAccum();
 
-<<<<<<< Updated upstream
     }
 
-    public void setCurrVelocity(double velocity) {
-        intakeMotor.getClosedLoopController().setSetpoint(velocity, ControlType.kVelocity);
-
-    }
-    public void setTargVelocity(double velocity) {
-        intakeMotor.getClosedLoopController().setSetpoint(velocity, ControlType.kVelocity); 
-    }
-    public void setP(double p) {
-        intakeMotor.getClosedLoopController().closedLoop.setP(p, ClosedLoopSlot.kSlot0);
-        //trying to update the "P" value for the pid of intake motor.
-        //retrieve I, D, F 
-        //create new config motor object with new P value and old I, D, F values
-        //apply new config to intake motor. do NOT persist
-
-    }
-    public void setI() {
-
-    }
-    public void setD() {
-
-    }
-    public void setF() {
-
-    }
-    public void setIACC() {
-
-=======
     // PIDTunable — tunes the intake roller's velocity loop (slot 0, RPM)
 
     @Override
@@ -477,7 +448,6 @@ public class Intake extends SubsystemBase implements PIDTunable {
             intakeMotor.configAccessor.closedLoop.getD(ClosedLoopSlot.kSlot0),
             intakeMotor.configAccessor.closedLoop.feedForward.getkV()
         };
->>>>>>> Stashed changes
     }
 
     @Override

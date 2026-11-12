@@ -28,25 +28,6 @@ public interface PIDTunable {
      *   Intake roller -> getRollerRPM()
      *   Flywheels     -> getLMotorRPM()
      */
-<<<<<<< Updated upstream
-    //SparkClosedLoopController getLoopController();
-
-    double getCurrVelocity();
-    double getTargVelocity();
-    double getP();
-    double getI();
-    double getD();
-    double getF();
-    double getIACC();
-    
-    void setCurrVelocity();
-    void setTargVelocity();
-    void setP();
-    void setI();
-    void setD();
-    void setF();
-    void setIACC();
-=======
     double getMeasurement();
 
     /**
@@ -75,15 +56,10 @@ public interface PIDTunable {
      * Default does nothing, which is fine for subsystems that are never tuned for kI.
      */
     default void resetIntegral() {}
->>>>>>> Stashed changes
 
     /**
      * Returns a short name used to namespace SmartDashboard keys.
      * Example: "Intake" produces keys like "Intake/kP", "Intake/Error"
      */
     String getTunableName();
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 }

@@ -258,6 +258,10 @@ private String alliance;
  //SmartDashboard.putData("Tune Intake PID",   new TunePID(m_intake,   m_intake));
 // Auto tune — finds the roller's kV, kP, kI and kD at the intaking speed (see AutoTuneVelocity)
 SmartDashboard.putData("AutoTune Intake",   new AutoTuneVelocity(m_intake, m_intake, Intake.STATUS.EXTENDED_INTAKING.getSpeed()));
+// Auto tune part 2 — run AutoTune Intake first; this optimizes kP/kI for recovering from a load
+SmartDashboard.putData("AutoTune Intake Recovery", new AutoTuneRecovery(m_intake, m_intake, Intake.STATUS.EXTENDED_INTAKING.getSpeed()));
+// Recovery test — spins the roller at intaking speed, then you load it by hand/game piece 5 times
+SmartDashboard.putData("Recovery Test Intake", new RecoveryTest(m_intake, m_intake, Intake.STATUS.EXTENDED_INTAKING.getSpeed(), 5));
 //SmartDashboard.putData("Tune Launcher PID", new TunePID(m_launcher, m_launcher));
 //SmartDashboard.putData("Tune Hopper PID",   new TunePID(m_feeder,   m_feeder));
 

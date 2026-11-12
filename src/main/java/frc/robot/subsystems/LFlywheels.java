@@ -28,7 +28,7 @@ import frc.robot.utils.MultiMotorPIDTunable;
  *   flyWheelLeft  -> applied to TowerLM slot 0
  *   flyWheelRight -> applied to TowerRM slot 0
  */
-public class LFlywheels extends SubsystemBase {
+public class LFlywheels extends SubsystemBase implements MultiMotorPIDTunable {
 
     // -----------------------------------------------------------------------
     // Hardware
